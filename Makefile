@@ -213,3 +213,16 @@ validate: check-version ## Check SBOM documents: SPDX, NTIA, FSCT3, CPE/PURL (of
 .PHONY: normalize
 normalize: check-version ## One component SBOM from west spdx + identifiers/component-map.yaml (offline)
 	@$(RUN_OFFLINE) $(PY) -m pipeline.normalize --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION)
+
+# ---------------------------------------------------------------- Phase 5
+
+SNAPSHOT ?= baseline
+ROWS     ?= 15
+
+.PHONY: scan
+scan: check-version ## Grype + OSV-Scanner on the normalized SBOM, offline [SNAPSHOT=baseline]
+	@$(RUN_OFFLINE) $(PY) -m pipeline.scan --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) --snapshot $(SNAPSHOT)
+
+.PHONY: queue
+queue: check-version ## Review queue: findings without a decision for this firmware hash [ROWS=15]
+	@$(RUN_OFFLINE) $(PY) -m pipeline.queue --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) --rows $(ROWS)

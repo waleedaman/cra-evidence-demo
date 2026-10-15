@@ -3,7 +3,7 @@
 Demo repository for the talk *"From Firmware Build to CRA Evidence: A Reproducible SBOM
 and Vulnerability Workflow"*. Open tooling only. Licensed under Apache-2.0.
 
-> Status: Phase 4 (SBOM validation and normalization). Scanning, VEX and gate phases are not built yet.
+> Status: Phase 5 (vulnerability matching and review queue). Decisions/VEX and gate phases are not built yet.
 
 ## Requirements
 
@@ -69,6 +69,15 @@ make normalize VERSION=v1.0   # -> out/v1.0/<board>/normalized/firmware.spdx.jso
 
 Identifiers that `west spdx` does not provide are added only from the reviewed
 `identifiers/component-map.yaml`. Details and findings: `docs/sbom-quality.md`.
+
+## Vulnerability matching and review queue (Phase 5)
+
+```bash
+make scan VERSION=v1.0 [SNAPSHOT=baseline]   # Grype + OSV-Scanner, offline -> out/v1.0/<board>/findings.json
+make queue VERSION=v1.0 [ROWS=15]            # findings without a decision for this firmware hash
+```
+
+What each scanner can and cannot see, and why they disagree: `docs/scanning.md`.
 
 ## Where things are pinned
 

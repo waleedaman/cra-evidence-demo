@@ -63,5 +63,7 @@
   archives from a local directory (another clone, a USB stick) before trying upstream.
   `make clean-clone-check` uses this to prove a fresh clone reaches `make doctor` PASS.
 - OSV-Scanner offline mode does not support commit-level matching, so OSV findings for
-  embedded C libraries are expected to be sparse (Phase 5 topic).
+  embedded C libraries are expected to be sparse. Phase 5 result: see `docs/scanning.md`
+  (it can match repository + release tag offline; the cache layout it reads is
+  `<dir>/osv-scalibr/<ecosystem>/all.zip`, not the `osv-scanner/` layout of our archives).
 - Only linux/amd64 is supported.

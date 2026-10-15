@@ -162,7 +162,8 @@ def record_osv(name: str) -> dict[str, Any]:
     entries: dict[str, Any] = {}
     for eco in wanted:
         url = f"{OSV_BUCKET_URL}/{eco}/all.zip"
-        # layout expected by OSV_SCANNER_LOCAL_DB_CACHE_DIRECTORY: <dir>/osv-scanner/<eco>/all.zip
+        # archive layout <snapshot>/osv-scanner/<eco>/all.zip. NOTE: OSV-Scanner 2.7.0 reads
+        # <dir>/osv-scalibr/<eco>/all.zip; pipeline/scan.py links it there at scan time.
         dest = base / "osv-scanner" / eco / "all.zip"
         console.print(f"osv: downloading {url}", soft_wrap=True)
         sha, headers = download(url, dest)
