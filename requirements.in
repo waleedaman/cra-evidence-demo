@@ -1,0 +1,13 @@
+# Direct Python dependencies of the pipeline code.
+# Regenerate the hashed lock (CPython 3.12, linux x86_64) with:
+#   uv pip compile requirements.in --python-version 3.12 \
+#     --python-platform x86_64-unknown-linux-gnu --generate-hashes \
+#     --no-header --annotation-style line -o requirements.lock
+spdx-tools==0.8.5
+ntia-conformance-checker==6.0.0
+rich
+PyYAML
+jsonschema
+mypy
+types-PyYAML
+types-jsonschema

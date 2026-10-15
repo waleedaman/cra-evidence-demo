@@ -1,0 +1,5 @@
+# Build context is allow-listed: only what docker/Dockerfile COPYs.
+*
+!pins.env
+!requirements.lock
+!docker/install-tools.sh

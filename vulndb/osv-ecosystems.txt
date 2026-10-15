@@ -1,0 +1,9 @@
+# OSV ecosystems to include in each snapshot (one per line).
+# Downloaded from https://osv-vulnerabilities.storage.googleapis.com/<ECOSYSTEM>/all.zip
+#
+# Embedded C libraries (Zephyr, mbedTLS) have no package-manager ecosystem in OSV.
+# Their records use Git commit ranges. "GIT" is our assumption for where those
+# records are published; it is NOT yet verified (the bucket was not reachable while
+# writing this). `make snapshot` checks this list against the bucket's
+# ecosystems.txt and fails with the real list if an entry does not exist.
+GIT

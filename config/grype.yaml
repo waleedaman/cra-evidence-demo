@@ -1,0 +1,14 @@
+# Grype configuration for the demo. Passed explicitly with `grype -c config/grype.yaml`.
+# Goal: never touch the network, never replace or reject the frozen DB snapshot.
+# Keys checked against grype v0.120.1 source (cmd/grype/cli/options/database.go, grype.go).
+# The DB location (db.cache-dir) is set per snapshot via GRYPE_DB_CACHE_DIR.
+
+check-for-app-update: false
+
+db:
+  # do not download a newer DB on startup
+  auto-update: false
+  # default is true with a 5-day max age, which would reject a frozen snapshot
+  validate-age: false
+  # do not require reaching the update server
+  require-update-check: false

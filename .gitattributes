@@ -1,0 +1,7 @@
+# Scripts run inside Linux containers: force LF even on Windows checkouts.
+* text=auto eol=lf
+*.sh text eol=lf
+Makefile text eol=lf
+*.env text eol=lf
+*.zip binary
+*.tar.* binary

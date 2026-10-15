@@ -1,0 +1,12 @@
+# generated artifacts
+/out/
+# vulnerability DB archives (only vulndb/snapshots.yaml is committed)
+/vulndb/archives/
+# signing keys: the private key never leaves the presenter machine
+*.key
+/keys/*.key
+# python
+__pycache__/
+.mypy_cache/
+.ruff_cache/
+*.pyc

@@ -1,0 +1,5 @@
+# Frozen vulnerability DB snapshots. Written by `make snapshot NAME=<name>`.
+# Do not edit by hand: `make fetch` and `make doctor` verify archives against
+# these checksums. Archives themselves are git-ignored (vulndb/archives/).
+grype: {}
+osv: {}

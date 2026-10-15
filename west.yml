@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# West manifest for the CRA evidence demo (this repo is the manifest repository).
+# Zephyr is pinned by commit (= tag v4.4.2). Modules are imported from Zephyr's own
+# west.yml at that commit, so each one is pinned by the SHA Zephyr declares there.
+# Only the modules named in name-allowlist are fetched; everything else in
+# Zephyr's manifest is ignored. That keeps `make fetch` small and keeps unused
+# code out of the workspace (and therefore out of the SBOM discussion).
+#
+# Module list rationale (revisit in Phase 1 when the app and board are final):
+#   mbedtls  - TLS for MQTT
+#   picolibc - C library module, may be needed depending on toolchain/board
+#   cmsis_6  - required by Cortex-M boards (the later real-board build)
+# A board HAL (hal_*) will be added once the dev board is chosen.
+
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: dccb09599635bdff17633fa7e9dab014b91dce90 # v4.4.2
+      import:
+        name-allowlist:
+          - mbedtls
+          - picolibc
+          - cmsis_6
