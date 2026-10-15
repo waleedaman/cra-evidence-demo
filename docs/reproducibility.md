@@ -29,7 +29,17 @@ zephyr_compile_options(-ffile-prefix-map=${CMAKE_BINARY_DIR}=build
 target_compile_options(native_simulator INTERFACE ...same maps...)   # native_sim only
 ```
 
-After the fix the ELF contains 0 references to either path. Inside the tooling container the
+**The first version of this fix was itself wrong, and `make reproduce-check` caught it.**
+GCC applies the *last* matching `-ffile-prefix-map`. We listed the build-dir map first
+and the workspace map second. Our build directories live inside the workspace
+(`/ws/build/...`), so the workspace map won, and the build path leaked into the ELF as
+`ws/build/repro-a/...` vs `ws/build/repro-b/...`. The test workspace had the build
+directories *outside* the workspace, so it passed there and failed on the presenter
+machine. Fix: workspace map first, build-dir map last.
+
+After the fix the ELF contains 0 references to either path. The remaining absolute paths
+point into the Zephyr SDK (headers and precompiled libraries), which sits at the fixed path
+`/opt/toolchains/zephyr-sdk-<version>` inside the tooling image. Inside the tooling container the
 paths are also fixed (`/ws/...`), so builds on different machines see the same paths anyway;
 the prefix maps make the result independent of that convention too.
 

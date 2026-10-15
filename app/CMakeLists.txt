@@ -18,15 +18,18 @@ generate_inc_file_for_target(app ${DEMO_CA_DER} ${gen_dir}/demo_ca.der.inc)
 # Reproducibility: strip absolute build and workspace paths from debug info and
 # __FILE__ so the image does not depend on where the workspace lives.
 get_filename_component(WEST_TOPDIR ${ZEPHYR_BASE}/.. ABSOLUTE)
+# Order matters: GCC applies the LAST matching map. The build directory usually lives
+# inside the west workspace (/ws/build/...), so the more specific build-dir map must
+# come after the workspace map, otherwise the build path leaks as "ws/build/...".
 zephyr_compile_options(
-  -ffile-prefix-map=${CMAKE_BINARY_DIR}=build
   -ffile-prefix-map=${WEST_TOPDIR}=ws
+  -ffile-prefix-map=${CMAKE_BINARY_DIR}=build
 )
 # native_sim: the native simulator runner is compiled separately from Zephyr;
 # give it the same prefix maps so zephyr.exe is path-independent as well.
 if(TARGET native_simulator)
   target_compile_options(native_simulator INTERFACE
-    -ffile-prefix-map=${CMAKE_BINARY_DIR}=build
     -ffile-prefix-map=${WEST_TOPDIR}=ws
+    -ffile-prefix-map=${CMAKE_BINARY_DIR}=build
   )
 endif()
