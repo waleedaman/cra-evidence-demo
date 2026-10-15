@@ -25,7 +25,6 @@ from pipeline.common import (
     ARCHIVE_DIR,
     GRYPE_CONFIG,
     OUT_DIR,
-    PINS_FILE,
     REPO,
     REQUIREMENTS_LOCK,
     WORKSPACE,
@@ -39,6 +38,8 @@ from pipeline.common import (
 from pipeline.vulndb import grype_status, load_snapshots, same_instant
 
 IMAGE_DIR = Path("/opt/cra")
+# pins.env keys baked into the image by docker/install-tools.sh
+IMAGE_PIN_PREFIXES = ("ZEPHYR_SDK_", "GRYPE_", "OSV_SCANNER_", "VEXCTL_", "COSIGN_", "JQ_")
 SDK_DIR = Path(os.environ.get("ZEPHYR_SDK_INSTALL_DIR", "/opt/toolchains/zephyr-sdk"))
 
 
@@ -86,13 +87,20 @@ def check_image(pins: dict[str, str]) -> None:
     if os.environ.get("CRA_IN_IMAGE") != "1":
         add("Demo image", "running inside image", "not inside image", False)
         return
-    same_pins = (IMAGE_DIR / "pins.env").exists() and \
-        sha256_file(IMAGE_DIR / "pins.env") == sha256_file(PINS_FILE)
+    # Only the pins that docker/install-tools.sh consumes affect the image. Other
+    # pins (modules, Mosquitto, recorded dates) must not force an image rebuild.
+    baked = load_pins(IMAGE_DIR / "pins.env") if (IMAGE_DIR / "pins.env").exists() else {}
+    changed = sorted(k for k in set(baked) | set(pins)
+                     if k.startswith(IMAGE_PIN_PREFIXES) and baked.get(k) != pins.get(k))
     same_reqs = (IMAGE_DIR / "requirements.lock").exists() and \
         sha256_file(IMAGE_DIR / "requirements.lock") == sha256_file(REQUIREMENTS_LOCK)
-    add("Image built from current pins", "pins.env + requirements.lock",
-        "match" if same_pins and same_reqs else "stale image: run `make env`",
-        same_pins and same_reqs)
+    if not baked:
+        changed = ["(no pins.env in image)"]
+    if not same_reqs:
+        changed.append("requirements.lock")
+    add("Image built from current pins", "tool pins + requirements.lock",
+        "match" if not changed else f"stale ({', '.join(changed)[:30]}): make env",
+        not changed)
     want = f"{pins['CI_BASE_IMAGE']}@{pins['CI_BASE_DIGEST']}"
     have = os.environ.get("CRA_BASE_IMAGE", "")
     add("Base image", short(pins["CI_BASE_DIGEST"].removeprefix("sha256:")),
