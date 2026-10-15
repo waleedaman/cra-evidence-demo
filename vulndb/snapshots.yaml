@@ -1,5 +1,29 @@
 # Frozen vulnerability DB snapshots. Written by `make snapshot NAME=<name>`.
 # Do not edit by hand: `make fetch` and `make doctor` verify archives against
 # these checksums. Archives themselves are git-ignored (vulndb/archives/).
-grype: {}
-osv: {}
+grype:
+  baseline:
+    built: '2026-10-15T06:30:36Z'
+    file: grype/baseline/vulnerability-db_v6.1.10_2026-10-15T00:29:08Z_1792045836.tar.zst
+    http_headers:
+      Content-Length: '190523958'
+      ETag: '"e0e3cc0f58b4e4f521dbc5d2bfe8a48a-23"'
+      Last-Modified: Thu, 15 Oct 2026 07:17:40 GMT
+    listing: https://grype.anchore.io/databases/v6/latest.json
+    recorded_at: '2026-10-15T13:53:32+00:00'
+    schema_version: v6.1.10
+    sha256: 2f1597f25b5089e966272b251eb4d1f9977e59d57029af1c8810deb6e5321aa2
+    url: https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-10-15T00:29:08Z_1792045836.tar.zst
+osv:
+  baseline:
+    ecosystems:
+      GIT:
+        file: osv/baseline/osv-scanner/GIT/all.zip
+        http_headers:
+          Content-Length: '201726688'
+          ETag: '"4ffcc09f9f6c09d18125063fec11d954"'
+          Last-Modified: Thu, 15 Oct 2026 13:18:17 GMT
+          x-goog-generation: '1792070297145895'
+        sha256: 9ca7f47a96f84ed4ad54bb4d11a4a851db1b827c8395f1bf072c55e14433498d
+        url: https://osv-vulnerabilities.storage.googleapis.com/GIT/all.zip
+    recorded_at: '2026-10-15T13:53:50+00:00'
