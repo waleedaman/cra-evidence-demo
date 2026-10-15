@@ -11,7 +11,9 @@ SHA-256 of every artifact. It also compares against the release build in `out/`.
 | `w5500_evb_pico2/rp2350a/m33` | `.elf .uf2 .hex .bin` | identical | identical (with prefix map) |
 | `native_sim/native/64` | `zephyr.elf zephyr.exe` | identical | identical (with prefix map) |
 
-Measured in a test workspace with the same pinned versions; `make reproduce-check` re-checks it on any machine.
+Confirmed on the presenter machine (2026-10-15, commit 2bc1094): board `zephyr.elf`
+`9ece531d8b7b863e...`, native_sim `zephyr.exe` `3cbfb901223ea13a...`; both builds and the
+release build identical. `make reproduce-check` re-checks it on any machine.
 
 ## What we had to fix
 
@@ -24,8 +26,8 @@ simulator runner, which is compiled outside Zephyr's normal compile options.
 Fix in `app/CMakeLists.txt`:
 
 ```cmake
-zephyr_compile_options(-ffile-prefix-map=${CMAKE_BINARY_DIR}=build
-                       -ffile-prefix-map=${WEST_TOPDIR}=ws)
+zephyr_compile_options(-ffile-prefix-map=${WEST_TOPDIR}=ws          # first
+                       -ffile-prefix-map=${CMAKE_BINARY_DIR}=build)  # last one wins
 target_compile_options(native_simulator INTERFACE ...same maps...)   # native_sim only
 ```
 
