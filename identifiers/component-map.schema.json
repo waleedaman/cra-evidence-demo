@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "component-map.yaml",
+  "description": "Reviewed identifier additions applied by pipeline/normalize.py",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "product", "components"],
+  "properties": {
+    "schema": {"const": 1},
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "supplier", "purl", "license_declared", "rationale",
+                   "added_by", "added_on", "reviewed_by", "reviewed_on"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+        "supplier": {"$ref": "#/$defs/actor"},
+        "purl": {"type": "string", "pattern": "^pkg:[a-z]+/.+\\{version\\}$"},
+        "license_declared": {"type": "string", "minLength": 1},
+        "rationale": {"$ref": "#/$defs/text"},
+        "added_by": {"$ref": "#/$defs/text"},
+        "added_on": {"$ref": "#/$defs/date"},
+        "reviewed_by": {"type": "string"},
+        "reviewed_on": {"$ref": "#/$defs/date_or_empty"}
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "version", "rationale", "evidence", "added_by", "added_on",
+                     "reviewed_by", "reviewed_on"],
+        "oneOf": [
+          {"required": ["spdx_package"]},
+          {"required": ["evidence_required", "supplier"]}
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+          "spdx_package": {"type": "string", "minLength": 1},
+          "evidence_required": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["linked_archive", "sdk_paths"],
+            "properties": {
+              "linked_archive": {"type": "string", "pattern": "^lib[\\w+-]+\\.a$"},
+              "sdk_paths": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^\\./.+/$"}},
+              "sdk_file_sha256": {
+                "type": "object",
+                "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+              }
+            }
+          },
+          "version": {"type": "string", "minLength": 1},
+          "supplier": {"$ref": "#/$defs/actor"},
+          "add_cpe": {"type": "array", "items": {"type": "string", "pattern": "^cpe:2\\.3:[aho]:[^:]+:[^:]+:[^:*]+(:[^:]+){7}$"}},
+          "add_purl": {"type": "array", "items": {"type": "string", "pattern": "^pkg:[a-z]+/[^@]+@[^@]+$"}},
+          "comment": {"$ref": "#/$defs/text"},
+          "rationale": {"$ref": "#/$defs/text"},
+          "evidence": {"$ref": "#/$defs/text"},
+          "added_by": {"$ref": "#/$defs/text"},
+          "added_on": {"$ref": "#/$defs/date"},
+          "reviewed_by": {"type": "string"},
+          "reviewed_on": {"$ref": "#/$defs/date_or_empty"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "actor": {"type": "string", "pattern": "^(Organization|Person): .+$"},
+    "date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "date_or_empty": {"type": "string", "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$"}
+  }
+}

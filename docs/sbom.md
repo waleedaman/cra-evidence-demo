@@ -63,7 +63,7 @@ Findings worth showing:
   `libgcc.a` from the Zephyr SDK; `sdk.spdx` lists only headers in one unversioned
   `sdk` package. native_sim links the host C library dynamically and it does not
   appear at all. `make sbom` reports both gaps; Phase 4 adds them via
-  `identifiers/component-map.yaml`.
+  `identifiers/component-map.yaml` (see `docs/sbom-quality.md`).
 - **A symlinked SDK path drops the toolchain from the SBOM.** `west spdx` assigns
   headers to the SDK document by comparing paths with `ZEPHYR_SDK_INSTALL_DIR`. Our
   first image pointed that variable at a symlink (`/opt/toolchains/zephyr-sdk`); the

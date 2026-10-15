@@ -3,7 +3,7 @@
 Demo repository for the talk *"From Firmware Build to CRA Evidence: A Reproducible SBOM
 and Vulnerability Workflow"*. Open tooling only. Licensed under Apache-2.0.
 
-> Status: Phase 3 (provenance, reproducibility). Scanning, VEX and gate phases are not built yet.
+> Status: Phase 4 (SBOM validation and normalization). Scanning, VEX and gate phases are not built yet.
 
 ## Requirements
 
@@ -59,6 +59,16 @@ make reproduce-check VERSION=v1.0           # two clean builds, different paths,
 ```
 
 See `docs/provenance.md` and `docs/reproducibility.md`.
+
+## SBOM validation and normalization (Phase 4)
+
+```bash
+make validate VERSION=v1.0    # SPDX validity, NTIA minimum elements, FSCT3, CPE/PURL coverage
+make normalize VERSION=v1.0   # -> out/v1.0/<board>/normalized/firmware.spdx.json
+```
+
+Identifiers that `west spdx` does not provide are added only from the reviewed
+`identifiers/component-map.yaml`. Details and findings: `docs/sbom-quality.md`.
 
 ## Where things are pinned
 

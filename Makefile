@@ -203,3 +203,13 @@ reproduce-check: check-version ## Two clean builds in fresh containers, differen
 		bash scripts/build-firmware.sh $(BOARD) $(VERSION) /ws/build/repro-b/another/path/$(VERSION)/$(BOARD_DIR) $(OUT_BOARD)/repro/b
 	@$(RUN_OFFLINE) $(PY) -m pipeline.repro --a $(OUT_BOARD)/repro/a --b $(OUT_BOARD)/repro/b \
 		--release $(OUT_BOARD) --report $(OUT_BOARD)/repro/report.json
+
+# ---------------------------------------------------------------- Phase 4
+
+.PHONY: validate
+validate: check-version ## Check SBOM documents: SPDX, NTIA, FSCT3, CPE/PURL (offline)
+	@$(RUN_OFFLINE) $(PY) -m pipeline.validate --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION)
+
+.PHONY: normalize
+normalize: check-version ## One component SBOM from west spdx + identifiers/component-map.yaml (offline)
+	@$(RUN_OFFLINE) $(PY) -m pipeline.normalize --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION)

@@ -1,0 +1,163 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Reviewed identifier map: what `make normalize` adds to the raw `west spdx` output.
+#
+# Rules (enforced by pipeline/normalize.py and component-map.schema.json):
+# - Every entry says what it adds, why (rationale), on what evidence, who added it and when.
+# - An entry applies only to the exact version it was written for. If the build's version
+#   differs (module or SDK update), normalize stops: the entry must be reviewed again.
+# - Entries are applied only when their evidence is found in this build's SBOM
+#   (a package with source files, a linked archive, SDK files with a known hash).
+# - reviewed_by stays empty until a person has checked the entry. Normalize prints how
+#   many entries are unreviewed. An AI-drafted entry is not a reviewed entry.
+#
+# CVE counts below were taken from the grype DB snapshot "baseline"
+# (vulnerability-db_v6.1.10_2026-10-15T00:29:08Z, see vulndb/snapshots.yaml) by querying
+# its cpes/affected_cpe_handles tables. They describe the database, not this firmware.
+
+schema: 1
+
+product:
+  name: cra-evidence-demo-firmware
+  supplier: "Organization: CRA evidence demo project"
+  purl: "pkg:generic/cra-evidence-demo-firmware@{version}"
+  license_declared: Apache-2.0
+  rationale: >-
+    The firmware is this repository's own product. It is not published in a package
+    registry and has no CPE in NVD, so it gets a generic PURL (purl type "generic")
+    and no CPE. Version comes from app/VERSION.
+  added_by: Claude (AI assistant)
+  added_on: "2026-10-15"
+  reviewed_by: ""
+  reviewed_on: ""
+
+components:
+  - id: mbedtls
+    spdx_package: mbedtls-sources
+    version: "4.1.0"
+    add_cpe:
+      - "cpe:2.3:a:trustedfirmware:mbed_tls:4.1.0:*:*:*:*:*:*:*"
+      - "cpe:2.3:a:mbed-tls:mbedtls:4.1.0:*:*:*:*:*:*:*"
+    rationale: >-
+      NVD files Mbed TLS vulnerabilities under three different CPE vendor:product
+      pairs. The module's module.yml declares only arm:mbed_tls, so a CPE-based scanner
+      would silently miss every CVE filed under the other two names.
+    evidence: >-
+      grype DB baseline: arm:mbed_tls 58 CVEs, trustedfirmware:mbed_tls 31,
+      mbed-tls:mbedtls 14; 73 distinct, 15 of them not under arm:mbed_tls
+      (e.g. CVE-2024-45157, CVE-2026-25833).
+    added_by: Claude (AI assistant)
+    added_on: "2026-10-15"
+    reviewed_by: ""
+    reviewed_on: ""
+
+  - id: tf-psa-crypto
+    spdx_package: tf-psa-crypto-sources
+    version: "1.1.0"
+    add_cpe:
+      - "cpe:2.3:a:trustedfirmware:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*"
+    rationale: >-
+      Same problem as Mbed TLS: module.yml declares arm:tf-psa-crypto, NVD also uses
+      trustedfirmware:tf-psa-crypto, and the two lists do not overlap.
+    evidence: >-
+      grype DB baseline: arm:tf-psa-crypto CVE-2025-66442, CVE-2026-34872;
+      trustedfirmware:tf-psa-crypto CVE-2026-25835, CVE-2026-34871, CVE-2026-34875.
+    added_by: Claude (AI assistant)
+    added_on: "2026-10-15"
+    reviewed_by: ""
+    reviewed_on: ""
+
+  - id: cmsis_6
+    spdx_package: cmsis_6-sources
+    version: "30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74"
+    supplier: "Organization: ARM Limited"
+    add_purl:
+      - "pkg:github/zephyrproject-rtos/cmsis_6@30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74"
+    comment: >-
+      Zephyr fork of ARM-software/CMSIS_6. ARM.CMSIS.pdsc says 6.2.0-dev,
+      CMSIS-Core(M) header says 6.1; no upstream tag matches, so the version stays the
+      commit.
+    rationale: >-
+      No module.yml identifiers. The PURL names the exact repository and commit that was
+      built. No CPE: NVD has none for CMSIS 6 (grype DB baseline: only arm:cmsis-rtos,
+      a different product).
+    evidence: >-
+      download location in zephyr.spdx; copyright header "ARM Limited" in
+      CMSIS/Core/Include/cmsis_version.h; ARM.CMSIS.pdsc release 6.2.0-dev.
+    added_by: Claude (AI assistant)
+    added_on: "2026-10-15"
+    reviewed_by: ""
+    reviewed_on: ""
+
+  - id: hal_rpi_pico
+    spdx_package: hal_rpi_pico-sources
+    version: "562b41e10a1d8b1a761b253b107c5c6a84cf4535"
+    supplier: "Organization: Raspberry Pi (Trading) Ltd."
+    add_purl:
+      - "pkg:github/zephyrproject-rtos/hal_rpi_pico@562b41e10a1d8b1a761b253b107c5c6a84cf4535"
+    comment: >-
+      Zephyr fork of raspberrypi/pico-sdk 2.2.0 (pico_sdk_version.cmake) with 9 Zephyr
+      patches (ChangeLog.zephyr.md).
+    rationale: >-
+      No module.yml identifiers. The PURL names the fork commit that was built; a
+      pkg:github/raspberrypi/pico-sdk@2.2.0 PURL would hide the patches. No CPE: none
+      for the Pico SDK in the grype DB baseline.
+    evidence: >-
+      download location in zephyr.spdx; LICENSE.TXT "Raspberry Pi (Trading) Ltd.";
+      upstream tag 2.2.0 exists (git ls-remote, 2026-10-15).
+    added_by: Claude (AI assistant)
+    added_on: "2026-10-15"
+    reviewed_by: ""
+    reviewed_on: ""
+
+  - id: picolibc
+    evidence_required:
+      linked_archive: libc.a
+      sdk_paths:
+        - "./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/"
+      sdk_file_sha256:
+        "./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/picolibc.h": "d939be11c314a7efecf01e677e306adea9e3730c709682d437f0c67c3844394c"
+    version: "1.8.10"
+    supplier: "Organization: picolibc project"
+    add_purl:
+      - "pkg:github/picolibc/picolibc@1.8.10"
+    comment: >-
+      C library, prebuilt in Zephyr SDK 1.0.1 (CONFIG_PICOLIBC_USE_TOOLCHAIN=y) and
+      statically linked as libc.a.
+    rationale: >-
+      west spdx lists the picolibc headers only inside one unversioned "sdk" package and
+      does not list libc.a at all, although its code is in the firmware. Version from
+      __PICOLIBC_VERSION__ in the picolibc.h whose hash is pinned here. No CPE: none in
+      the grype DB baseline. Its ancestor newlib has CVEs under newlib_project:newlib;
+      that is a different product and is NOT mapped (needs a human decision).
+    evidence: >-
+      picolibc.h sha256 in sdk.spdx = hash above, which says 1.8.10; libc.a in the
+      linker map (sbom/summary.json); upstream tag 1.8.10 exists (git ls-remote, 2026-10-15).
+    added_by: Claude (AI assistant)
+    added_on: "2026-10-15"
+    reviewed_by: ""
+    reviewed_on: ""
+
+  - id: gcc
+    evidence_required:
+      linked_archive: libgcc.a
+      sdk_paths:
+        - "./gnu/arm-zephyr-eabi/lib/gcc/arm-zephyr-eabi/14.3.0/"
+    version: "14.3.0"
+    supplier: "Organization: GNU Project"
+    add_cpe:
+      - "cpe:2.3:a:gnu:gcc:14.3.0:*:*:*:*:*:*:*"
+    comment: >-
+      Only the compiler runtime (libgcc.a) and compiler headers end up in the firmware,
+      from Zephyr SDK 1.0.1 (arm-zephyr-eabi-gcc 14.3.0).
+    rationale: >-
+      libgcc.a is statically linked but appears nowhere in the raw SBOM. NVD tracks GCC
+      as gnu:gcc; most GCC CVEs concern the compiler, not libgcc, so expect findings that
+      need a VEX decision (Phase 6) rather than a silent omission.
+    evidence: >-
+      libgcc.a in the linker map (sbom/summary.json); headers under .../14.3.0/include in
+      sdk.spdx; grype DB baseline: gnu:gcc 14 CVEs.
+    added_by: Claude (AI assistant)
+    added_on: "2026-10-15"
+    reviewed_by: ""
+    reviewed_on: ""
