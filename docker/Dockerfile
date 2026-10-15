@@ -6,7 +6,9 @@
 # vexctl, cosign, jq, and a separate Python venv for the pipeline tools.
 # Every download is verified against the sha256 in pins.env.
 
-ARG BASE_IMAGE
+# The default is a deliberately non-existent image: `make env` always passes the pinned
+# digest, and a plain `docker build` without it fails at the pull.
+ARG BASE_IMAGE=base-image-must-be-passed-by-make-env
 FROM ${BASE_IMAGE}
 ARG BASE_IMAGE
 

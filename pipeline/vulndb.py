@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import shutil
 import sys
@@ -129,7 +130,7 @@ def record_grype(name: str) -> dict[str, Any]:
         raise SnapshotError(f"unexpected checksum format in latest.json: {latest['checksum']}")
     url = urljoin(GRYPE_LATEST_URL, str(latest["path"]))
     dest = ARCHIVE_DIR / "grype" / name / Path(urlparse(url).path).name
-    console.print(f"grype: downloading {url}")
+    console.print(f"grype: downloading {url}", soft_wrap=True)
     actual, headers = download(url, dest)
     if actual != expected:
         raise SnapshotError(f"Grype archive sha256 {actual} != latest.json {expected}")
@@ -147,7 +148,9 @@ def record_grype(name: str) -> dict[str, Any]:
 
 def record_osv(name: str) -> dict[str, Any]:
     wanted = load_osv_ecosystems()
-    available = http_get_bytes(f"{OSV_BUCKET_URL}/ecosystems.txt").decode().split()
+    available = [ln.strip() for ln in
+                 http_get_bytes(f"{OSV_BUCKET_URL}/ecosystems.txt").decode().splitlines()
+                 if ln.strip()]
     missing = [e for e in wanted if e not in available]
     if missing:
         raise SnapshotError(
@@ -161,7 +164,7 @@ def record_osv(name: str) -> dict[str, Any]:
         url = f"{OSV_BUCKET_URL}/{eco}/all.zip"
         # layout expected by OSV_SCANNER_LOCAL_DB_CACHE_DIRECTORY: <dir>/osv-scanner/<eco>/all.zip
         dest = base / "osv-scanner" / eco / "all.zip"
-        console.print(f"osv: downloading {url}")
+        console.print(f"osv: downloading {url}", soft_wrap=True)
         sha, headers = download(url, dest)
         entries[eco] = {
             "url": url,
@@ -191,12 +194,24 @@ def cmd_record(name: str, force: bool) -> int:
 
 
 def ensure_archive(entry: dict[str, Any], label: str) -> str:
-    """Make sure the archive exists and matches. Returns 'cached' or 'downloaded'."""
+    """Make sure the archive exists and matches.
+
+    Order: local copy -> mirror directory (CRA_VULNDB_MIRROR, read-only, same layout
+    as vulndb/archives) -> upstream URL. Every source is checked against the recorded
+    sha256. Returns 'cached', 'from mirror' or 'downloaded'.
+    """
     dest = ARCHIVE_DIR / str(entry["file"])
     expected = str(entry["sha256"])
     if dest.exists() and sha256_file(dest) == expected:
         return "cached"
-    console.print(f"{label}: downloading {entry['url']}")
+    mirror = os.environ.get("CRA_VULNDB_MIRROR")
+    if mirror:
+        src = Path(mirror) / str(entry["file"])
+        if src.exists() and sha256_file(src) == expected:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(src, dest)
+            return "from mirror"
+    console.print(f"{label}: downloading {entry['url']}", soft_wrap=True)
     actual, _ = download(str(entry["url"]), dest)
     if actual != expected:
         bad = dest.with_suffix(dest.suffix + ".mismatch")
@@ -204,7 +219,7 @@ def ensure_archive(entry: dict[str, Any], label: str) -> str:
         raise SnapshotError(
             f"{label}: upstream bytes changed (sha256 {actual[:16]}... != recorded "
             f"{expected[:16]}...). The recorded snapshot is no longer served upstream; "
-            "restore the archived copy or record a new snapshot."
+            "use VULNDB_MIRROR=<dir with the recorded archives> or record a new snapshot."
         )
     return "downloaded"
 

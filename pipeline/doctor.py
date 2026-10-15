@@ -233,8 +233,8 @@ def check_grype_config() -> None:
         db = cfg["db"]
         ok = (cfg["check-for-app-update"] is False and db["auto-update"] is False
               and db["validate-age"] is False)
-        actual = (f"auto-update={db['auto-update']} validate-age={db['validate-age']} "
-                  f"app-update={cfg['check-for-app-update']}")
+        actual = (f"update={db['auto-update']} age={db['validate-age']} "
+                  f"app={cfg['check-for-app-update']}")
     except (yaml.YAMLError, KeyError, TypeError):
         ok, actual = False, "could not read `grype config --load`"
     add("Grype offline config", "no update, no age check", actual[:48], ok)
