@@ -3,8 +3,9 @@
 # Single entry point for the CRA evidence demo. Run `make help`.
 # Host requirements: GNU make, bash, Docker. On Windows run from a WSL2 shell.
 #
-# Network policy: only `pin-base`, `env`, `snapshot` and `fetch` use the network.
-# Every other target runs its container with `--network none`.
+# Network policy: only `pin-base`, `pin-mosquitto`, `env`, `snapshot` and `fetch` use the
+# network. Every other target runs its containers with `--network none`, except `make run`,
+# which uses an *internal* Docker network (broker <-> device, no internet access).
 
 SHELL := bash
 .SHELLFLAGS := -euo pipefail -c
@@ -40,12 +41,8 @@ help: ## Show this help
 
 .PHONY: pin-base
 pin-base: ## (network, once) Pull the ci-base image tag and record its digest in pins.env
-	docker pull $(CI_BASE_IMAGE):$(CI_BASE_TAG)
-	@digest="$$(docker image inspect -f '{{range .RepoDigests}}{{println .}}{{end}}' \
-		$(CI_BASE_IMAGE):$(CI_BASE_TAG) | grep '^$(CI_BASE_IMAGE)@' | head -n1 | cut -d@ -f2)"; \
-	if [[ -z "$$digest" ]]; then echo "ERROR: no repo digest found" >&2; exit 1; fi; \
-	sed -i "s|^CI_BASE_DIGEST=.*|CI_BASE_DIGEST=$$digest|; s|^CI_BASE_DIGEST_RECORDED=.*|CI_BASE_DIGEST_RECORDED=$$(date -u +%Y-%m-%d)|" pins.env; \
-	echo "recorded $(CI_BASE_IMAGE)@$$digest in pins.env (commit it, then run: make env)"
+	bash scripts/pin-image.sh $(CI_BASE_IMAGE) $(CI_BASE_TAG) CI_BASE
+	@echo "next: make env"
 
 .PHONY: check-base-pinned
 check-base-pinned:
@@ -74,6 +71,7 @@ fetch: ## (network, once) West workspace + recorded DB snapshots [VULNDB_MIRROR=
 		if [[ ! -d /ws/.west ]]; then west init -l /ws/demo; fi; \
 		west update --narrow -o=--depth=1; \
 		$(PY) -m pipeline.vulndb fetch'
+	@if [[ -n "$(MOSQUITTO_DIGEST)" ]]; then docker pull -q $(MOSQUITTO_IMAGE)@$(MOSQUITTO_DIGEST); fi
 
 .PHONY: doctor
 doctor: ## Check every tool version, pin and checksum (offline)
@@ -101,3 +99,56 @@ clean-clone-check: ## Phase 0 acceptance: fresh clone + fresh workspace volume -
 .PHONY: clean-ws
 clean-ws: ## Delete the west workspace volume (next `make fetch` re-downloads)
 	docker volume rm $(WS_VOLUME)
+
+# ---------------------------------------------------------------- Phase 1
+
+# Firmware version comes from app/VERSION; `make build` requires VERSION=v<major>.<minor>
+# and refuses to build if the two disagree.
+APP_VERSION := v$(shell sed -n 's/^VERSION_MAJOR *= *//p' app/VERSION).$(shell sed -n 's/^VERSION_MINOR *= *//p' app/VERSION)
+BOARD       ?= native_sim/native/64
+BOARD_DIR   := $(subst /,_,$(BOARD))
+TOOLCHAIN   := $(if $(filter native_sim%,$(BOARD)),host,zephyr)
+MOSQUITTO_REF = $(MOSQUITTO_IMAGE)@$(MOSQUITTO_DIGEST)
+RUN_SECONDS ?= 6
+NET_NAME    ?= cra-demo-net
+BROKER_NAME ?= cra-demo-mosquitto
+
+.PHONY: pin-mosquitto
+pin-mosquitto: ## (network, once) Pull the Mosquitto image tag and record its digest in pins.env
+	bash scripts/pin-image.sh $(MOSQUITTO_IMAGE) $(MOSQUITTO_TAG) MOSQUITTO
+
+.PHONY: check-mosquitto-pinned
+check-mosquitto-pinned:
+	@if [[ -z "$(MOSQUITTO_DIGEST)" ]]; then \
+		echo "ERROR: MOSQUITTO_DIGEST is empty in pins.env. Run 'make pin-mosquitto' once." >&2; exit 1; fi
+
+.PHONY: certs
+certs: ## Generate the demo-only CA and broker certificate (FORCE=1 regenerates)
+	$(DOCKER_RUN) -e FORCE=$(if $(FORCE),1,0) --network none $(IMAGE) bash scripts/gen-demo-certs.sh
+
+.PHONY: check-version
+check-version:
+	@if [[ -z "$(VERSION)" ]]; then echo "usage: make build VERSION=$(APP_VERSION) [BOARD=...]" >&2; exit 2; fi
+	@if [[ "$(VERSION)" != "$(APP_VERSION)" ]]; then \
+		echo "ERROR: VERSION=$(VERSION) but app/VERSION is $(APP_VERSION)" >&2; exit 1; fi
+	@if [[ ! -f certs/generated/demo-ca.der ]]; then echo "ERROR: run 'make certs' first" >&2; exit 1; fi
+
+.PHONY: build
+build: check-version ## Build firmware (offline): make build VERSION=v1.0 [BOARD=w5500_evb_pico2/rp2350a/m33]
+	@mkdir -p out/$(VERSION)/$(BOARD_DIR)
+	@echo "building $(VERSION) for $(BOARD) (toolchain: $(TOOLCHAIN)), log: out/$(VERSION)/$(BOARD_DIR)/build.log"
+	$(DOCKER_RUN) -e ZEPHYR_TOOLCHAIN_VARIANT=$(TOOLCHAIN) --network none $(IMAGE) bash -c '\
+		west build -p always -b $(BOARD) -d /ws/build/$(VERSION)/$(BOARD_DIR) app \
+			> out/$(VERSION)/$(BOARD_DIR)/build.log 2>&1 \
+			|| { tail -n 25 out/$(VERSION)/$(BOARD_DIR)/build.log; exit 1; }; \
+		grep -E "^ +(FLASH|RAM):" out/$(VERSION)/$(BOARD_DIR)/build.log || true; \
+		$(PY) -m pipeline.artifacts --build-dir /ws/build/$(VERSION)/$(BOARD_DIR) \
+			--out-dir out/$(VERSION)/$(BOARD_DIR) --board $(BOARD) --version $(VERSION)'
+
+.PHONY: run
+run: check-mosquitto-pinned ## Run the native_sim firmware against local Mosquitto over TLS (internal network only)
+	@exe=out/$(or $(VERSION),$(APP_VERSION))/native_sim_native_64/zephyr.exe; \
+	if [[ ! -f "$$exe" ]]; then echo "ERROR: $$exe missing, run 'make build VERSION=$(APP_VERSION)'" >&2; exit 1; fi; \
+	MOSQUITTO_REF=$(MOSQUITTO_REF) IMAGE=$(IMAGE) EXE="$$exe" NET_NAME=$(NET_NAME) \
+	BROKER_NAME=$(BROKER_NAME) RUN_SECONDS=$(RUN_SECONDS) HOST_UID=$(HOST_UID) \
+	HOST_GID=$(HOST_GID) REPO="$(CURDIR)" bash scripts/run-native.sh

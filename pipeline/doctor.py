@@ -158,6 +158,7 @@ def check_tools(p: dict[str, str]) -> None:
                bin_dir / "cosign", p["COSIGN_SHA256"])
     check_tool("jq", ["jq", "--version"], p["JQ_VERSION"], bin_dir / "jq", p["JQ_SHA256"])
     for label, cmd in (("west", ["west", "--version"]), ("cmake", ["cmake", "--version"]),
+                       ("openssl (make certs)", ["openssl", "version"]),
                        ("host gcc (native_sim)", ["gcc", "--version"])):
         res = run(cmd)
         add(label, "-", (res.stdout.splitlines() or ["not found"])[0][:48], None if res.ok else False)
@@ -212,7 +213,8 @@ def check_workspace(p: dict[str, str]) -> None:
     for line in res.stdout.splitlines():
         name, _, path = line.partition("|")
         if name != "manifest":
-            listed[name] = Path(path)
+            # pins.env keys use "_" where west project names use "-" (tf-psa-crypto)
+            listed[name.replace("-", "_")] = Path(path)
     unexpected = sorted(set(listed) - set(expected))
     missing = sorted(set(expected) - set(listed))
     add("West project set", ",".join(sorted(expected)),
@@ -266,6 +268,9 @@ def check_lockdoc(p: dict[str, str]) -> None:
     digest = p["CI_BASE_DIGEST"].removeprefix("sha256:")
     add("Base digest recorded", "set in pins.env",
         short(digest) if digest else "empty: run `make pin-base`", bool(digest))
+    mq = p.get("MOSQUITTO_DIGEST", "").removeprefix("sha256:")
+    add("Mosquitto digest recorded", "set in pins.env",
+        short(mq) if mq else "empty: run `make pin-mosquitto`", bool(mq))
     current = lockdoc.LOCK_DOC.read_text(encoding="utf-8") if lockdoc.LOCK_DOC.exists() else ""
     ok = current == lockdoc.render()
     add("versions.lock.md", "up to date", "current" if ok else "stale: run `make lock-doc`", ok)

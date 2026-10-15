@@ -2,6 +2,8 @@
 /out/
 # vulnerability DB archives (only vulndb/snapshots.yaml is committed)
 /vulndb/archives/
+# demo certificates and keys (make certs)
+/certs/generated/
 # signing keys: the private key never leaves the presenter machine
 *.key
 /keys/*.key

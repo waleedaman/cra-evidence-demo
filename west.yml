@@ -7,11 +7,13 @@
 # Zephyr's manifest is ignored. That keeps `make fetch` small and keeps unused
 # code out of the workspace (and therefore out of the SBOM discussion).
 #
-# Module list rationale (revisit in Phase 1 when the app and board are final):
-#   mbedtls  - TLS for MQTT
-#   picolibc - C library module, may be needed depending on toolchain/board
-#   cmsis_6  - required by Cortex-M boards (the later real-board build)
-# A board HAL (hal_*) will be added once the dev board is chosen.
+# Module list rationale (Phase 1, verified by building all three targets):
+#   mbedtls       - TLS for MQTT (Mbed TLS 4.1.0)
+#   tf-psa-crypto - crypto library that Mbed TLS 4.x is built on (TF-PSA-Crypto 1.1.0)
+#   cmsis_6       - Cortex-M core support (RP2350 Arm cores)
+#   hal_rpi_pico  - Raspberry Pi RP2350 HAL (Pico 2 / W5500-EVB-Pico2)
+# picolibc was dropped: native_sim links the host libc and the board build uses
+# the picolibc shipped with the Zephyr SDK, so the module source is never compiled.
 
 manifest:
   remotes:
@@ -25,5 +27,6 @@ manifest:
       import:
         name-allowlist:
           - mbedtls
-          - picolibc
+          - tf-psa-crypto
           - cmsis_6
+          - hal_rpi_pico

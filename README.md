@@ -3,8 +3,8 @@
 Demo repository for the talk *"From Firmware Build to CRA Evidence: A Reproducible SBOM
 and Vulnerability Workflow"*. Open tooling only. Licensed under Apache-2.0.
 
-> Status: Phase 0 (environment). The application, SBOM, provenance, scanning, VEX and
-> gate phases are not built yet.
+> Status: Phase 1 (sensor node application). SBOM, provenance, scanning, VEX and gate
+> phases are not built yet.
 
 ## Requirements
 
@@ -28,6 +28,19 @@ Acceptance check for Phase 0: `make clean-clone-check` (fresh clone + fresh work
 volume, DB archives taken from this clone via `VULNDB_MIRROR`, then `make doctor`).
 
 After `make fetch`, every other target runs with `--network none`.
+
+## Sensor node (Phase 1)
+
+A Zephyr application that reads a simulated temperature sensor and publishes it over
+MQTT with TLS (server certificate verified against a demo CA).
+
+```bash
+make pin-mosquitto            # once: records the broker image digest in pins.env
+make certs                    # once: demo-only CA + broker certificate (certs/generated/)
+make build VERSION=v1.0       # native_sim build -> out/v1.0/native_sim_native_64/
+make run                      # device + broker on an internal Docker network
+make build VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33   # real board (see docs/hardware.md)
+```
 
 ## Where things are pinned
 

@@ -1,0 +1,7 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/* Enable the RP2350 hardware TRNG (the SoC already selects it as zephyr,entropy;
+ * this board's devicetree leaves it disabled). TLS needs a real entropy source.
+ */
+&rng {
+	status = "okay";
+};
