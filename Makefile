@@ -92,7 +92,7 @@ clean-clone-check: ## Phase 0 acceptance: fresh clone + fresh workspace volume -
 	@if [[ -n "$$(git status --porcelain)" ]]; then echo "ERROR: commit your changes first" >&2; exit 1; fi
 	rm -rf /tmp/cra-clean-clone
 	git clone -q "$(CURDIR)" /tmp/cra-clean-clone
-	-docker volume rm cra-clean-clone-ws >/dev/null 2>&1
+	docker volume rm cra-clean-clone-ws >/dev/null 2>&1 || true
 	$(MAKE) -C /tmp/cra-clean-clone fetch doctor WS_VOLUME=cra-clean-clone-ws \
 		VULNDB_MIRROR="$(CURDIR)/vulndb/archives"
 	docker volume rm cra-clean-clone-ws >/dev/null
