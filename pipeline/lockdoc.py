@@ -90,6 +90,16 @@ def render() -> str:
                         f"`{p[f'{key}_SHA256']}`"))
     out += [
         "",
+        "## Vendored data formats (schema/vendor/)",
+        "",
+        _row("Format", "Source", "Commit", "sha256"),
+        _row("---", "---", "---", "---"),
+        _row("OpenVEX JSON schema", f"[openvex/spec openvex_json_schema.json]({GH}/openvex/spec/blob/"
+             f"{p['OPENVEX_SCHEMA_COMMIT']}/openvex_json_schema.json)",
+             f"`{p['OPENVEX_SCHEMA_COMMIT']}`", f"`{p['OPENVEX_SCHEMA_SHA256']}`"),
+    ]
+    out += [
+        "",
         "## Python packages (requirements.lock, installed with --require-hashes)",
         "",
         _row("Package", "Version"),

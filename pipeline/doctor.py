@@ -284,6 +284,13 @@ def check_snapshots() -> None:
             "sha OK" if not bad else f"missing/bad: {','.join(bad)}", not bad)
 
 
+def check_vendored(p: dict[str, str]) -> None:
+    f = REPO / "schema" / "vendor" / "openvex_json_schema.json"
+    ok = f.exists() and sha256_file(f) == p.get("OPENVEX_SCHEMA_SHA256", "")
+    add("OpenVEX schema (vendored)", short(p.get("OPENVEX_SCHEMA_SHA256", "")),
+        "sha OK" if ok else "missing or modified", ok)
+
+
 def check_lockdoc(p: dict[str, str]) -> None:
     digest = p["CI_BASE_DIGEST"].removeprefix("sha256:")
     add("Base digest recorded", "set in pins.env",
@@ -309,6 +316,7 @@ def main() -> int:
     check_workspace(pins)
     check_grype_config()
     check_snapshots()
+    check_vendored(pins)
     check_lockdoc(pins)
 
     table = Table(title="make doctor", title_style="bold", header_style="bold")

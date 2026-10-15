@@ -226,3 +226,16 @@ scan: check-version ## Grype + OSV-Scanner on the normalized SBOM, offline [SNAP
 .PHONY: queue
 queue: check-version ## Review queue: findings without a decision for this firmware hash [ROWS=15]
 	@$(RUN_OFFLINE) $(PY) -m pipeline.queue --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) --rows $(ROWS)
+
+# ---------------------------------------------------------------- Phase 6
+
+.PHONY: decide
+decide: check-version ## Draft decision file(s) from findings: VULN=<id>|open [COMPONENT=..] [FORCE=1]
+	@if [[ -z "$(VULN)" ]]; then echo "usage: make decide VERSION=$(VERSION) VULN=<id>|open [COMPONENT=<name>]" >&2; exit 2; fi
+	@$(RUN_OFFLINE) $(PY) -m pipeline.decide --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) \
+		--vuln "$(VULN)" $(if $(COMPONENT),--component "$(COMPONENT)",) $(if $(FORCE),--force,)
+
+.PHONY: vex
+vex: check-version ## OpenVEX from the decisions of this firmware (vexctl), offline [SIGN=1]
+	@$(DOCKER_RUN) $(COSIGN_ENV) --network none $(IMAGE) $(PY) -m pipeline.vex \
+		--out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) $(if $(SIGN),--sign,)

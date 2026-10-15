@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cra-evidence-demo.invalid/schema/decision/v1",
+  "title": "Vulnerability decision",
+  "description": "One human decision about one finding (vulnerability x component) for one firmware build. File: decisions/<release>/<board>/<vuln_id>--<component>.yaml. Status and justification values are the OpenVEX v0.2.0 ones.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["vuln_id", "component", "product", "status", "evidence", "reviewer",
+               "decided_at", "reassess_trigger"],
+  "anyOf": [
+    {"required": ["component_purl"], "properties": {"component_purl": {"type": "string"}}},
+    {"required": ["component_cpe"], "properties": {"component_cpe": {"type": "string"}}}
+  ],
+  "properties": {
+    "vuln_id": {"type": "string", "pattern": "^(CVE-\\d{4}-\\d{4,}|GHSA(-[23456789cfghjmpqrvwx]{4}){3}|OSV-\\d{4}-\\d+|DEMO-[A-Za-z0-9-]+)$"},
+    "aliases": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "component": {"type": "string", "minLength": 1,
+                  "description": "Component name as in the normalized SBOM."},
+    "component_purl": {"type": ["string", "null"], "pattern": "^pkg:[a-z]+/.+"},
+    "component_cpe": {"type": ["string", "null"], "pattern": "^cpe:2\\.3:[aho]:"},
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "board", "purl", "firmware_file", "firmware_sha256"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1,
+                    "description": "Firmware version as in the SBOM (1.0.0), not the release label (v1.0)."},
+        "board": {"type": "string", "minLength": 1},
+        "purl": {"type": "string", "pattern": "^pkg:[a-z]+/.+@.+"},
+        "firmware_file": {"type": "string", "minLength": 1},
+        "firmware_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "status": {"enum": ["not_affected", "affected", "fixed", "under_investigation"]},
+    "justification": {
+      "enum": [null, "component_not_present", "vulnerable_code_not_present",
+               "vulnerable_code_not_in_execute_path",
+               "vulnerable_code_cannot_be_controlled_by_adversary",
+               "inline_mitigations_already_exist"]
+    },
+    "impact_statement": {"type": ["string", "null"]},
+    "action_statement": {"type": ["string", "null"]},
+    "due_date": {"type": ["string", "null"],
+                 "description": "Required for under_investigation: when the investigation must be finished."},
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "path_or_url", "description"],
+        "properties": {
+          "type": {"enum": ["scanner-report", "advisory", "sbom", "config", "linker-map",
+                            "symbols", "source", "commit", "test", "analysis", "other"]},
+          "path_or_url": {"type": "string", "minLength": 1},
+          "description": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "reviewer": {"type": "string", "minLength": 1,
+                 "description": "The person responsible for this decision. Never a tool or an AI."},
+    "decided_at": {"type": "string",
+                   "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"},
+    "reassess_trigger": {"type": "string", "minLength": 1},
+    "exception": {
+      "type": ["object", "null"],
+      "description": "Approved exception for shipping with an affected finding (used by the gate).",
+      "additionalProperties": false,
+      "required": ["approved_by", "approved_at", "expires", "reason"],
+      "properties": {
+        "approved_by": {"type": "string", "minLength": 1},
+        "approved_at": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+        "expires": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "finding": {
+      "type": "object",
+      "description": "Copy of the finding at scaffold time, for context. Not part of the decision."
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "not_affected"}}},
+      "then": {
+        "required": ["justification", "impact_statement"],
+        "properties": {
+          "justification": {"type": "string"},
+          "impact_statement": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "affected"}}},
+      "then": {
+        "required": ["action_statement"],
+        "properties": {"action_statement": {"type": "string", "minLength": 1}}
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "under_investigation"}}},
+      "then": {
+        "required": ["due_date"],
+        "properties": {"due_date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}}
+      }
+    },
+    {
+      "if": {"properties": {"status": {"not": {"const": "not_affected"}}}},
+      "then": {"properties": {"justification": {"const": null}}}
+    }
+  ]
+}

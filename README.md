@@ -3,7 +3,7 @@
 Demo repository for the talk *"From Firmware Build to CRA Evidence: A Reproducible SBOM
 and Vulnerability Workflow"*. Open tooling only. Licensed under Apache-2.0.
 
-> Status: Phase 5 (vulnerability matching and review queue). Decisions/VEX and gate phases are not built yet.
+> Status: Phase 6 (decisions and VEX). The policy gate and the failure-mode scenarios are not built yet.
 
 ## Requirements
 
@@ -78,6 +78,16 @@ make queue VERSION=v1.0 [ROWS=15]            # findings without a decision for t
 ```
 
 What each scanner can and cannot see, and why they disagree: `docs/scanning.md`.
+
+## Decisions and VEX (Phase 6)
+
+```bash
+make decide VERSION=v1.0 VULN=CVE-2023-4039   # draft decisions/v1.0/<board>/CVE-2023-4039--gcc.yaml
+make vex VERSION=v1.0 [SIGN=1]                # OpenVEX from the completed decisions (vexctl)
+```
+
+A person completes each draft (status, justification, evidence, reviewer). Data model:
+`docs/decisions.md`; OpenVEX, Grype and CSAF notes: `docs/vex-formats.md`.
 
 ## Where things are pinned
 
