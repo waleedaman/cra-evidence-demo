@@ -228,6 +228,14 @@ def check_workspace(p: dict[str, str]) -> None:
     add("West project set", ",".join(sorted(expected)),
         "match" if not (unexpected or missing) else f"extra {unexpected} missing {missing}"[:48],
         not unexpected and not missing)
+    tag = p["ZEPHYR_VERSION"]
+    if "zephyr" in listed:
+        res_tag = run(["git", "-C", str(listed["zephyr"]), "rev-parse", "--verify", "-q",
+                       f"{tag}^{{commit}}"])
+        tag_sha = res_tag.stdout.strip()
+        add(f"  zephyr tag {tag}", short(p["ZEPHYR_COMMIT"]),
+            short(tag_sha) if tag_sha else "missing: run `make fetch` (Zephyr CPE in SBOM)",
+            tag_sha == p["ZEPHYR_COMMIT"])
     for name in sorted(expected):
         if name not in listed:
             continue

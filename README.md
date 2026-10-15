@@ -3,8 +3,7 @@
 Demo repository for the talk *"From Firmware Build to CRA Evidence: A Reproducible SBOM
 and Vulnerability Workflow"*. Open tooling only. Licensed under Apache-2.0.
 
-> Status: Phase 1 (sensor node application). SBOM, provenance, scanning, VEX and gate
-> phases are not built yet.
+> Status: Phase 2 (SBOM). Provenance, scanning, VEX and gate phases are not built yet.
 
 ## Requirements
 
@@ -41,6 +40,14 @@ make build VERSION=v1.0       # native_sim build -> out/v1.0/native_sim_native_6
 make run                      # device + broker on an internal Docker network
 make build VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33   # real board (see docs/hardware.md)
 ```
+
+## SBOM (Phase 2)
+
+```bash
+make build VERSION=v1.0 && make sbom VERSION=v1.0   # -> out/v1.0/<board>/sbom/*.spdx
+```
+
+What each SPDX document contains and the gaps we found: `docs/sbom.md`.
 
 ## Where things are pinned
 

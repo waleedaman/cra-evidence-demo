@@ -20,7 +20,7 @@ from pipeline.common import console, sha256_file
 # Files we treat as release artifacts, in display order. Only existing ones are copied.
 ARTIFACTS = ("zephyr.exe", "zephyr.elf", "zephyr.uf2", "zephyr.hex", "zephyr.bin")
 # Build evidence kept next to the artifacts (used by later phases).
-EVIDENCE = (".config", "zephyr.map", "zephyr.dts")
+EVIDENCE = (".config", "zephyr.map", "zephyr.dts", "zephyr.meta")
 
 
 def main(argv: list[str] | None = None) -> int:

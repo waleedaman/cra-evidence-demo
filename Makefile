@@ -70,6 +70,8 @@ fetch: ## (network, once) West workspace + recorded DB snapshots [VULNDB_MIRROR=
 	$(RUN_ONLINE) bash -c '\
 		if [[ ! -d /ws/.west ]]; then west init -l /ws/demo; fi; \
 		west update --narrow -o=--depth=1; \
+		git -C /ws/zephyr fetch -q --depth=1 --no-tags "$$(west list -f "{url}" zephyr)" \
+			"refs/tags/$(ZEPHYR_VERSION):refs/tags/$(ZEPHYR_VERSION)"; \
 		$(PY) -m pipeline.vulndb fetch'
 	@if [[ -n "$(MOSQUITTO_DIGEST)" ]]; then docker pull -q $(MOSQUITTO_IMAGE)@$(MOSQUITTO_DIGEST); fi
 
@@ -138,7 +140,9 @@ build: check-version ## Build firmware (offline): make build VERSION=v1.0 [BOARD
 	@mkdir -p out/$(VERSION)/$(BOARD_DIR)
 	@echo "building $(VERSION) for $(BOARD) (toolchain: $(TOOLCHAIN)), log: out/$(VERSION)/$(BOARD_DIR)/build.log"
 	$(DOCKER_RUN) -e ZEPHYR_TOOLCHAIN_VARIANT=$(TOOLCHAIN) --network none $(IMAGE) bash -c '\
-		west build -p always -b $(BOARD) -d /ws/build/$(VERSION)/$(BOARD_DIR) app \
+		rm -rf /ws/build/$(VERSION)/$(BOARD_DIR); \
+		west spdx --init -d /ws/build/$(VERSION)/$(BOARD_DIR) > /dev/null; \
+		west build -b $(BOARD) -d /ws/build/$(VERSION)/$(BOARD_DIR) app \
 			> out/$(VERSION)/$(BOARD_DIR)/build.log 2>&1 \
 			|| { tail -n 25 out/$(VERSION)/$(BOARD_DIR)/build.log; exit 1; }; \
 		grep -E "^ +(FLASH|RAM):" out/$(VERSION)/$(BOARD_DIR)/build.log || true; \
@@ -152,3 +156,20 @@ run: check-mosquitto-pinned ## Run the native_sim firmware against local Mosquit
 	MOSQUITTO_REF=$(MOSQUITTO_REF) IMAGE=$(IMAGE) EXE="$$exe" NET_NAME=$(NET_NAME) \
 	BROKER_NAME=$(BROKER_NAME) RUN_SECONDS=$(RUN_SECONDS) HOST_UID=$(HOST_UID) \
 	HOST_GID=$(HOST_GID) REPO="$(CURDIR)" bash scripts/run-native.sh
+
+# ---------------------------------------------------------------- Phase 2
+
+SBOM_DIR = out/$(VERSION)/$(BOARD_DIR)/sbom
+
+.PHONY: sbom
+sbom: check-version ## SPDX 2.3 SBOM for a build (offline): make sbom VERSION=v1.0 [BOARD=...]
+	$(DOCKER_RUN) --network none $(IMAGE) bash -c '\
+		b=/ws/build/$(VERSION)/$(BOARD_DIR); \
+		if [[ ! -f $$b/zephyr/zephyr.meta || ! -d $$b/.cmake/api/v1/reply ]]; then \
+			echo "ERROR: no SBOM-ready build for $(VERSION) $(BOARD); run: make build VERSION=$(VERSION) BOARD=$(BOARD)" >&2; exit 1; fi; \
+		rm -rf $(SBOM_DIR); \
+		west spdx -d $$b -s $(SBOM_DIR) --spdx-version 2.3 --analyze-includes --include-sdk \
+			-n "https://spdx.org/spdxdocs/cra-evidence-demo/$(VERSION)/$(BOARD_DIR)/$$(sha256sum out/$(VERSION)/$(BOARD_DIR)/zephyr.elf | cut -c1-16)" \
+			> out/$(VERSION)/$(BOARD_DIR)/sbom.log 2>&1 \
+			|| { tail -n 20 out/$(VERSION)/$(BOARD_DIR)/sbom.log; exit 1; }; \
+		$(PY) -m pipeline.sbom_report --sbom-dir $(SBOM_DIR) --build-dir $$b'
