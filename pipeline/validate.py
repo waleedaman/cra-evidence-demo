@@ -36,6 +36,7 @@ from ntia_conformance_checker.ntia_checker import NTIAChecker
 from rich.markup import escape
 from rich.table import Table
 from spdx_tools.spdx.model import Document
+from spdx_tools.spdx.parser.error import SPDXParsingError
 
 from pipeline import spdxio
 from pipeline.common import console
@@ -86,7 +87,20 @@ def _conformance(checker: BaseChecker) -> Conformance:
 
 def check(path: Path, label: str | None = None, report_dir: Path | None = None) -> DocResult:
     """Run all checks on one SPDX document. Optionally write a JSON report per checker."""
-    doc = spdxio.parse(path)
+    name = label or path.name
+    try:
+        doc = spdxio.parse(path)
+    except SPDXParsingError as exc:
+        messages = [str(m) for m in exc.get_messages()]
+        failed = Conformance(compliant=False, failed=["document could not be parsed"])
+        if report_dir is not None:
+            report_dir.mkdir(parents=True, exist_ok=True)
+            (report_dir / f"{Path(name).name}.json").write_text(
+                json.dumps({"document": name, "parse_errors": messages}, indent=2) + "\n",
+                encoding="utf-8")
+        return DocResult(document=name, packages=0, reachable=0, with_ids=0,
+                         spdx_errors=["parse error: " + m for m in messages],
+                         ntia=failed, fsct3=failed)
     _PARSED[str(path)] = doc
     errors = spdxio.validate(doc)
     previous = logging.root.manager.disable
@@ -99,7 +113,6 @@ def check(path: Path, label: str | None = None, report_dir: Path | None = None) 
     reachable = ntia.reachable_component_ids
     with_ids = sum(1 for p in doc.packages if p.spdx_id in reachable
                    and any(r.reference_type in ID_TYPES for r in p.external_references))
-    name = label or path.name
     if report_dir is not None:
         report_dir.mkdir(parents=True, exist_ok=True)
         out: dict[str, Any] = {"document": name, "spdx_validation_errors": errors,

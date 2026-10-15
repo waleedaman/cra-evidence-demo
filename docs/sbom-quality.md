@@ -75,6 +75,14 @@ PyPI (checked 2026-10-15).
 byte-identical with and without the workaround, and validation gives the same (empty)
 message list. All checks for one board now take about 4 s.
 
+Second spdx-tools detail: its tag-value parser (PLY) caches parser tables inside the
+installed package. In the image that directory belongs to root and the pipeline runs as
+the host user, so the first run on the presenter machine printed two "Permission denied"
+warnings and "Generating LALR tables" per document. `spdxio.py` builds the parser with
+table writing and PLY's grammar log off (in-memory tables, 0.06 s). Errors in a document
+are still reported: a document that cannot be parsed shows as `INVALID` with the first
+parser message, all messages in `validate/<doc>.json`.
+
 ## What `make normalize` produces
 
 `out/<v>/<board>/normalized/firmware.spdx.json`: SPDX 2.3 JSON with one root package for
