@@ -56,8 +56,12 @@
 
 - The base image digest and DB snapshots are recorded on first use, not derived from a
   signed upstream source.
-- `vulndb/osv-ecosystems.txt` lists `GIT` as the ecosystem for C/C++ commit-range
-  records. This is not verified yet; `make snapshot` fails with the real list if wrong.
+- `GIT` exists in the OSV bucket (verified 2026-10-15). The bucket also lists an
+  `[EMPTY]` ecosystem (records without a package), which may matter for C/C++ in Phase 5.
+- The OSV `all.zip` files are replaced every few hours, so a recorded OSV snapshot can
+  only be re-created from our own copy. `make fetch VULNDB_MIRROR=<dir>` takes verified
+  archives from a local directory (another clone, a USB stick) before trying upstream.
+  `make clean-clone-check` uses this to prove a fresh clone reaches `make doctor` PASS.
 - OSV-Scanner offline mode does not support commit-level matching, so OSV findings for
   embedded C libraries are expected to be sparse (Phase 5 topic).
 - Only linux/amd64 is supported.

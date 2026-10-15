@@ -24,6 +24,9 @@ make fetch                    # west workspace + verify/import the recorded DB s
 make doctor                   # offline: every version, pin and checksum must PASS
 ```
 
+Acceptance check for Phase 0: `make clean-clone-check` (fresh clone + fresh workspace
+volume, DB archives taken from this clone via `VULNDB_MIRROR`, then `make doctor`).
+
 After `make fetch`, every other target runs with `--network none`.
 
 ## Where things are pinned
