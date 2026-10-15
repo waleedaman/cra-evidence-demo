@@ -176,6 +176,13 @@ def main(argv: list[str] | None = None) -> int:
     if archives:
         console.print("Linked from the toolchain, no component in the SBOM: "
                       + escape(", ".join(archives)))
+    cache = args.build_dir / "CMakeCache.txt"
+    uses_sdk = cache.exists() and "ZEPHYR_TOOLCHAIN_VARIANT:STRING=zephyr" in cache.read_text(
+        encoding="utf-8", errors="replace")
+    sdk_files = docs["sdk"].files if "sdk" in docs else 0
+    if uses_sdk and sdk_files == 0:
+        console.print("[bold red]WARNING[/] Zephyr SDK toolchain used but sdk.spdx lists no files "
+                      "(SDK path is a symlink? west spdx matches by path prefix)")
     config = args.build_dir / "zephyr" / ".config"
     host_libc = config.exists() and "CONFIG_EXTERNAL_LIBC=y" in config.read_text(encoding="utf-8")
     if host_libc:
@@ -190,6 +197,7 @@ def main(argv: list[str] | None = None) -> int:
         "elf_matches_artifact": elf_ok,
         "toolchain_archives_not_described": archives,
         "host_libc_not_described": host_libc,
+        "sdk_files_missing": bool(uses_sdk and sdk_files == 0),
     }
     (args.sbom_dir / "summary.json").write_text(json.dumps(summary, indent=2) + "\n",
                                                encoding="utf-8")

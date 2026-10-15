@@ -17,13 +17,17 @@ LABEL org.opencontainers.image.title="cra-evidence-demo-tools" \
       org.opencontainers.image.licenses="Apache-2.0" \
       org.opencontainers.image.base.name="${BASE_IMAGE}"
 
+ARG ZEPHYR_SDK_VERSION
 COPY pins.env requirements.lock /opt/cra/
-COPY docker/install-tools.sh /opt/cra/install-tools.sh
+# The recipe itself is kept in the image so `make doctor` can detect a stale image.
+COPY docker/Dockerfile docker/install-tools.sh /opt/cra/
 RUN bash /opt/cra/install-tools.sh
 
 # The SDK is found through this variable (no CMake package registry needed,
-# so it works for any UID the container runs as).
-ENV ZEPHYR_SDK_INSTALL_DIR=/opt/toolchains/zephyr-sdk \
+# so it works for any UID the container runs as). It must be the real directory,
+# not a symlink: `west spdx` attributes headers to the SDK by path prefix, and a
+# symlinked SDK path silently drops all SDK files from sdk.spdx.
+ENV ZEPHYR_SDK_INSTALL_DIR=/opt/toolchains/zephyr-sdk-${ZEPHYR_SDK_VERSION} \
     CRA_BASE_IMAGE=${BASE_IMAGE} \
     CRA_VENV=/opt/cra-venv \
     CRA_IN_IMAGE=1
@@ -31,7 +35,8 @@ ENV ZEPHYR_SDK_INSTALL_DIR=/opt/toolchains/zephyr-sdk \
 # /ws becomes the west workspace (a named Docker volume is mounted here and is
 # initialised from this directory, including its permissions). The demo repo
 # itself is bind-mounted at /ws/demo.
-RUN mkdir -p /ws && chmod 1777 /ws && \
+RUN test -f "${ZEPHYR_SDK_INSTALL_DIR}/sdk_version" && \
+    mkdir -p /ws && chmod 1777 /ws && \
     git config --system --add safe.directory '*'
 
 WORKDIR /ws/demo

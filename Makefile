@@ -53,6 +53,7 @@ check-base-pinned:
 env: check-base-pinned ## (network) Build the pinned tooling image
 	docker build -f docker/Dockerfile \
 		--build-arg BASE_IMAGE=$(CI_BASE_IMAGE)@$(CI_BASE_DIGEST) \
+		--build-arg ZEPHYR_SDK_VERSION=$(ZEPHYR_SDK_VERSION) \
 		-t $(IMAGE) .
 
 .PHONY: shell

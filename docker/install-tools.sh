@@ -38,7 +38,6 @@ sdk_dir="/opt/toolchains/zephyr-sdk-${ZEPHYR_SDK_VERSION}"
 # verified copy into the same place setup.sh uses (gnu/<toolchain>).
 mkdir -p "${sdk_dir}/gnu"
 tar -xf "${work}/arm.tar.xz" -C "${sdk_dir}/gnu"
-ln -sfn "${sdk_dir}" /opt/toolchains/zephyr-sdk
 
 # --- grype (tarball) -------------------------------------------------------------
 download "${gh}/anchore/grype/releases/download/v${GRYPE_VERSION}/grype_${GRYPE_VERSION}_linux_amd64.tar.gz" \

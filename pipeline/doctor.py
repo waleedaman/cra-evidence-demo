@@ -98,7 +98,11 @@ def check_image(pins: dict[str, str]) -> None:
         changed = ["(no pins.env in image)"]
     if not same_reqs:
         changed.append("requirements.lock")
-    add("Image built from current pins", "tool pins + requirements.lock",
+    for recipe in ("Dockerfile", "install-tools.sh"):
+        baked_file = IMAGE_DIR / recipe
+        if not baked_file.exists() or sha256_file(baked_file) != sha256_file(REPO / "docker" / recipe):
+            changed.append(recipe)
+    add("Image built from current pins", "tool pins, lock, recipe",
         "match" if not changed else f"stale ({', '.join(changed)[:30]}): make env",
         not changed)
     want = f"{pins['CI_BASE_IMAGE']}@{pins['CI_BASE_DIGEST']}"

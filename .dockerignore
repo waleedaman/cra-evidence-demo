@@ -3,3 +3,4 @@
 !pins.env
 !requirements.lock
 !docker/install-tools.sh
+!docker/Dockerfile

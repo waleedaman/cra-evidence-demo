@@ -64,6 +64,12 @@ Findings worth showing:
   `sdk` package. native_sim links the host C library dynamically and it does not
   appear at all. `make sbom` reports both gaps; Phase 4 adds them via
   `identifiers/component-map.yaml`.
+- **A symlinked SDK path drops the toolchain from the SBOM.** `west spdx` assigns
+  headers to the SDK document by comparing paths with `ZEPHYR_SDK_INSTALL_DIR`. Our
+  first image pointed that variable at a symlink (`/opt/toolchains/zephyr-sdk`); the
+  compiler reports real paths, nothing matched, and `sdk.spdx` came out with 0 files
+  and no error. The image now uses the real directory, and `make sbom` warns when an
+  SDK build produces an empty `sdk.spdx`.
 - **Identifiers sit in a different document than the sources.** `zephyr.spdx` and
   `modules-deps.spdx` describe the same module as two packages with different SPDX IDs.
   Phase 4 merges them into one inventory.
