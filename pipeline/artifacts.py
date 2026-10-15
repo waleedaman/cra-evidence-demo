@@ -30,6 +30,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--board", required=True)
     parser.add_argument("--version", required=True)
+    parser.add_argument("--quiet", action="store_true", help="do not print the table")
     args = parser.parse_args(argv)
 
     src = args.build_dir / "zephyr"
@@ -60,7 +61,8 @@ def main(argv: list[str] | None = None) -> int:
     (out / "artifacts.json").write_text(
         json.dumps({"version": args.version, "board": args.board, "artifacts": record},
                    indent=2) + "\n", encoding="utf-8")
-    console.print(table)
+    if not args.quiet:
+        console.print(table)
     return 0
 
 

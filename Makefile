@@ -138,17 +138,9 @@ check-version:
 
 .PHONY: build
 build: check-version ## Build firmware (offline): make build VERSION=v1.0 [BOARD=w5500_evb_pico2/rp2350a/m33]
-	@mkdir -p out/$(VERSION)/$(BOARD_DIR)
 	@echo "building $(VERSION) for $(BOARD) (toolchain: $(TOOLCHAIN)), log: out/$(VERSION)/$(BOARD_DIR)/build.log"
-	$(DOCKER_RUN) -e ZEPHYR_TOOLCHAIN_VARIANT=$(TOOLCHAIN) --network none $(IMAGE) bash -c '\
-		rm -rf /ws/build/$(VERSION)/$(BOARD_DIR); \
-		west spdx --init -d /ws/build/$(VERSION)/$(BOARD_DIR) > /dev/null; \
-		west build -b $(BOARD) -d /ws/build/$(VERSION)/$(BOARD_DIR) app \
-			> out/$(VERSION)/$(BOARD_DIR)/build.log 2>&1 \
-			|| { tail -n 25 out/$(VERSION)/$(BOARD_DIR)/build.log; exit 1; }; \
-		grep -E "^ +(FLASH|RAM):" out/$(VERSION)/$(BOARD_DIR)/build.log || true; \
-		$(PY) -m pipeline.artifacts --build-dir /ws/build/$(VERSION)/$(BOARD_DIR) \
-			--out-dir out/$(VERSION)/$(BOARD_DIR) --board $(BOARD) --version $(VERSION)'
+	@$(DOCKER_RUN) -e ZEPHYR_TOOLCHAIN_VARIANT=$(TOOLCHAIN) --network none $(IMAGE) \
+		bash scripts/build-firmware.sh $(BOARD) $(VERSION) /ws/build/$(VERSION)/$(BOARD_DIR) out/$(VERSION)/$(BOARD_DIR)
 
 .PHONY: run
 run: check-mosquitto-pinned ## Run the native_sim firmware against local Mosquitto over TLS (internal network only)
@@ -174,3 +166,40 @@ sbom: check-version ## SPDX 2.3 SBOM for a build (offline): make sbom VERSION=v1
 			> out/$(VERSION)/$(BOARD_DIR)/sbom.log 2>&1 \
 			|| { tail -n 20 out/$(VERSION)/$(BOARD_DIR)/sbom.log; exit 1; }; \
 		$(PY) -m pipeline.sbom_report --sbom-dir $(SBOM_DIR) --build-dir $$b'
+
+# ---------------------------------------------------------------- Phase 3
+
+OUT_BOARD     = out/$(VERSION)/$(BOARD_DIR)
+# Offline, key-based signing: no TUF signing config, no transparency log upload.
+COSIGN_SIGN   = --use-signing-config=false --tlog-upload=false --yes
+COSIGN_ENV    = -e COSIGN_PASSWORD="$${COSIGN_PASSWORD:-}"
+
+.PHONY: keys
+keys: ## Generate the local cosign key pair (keys/cosign.key is git-ignored)
+	@if [[ -f keys/cosign.key ]]; then echo "keys/cosign.key exists; refusing to overwrite" >&2; exit 1; fi
+	@mkdir -p keys
+	@$(DOCKER_RUN) $(COSIGN_ENV) --network none $(IMAGE) cosign generate-key-pair --output-key-prefix keys/cosign
+	@echo "commit keys/cosign.pub; keys/cosign.key stays private (git-ignored)"
+
+.PHONY: provenance
+provenance: check-version ## Signed SLSA provenance (offline): make provenance VERSION=v1.0 [BOARD=...]
+	@if [[ ! -f keys/cosign.key ]]; then echo "ERROR: run 'make keys' first" >&2; exit 1; fi
+	@$(DOCKER_RUN) $(COSIGN_ENV) --network none $(IMAGE) bash -c 'set -euo pipefail; \
+		$(PY) -m pipeline.provenance generate --version $(VERSION) --board $(BOARD); \
+		cosign attest-blob --key keys/cosign.key --statement $(OUT_BOARD)/provenance.intoto.json \
+			--bundle $(OUT_BOARD)/provenance.sigstore.json $(COSIGN_SIGN) 2>&1 | grep -v -e deprecated -e "Using statement"; \
+		$(PY) -m pipeline.provenance summary --version $(VERSION) --board $(BOARD)'
+
+.PHONY: verify
+verify: check-version ## Verify provenance signature, digests and pins (offline)
+	@$(RUN_OFFLINE) $(PY) -m pipeline.provenance verify --version $(VERSION) --board $(BOARD)
+
+.PHONY: reproduce-check
+reproduce-check: check-version ## Two clean builds in fresh containers, different paths: compare hashes
+	@echo "build A and build B of $(VERSION) for $(BOARD): fresh containers, different build paths"
+	@$(DOCKER_RUN) -e ZEPHYR_TOOLCHAIN_VARIANT=$(TOOLCHAIN) -e QUIET=1 --network none $(IMAGE) \
+		bash scripts/build-firmware.sh $(BOARD) $(VERSION) /ws/build/repro-a/$(VERSION)/$(BOARD_DIR) $(OUT_BOARD)/repro/a
+	@$(DOCKER_RUN) -e ZEPHYR_TOOLCHAIN_VARIANT=$(TOOLCHAIN) -e QUIET=1 --network none $(IMAGE) \
+		bash scripts/build-firmware.sh $(BOARD) $(VERSION) /ws/build/repro-b/another/path/$(VERSION)/$(BOARD_DIR) $(OUT_BOARD)/repro/b
+	@$(RUN_OFFLINE) $(PY) -m pipeline.repro --a $(OUT_BOARD)/repro/a --b $(OUT_BOARD)/repro/b \
+		--release $(OUT_BOARD) --report $(OUT_BOARD)/repro/report.json

@@ -3,7 +3,7 @@
 Demo repository for the talk *"From Firmware Build to CRA Evidence: A Reproducible SBOM
 and Vulnerability Workflow"*. Open tooling only. Licensed under Apache-2.0.
 
-> Status: Phase 2 (SBOM). Provenance, scanning, VEX and gate phases are not built yet.
+> Status: Phase 3 (provenance, reproducibility). Scanning, VEX and gate phases are not built yet.
 
 ## Requirements
 
@@ -48,6 +48,17 @@ make build VERSION=v1.0 && make sbom VERSION=v1.0   # -> out/v1.0/<board>/sbom/*
 ```
 
 What each SPDX document contains and the gaps we found: `docs/sbom.md`.
+
+## Provenance and reproducibility (Phase 3)
+
+```bash
+make keys                                   # once: keys/cosign.key (private) + keys/cosign.pub
+make provenance VERSION=v1.0                # signed SLSA v1 provenance, offline
+make verify VERSION=v1.0                    # signature, digests, pins
+make reproduce-check VERSION=v1.0           # two clean builds, different paths, compare hashes
+```
+
+See `docs/provenance.md` and `docs/reproducibility.md`.
 
 ## Where things are pinned
 
