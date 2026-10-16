@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.6.0",
+  "id": "DEMO-2026-0001",
+  "modified": "2026-10-15T00:00:00Z",
+  "published": "2026-10-15T00:00:00Z",
+  "summary": "SYNTHETIC DEMO RECORD, not a real vulnerability: mbedtls 4.1.0 TLS handshake denial of service",
+  "details": "SYNTHETIC. This record was written for the cra-evidence-demo talk (scenario 5) and describes no real flaw in Mbed TLS. It stands in for 'a new advisory published after the release' when no newer database snapshot was recorded. See docs/synthetic-data.md.",
+  "affected": [
+    {
+      "ranges": [
+        {
+          "type": "GIT",
+          "repo": "https://github.com/Mbed-TLS/mbedtls",
+          "events": [{"introduced": "0"}]
+        }
+      ],
+      "versions": ["v4.1.0"]
+    }
+  ],
+  "severity": [
+    {"type": "CVSS_V3", "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"}
+  ],
+  "references": [
+    {"type": "ADVISORY", "url": "https://cra-evidence-demo.invalid/advisories/DEMO-2026-0001"}
+  ],
+  "database_specific": {"synthetic": true, "source": "cra-evidence-demo scenarios/5-new-cve"}
+}

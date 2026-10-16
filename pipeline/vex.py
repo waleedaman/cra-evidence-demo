@@ -201,12 +201,14 @@ def main(argv: list[str] | None = None) -> int:
     for col in ("Vulnerability", "Component", "Status", "Justification", "Reviewer"):
         t.add_column(col, no_wrap=True)
     by_key = {(str(d.get("vuln_id")), str(d.get("component_purl") or d.get("component_cpe"))): d for d in ds}
-    for s in vex["statements"][:15]:
+    for s in vex["statements"][:10]:
         sub = s["products"][0].get("subcomponents", [{}])[0].get("@id", "")
         dec = by_key.get((s["vulnerability"]["name"], sub))
         t.add_row(s["vulnerability"]["name"], str(dec.get("component")) if dec else sub[:20],
                   s["status"], s.get("justification", "-"), str(dec.get("reviewer")) if dec else "?")
     console.print(t)
+    if len(vex["statements"]) > 10:
+        console.print(f"(first 10 of {len(vex['statements'])} statements shown)")
     counts: dict[str, int] = {}
     for s in vex["statements"]:
         counts[s["status"]] = counts.get(s["status"], 0) + 1

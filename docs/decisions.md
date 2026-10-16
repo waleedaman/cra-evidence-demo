@@ -71,3 +71,32 @@ decision: the Phase 7 gate requires at least one other evidence item.
   `draft`, with what is missing ("to complete: decided_at, due_date, reviewer, ...").
 - `make vex`: builds nothing if any decision file of the release and board is a draft or
   bound to another firmware.
+
+## Review and signing: `make review`
+
+```bash
+make review VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 REVIEWER="Jane Doe" [VULN=<id>]
+```
+
+Shows each draft (status, justification, impact, evidence, reassess trigger) and asks
+*sign / skip / quit*. Signing writes `reviewer`, `decided_at` (UTC now) and binds the
+decision to the firmware that is built now; nothing else changes. Edit the YAML file
+first if you disagree with the draft. Names that look like a tool or an AI are rejected
+(same pattern as gate rule R5). Commit `decisions/` afterwards: the provenance records
+whether the tree was clean (gate R2).
+
+The committed v1.0 drafts were prepared by an AI assistant from the build evidence
+(`make evidence`, fix commits, the patch test). Their header says so until they are signed.
+
+## Next release: `make decide FROM=<release>`
+
+```bash
+make decide VERSION=v1.1 VULN=open FROM=v1.0
+```
+
+Copies every decision of v1.0 for the same finding, moves the binding to the v1.1
+firmware, clears reviewer and decided_at, and checks Kconfig conditions in
+`reassess_trigger` (for example `CONFIG_NET_IPV6=y`) against v1.1's `.config`. A trigger
+that now holds is marked `REASSESS` in the file and listed first. Every carried decision
+needs a new review; a carried decision is a starting point, never coverage (scenario 4).
+

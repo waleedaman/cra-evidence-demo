@@ -3,17 +3,18 @@
 #
 # Generate the DEMO-ONLY certificate authority and MQTT broker certificate.
 #
-#   certs/generated/demo-ca.key      CA private key        (git-ignored)
+#   certs/generated/demo-ca.key      CA private key        (git-ignored, stays local)
 #   certs/generated/demo-ca.crt      CA certificate (PEM)  (used by mosquitto_sub)
 #   certs/generated/demo-ca.der      CA certificate (DER)  (embedded in the firmware)
-#   certs/generated/server.key       broker private key    (git-ignored)
+#   certs/generated/server.key       broker private key    (committed: demo only)
 #   certs/generated/server.crt       broker certificate, SAN: mosquitto, localhost
 #
 # ECDSA P-256 everywhere, matching the single cipher suite the firmware enables.
 # The firmware has no real-time clock source, so it does not check validity dates.
 #
 # Regenerating the CA changes the embedded certificate and therefore the
-# firmware hash, so existing files are kept unless FORCE=1.
+# firmware hash, so existing files are kept unless FORCE=1. Everything except
+# demo-ca.key is committed, so all clones build the same firmware (certs/README.md).
 set -euo pipefail
 
 out="${1:-certs/generated}"

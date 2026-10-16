@@ -4,6 +4,13 @@
   python -m pipeline.decide --out-dir out/v1.0/<board> --board <board> --version v1.0 \
                             --vuln CVE-2023-4039 [--component gcc] [--force]
   python -m pipeline.decide ... --vuln open      # one draft per open finding without a file
+  python -m pipeline.decide ... --vuln open --from v1.0   # carry decisions of v1.0 forward
+
+--from <release> starts from the decisions of an earlier release of the same board instead
+of an empty scaffold: the text is copied, the product binding is moved to this build, and
+reviewer and decided_at are cleared, so each one needs a new review. Kconfig conditions in
+reassess_trigger ("CONFIG_NET_IPV6=y") are checked against this build's .config; a trigger
+that now holds is marked in the file and in the table (scenario 4).
 
 The scaffold copies what the scan knows (IDs, component, product binding, advisory links,
 the scanner's match) and leaves everything that needs judgement empty: status stays
@@ -16,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
@@ -129,6 +137,55 @@ def render(f: dict[str, Any], findings: dict[str, Any], release: str, board: str
         evidence=evidence, finding=finding)
 
 
+TRIGGER = re.compile(r"(CONFIG_[A-Z0-9_]+)=(\S+?)(?=$|[\s,;)])")
+
+
+def config_values(path: Path) -> dict[str, str]:
+    vals: dict[str, str] = {}
+    if path.exists():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("CONFIG_") and "=" in line:
+                k, v = line.split("=", 1)
+                vals[k] = v.strip('"')
+    return vals
+
+
+def triggers_hit(trigger: str, config: dict[str, str]) -> list[str]:
+    """Kconfig conditions of a reassess_trigger that hold in this build ('n' = unset)."""
+    hits = []
+    for name, want in TRIGGER.findall(trigger):
+        have = config.get(name, "n")
+        if have == want:
+            hits.append(f"{name}={want}")
+    return hits
+
+
+def set_product(text: str, key: str, value: str) -> str:
+    """Replace the value of one two-space indented key (the product block)."""
+    m = re.search(rf"^  {key}: .*$", text, re.M)
+    return text if m is None else text[:m.start()] + f"  {key}: {value}" + text[m.end():]
+
+
+def carry_forward(old: decisions.Decision, findings: dict[str, Any], from_release: str,
+                  hits: list[str]) -> str:
+    p = findings["product"]
+    text = old.path.read_text(encoding="utf-8")
+    body = text[text.index("vuln_id:"):]
+    body = re.sub(r'^reviewer: .*$', 'reviewer: ""', body, count=1, flags=re.M)
+    body = re.sub(r'^decided_at: .*$', 'decided_at: ""', body, count=1, flags=re.M)
+    for key in ("version", "firmware_file", "firmware_sha256", "purl"):
+        body = set_product(body, key, q(p[key]))
+    head = (f"# Decision: {old.get('vuln_id')} in {old.get('component')} | {p['release']} | {p['board']}\n"
+            f"# Carried forward {datetime.now(UTC).strftime('%Y-%m-%d')} from {old.rel} "
+            f"(make decide FROM={from_release}).\n"
+            "# NOT reviewed for this build: reviewer and decided_at are empty until a person\n"
+            "# re-checks the evidence for THIS firmware (make review). Guide: docs/decisions.md\n")
+    if hits:
+        head += (f"# REASSESS: the trigger {', '.join(hits)} holds in {p['release']}. The old\n"
+                 "# justification is probably wrong for this build: redo the analysis.\n")
+    return head + body
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -138,6 +195,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--vuln", required=True, help="vulnerability ID, or 'open'")
     parser.add_argument("--component", default="")
     parser.add_argument("--force", action="store_true", help="overwrite an existing file")
+    parser.add_argument("--from", dest="from_release", default="",
+                        help="carry decisions forward from this earlier release")
     args = parser.parse_args(argv)
 
     src = args.out_dir / "findings.json"
@@ -165,6 +224,8 @@ def main(argv: list[str] | None = None) -> int:
             return 1
 
     folder = decisions.file_for(args.version, args.board, "x", "x").parent
+    if args.from_release:
+        return main_from(args, findings, selected, folder)
     table = Table(title=f"make decide  |  {folder.relative_to(REPO)}/")
     table.add_column("Vulnerability", no_wrap=True)
     table.add_column("Component")
@@ -184,6 +245,46 @@ def main(argv: list[str] | None = None) -> int:
     if len(selected) <= 15:
         console.print(table)
     console.print(f"{created} draft(s) written. Edit them, then: make queue / make vex")
+    return 0
+
+
+def main_from(args: argparse.Namespace, findings: dict[str, Any], selected: list[dict[str, Any]],
+              folder: Path) -> int:
+    config = config_values(args.out_dir / "config")
+    rows: list[tuple[str, str, str, str, str]] = []
+    created = 0
+    for f in selected:
+        path = decisions.file_for(args.version, args.board, f["id"], f["component"])
+        if path.exists() and not args.force:
+            rows.append((f["id"], f["component"], "-", "exists, kept", ""))
+            continue
+        old_path = decisions.file_for(args.from_release, args.board, f["id"], f["component"])
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if old_path.exists():
+            old = decisions.load(old_path)
+            hits = triggers_hit(str(old.get("reassess_trigger") or ""), config)
+            path.write_text(carry_forward(old, findings, args.from_release, hits), encoding="utf-8")
+            rows.append((f["id"], f["component"], str(old.get("status")),
+                         "carried, needs review",
+                         hits[0] + (f" (+{len(hits) - 1})" if len(hits) > 1 else "") if hits else ""))
+        else:
+            path.write_text(render(f, findings, args.version, args.board,
+                                   str(args.out_dir / "findings.json")), encoding="utf-8")
+            rows.append((f["id"], f["component"], "-", "new draft", ""))
+        created += 1
+    rows.sort(key=lambda r: (not r[4], r[3] != "new draft"))
+    hit = sum(1 for r in rows if r[4])
+    table = Table(title=f"make decide FROM={args.from_release}  |  {folder.relative_to(REPO)}/")
+    table.add_column("Vulnerability", no_wrap=True)
+    table.add_column("Component")
+    table.add_column(f"{args.from_release} status")
+    table.add_column("Result")
+    table.add_column("Reassess trigger holds", style="bold red")
+    for r in rows[:8]:
+        table.add_row(*r)
+    console.print(table)
+    console.print(f"{created} draft(s) written ({max(len(rows) - 8, 0)} more rows not shown). [bold red]{hit} decision(s) whose reassess trigger now holds.[/] "
+                  "Every carried decision needs a new review: make review")
     return 0
 
 

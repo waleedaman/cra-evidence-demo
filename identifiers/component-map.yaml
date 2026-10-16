@@ -161,3 +161,35 @@ components:
     added_on: "2026-10-15"
     reviewed_by: ""
     reviewed_on: ""
+
+  - id: cjson
+    evidence_required:
+      app_paths:
+        - "./lib/cjson/"
+      app_file_sha256:
+        "./lib/cjson/cJSON.h": "c01a8ca5609bb2c956dd1ae836d5d926ec68153ecebc5a75ea0febc2e076da8d"
+        "./lib/cjson/cJSON.c": "246525a76ff5a10dfe7b0bee24150f77a2dc38bbbcc68a22b9df8729ea0fba62"
+    version: "1.7.17"
+    supplier: "Organization: Dave Gamble and cJSON contributors"
+    add_cpe:
+      - "cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:*"
+      - "cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*"
+    add_purl:
+      - "pkg:github/davegamble/cjson@v1.7.17"
+    comment: >-
+      Copied into app/lib/cjson from tag v1.7.17 with one local patch (backport of
+      upstream commit 7e4d5dab, CVE-2024-31755). The version string is unchanged.
+    rationale: >-
+      west spdx lists vendored files as application sources, so no scanner can see a
+      library here. NVD uses two vendor names for cJSON (cjson_project for recent CVEs,
+      davegamble for older ones); both are added. The PURL uses the upstream repository
+      and tag, which is also how OSV records name it.
+    evidence: >-
+      cJSON.h defines CJSON_VERSION 1.7.17 and is byte-identical to the upstream tag;
+      cJSON.c is the tag plus the patch in app/lib/cjson/patches (both hashes pinned here).
+      grype DB baseline: cjson_project:cjson CVE-2023-53154, CVE-2024-31755;
+      davegamble:cjson older CVEs (<= 1.7.6).
+    added_by: Claude (AI assistant)
+    added_on: "2026-10-15"
+    reviewed_by: ""
+    reviewed_on: ""

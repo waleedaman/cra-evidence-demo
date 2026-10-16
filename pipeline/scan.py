@@ -173,6 +173,29 @@ def osv_cache_dir(name: str, snap: dict[str, Any]) -> Path:
     return base
 
 
+def osv_cache_with_extra(name: str, snap: dict[str, Any], extra: list[Path]) -> Path:
+    """Snapshot + SYNTHETIC records (scenario 5 fallback): a copy of the GIT database with
+    the extra OSV JSON records appended. The recorded snapshot itself is never changed."""
+    import hashlib
+    import shutil
+    tag = hashlib.sha256(b"".join(p.read_bytes() for p in extra)).hexdigest()[:12]
+    base = CACHE_DIR / "osv" / f"{name}+synthetic-{tag}"
+    target = base / "osv-scalibr" / "GIT" / "all.zip"
+    if not target.exists():
+        entry = snap["osv"]["ecosystems"]["GIT"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        tmp = target.with_suffix(".tmp")
+        shutil.copyfile(ARCHIVE_DIR / entry["file"], tmp)
+        with zipfile.ZipFile(tmp, "a") as z:
+            for p in extra:
+                record = json.loads(p.read_text(encoding="utf-8"))
+                if not str(record.get("id", "")).startswith("DEMO-"):
+                    raise ScanError(f"{p}: synthetic records must use a DEMO- id")
+                z.writestr(f"{record['id']}.json", json.dumps(record))
+        tmp.rename(target)
+    return base
+
+
 # ------------------------------------------------------------------ scanners
 
 
@@ -336,6 +359,11 @@ def render(comps: list[Component], snap: dict[str, Any], versions: dict[str, str
     console.print(f"[bold]{len(findings)} findings[/] -> findings.json: {g_only} Grype only, "
                   f"{o_only} OSV-Scanner only, {both} both")
     console.print(f"{disagree} Grype findings have an OSV record that does not list this version")
+    synthetic = [f["id"] for f in findings if f["id"].startswith("DEMO-")]
+    if snap.get("synthetic_osv_records"):
+        console.print(f"[bold magenta]SYNTHETIC data added to OSV for this scan[/]: "
+                      f"{', '.join(r['file'] for r in snap['synthetic_osv_records'])}; "
+                      f"synthetic findings: {', '.join(synthetic) or 'none'} (docs/synthetic-data.md)")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -345,6 +373,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--board", required=True)
     parser.add_argument("--version", required=True)
     parser.add_argument("--snapshot", default="baseline")
+    parser.add_argument("--osv-extra", type=Path, nargs="*", default=[],
+                        help="SYNTHETIC OSV records (DEMO- ids) added to the OSV data for this scan")
     args = parser.parse_args(argv)
 
     sbom_path = args.out_dir / NORMALIZED
@@ -359,7 +389,11 @@ def main(argv: list[str] | None = None) -> int:
         snap = snapshot_info(args.snapshot)
         sbom = json.loads(sbom_path.read_text(encoding="utf-8"))
         root, comps = load_components(sbom)
-        cache = osv_cache_dir(args.snapshot, snap)
+        cache = (osv_cache_with_extra(args.snapshot, snap, args.osv_extra) if args.osv_extra
+                 else osv_cache_dir(args.snapshot, snap))
+        if args.osv_extra:
+            snap["synthetic_osv_records"] = [{"file": str(p), "sha256": sha256_file(p)}
+                                             for p in args.osv_extra]
         grype = run_grype(sbom_path, scan_dir / "grype.json", args.snapshot)
         osv = run_osv(comps, scan_dir, cache)
     except ScanError as exc:

@@ -26,10 +26,16 @@ simulator runner, which is compiled outside Zephyr's normal compile options.
 Fix in `app/CMakeLists.txt`:
 
 ```cmake
-zephyr_compile_options(-ffile-prefix-map=${WEST_TOPDIR}=ws          # first
-                       -ffile-prefix-map=${CMAKE_BINARY_DIR}=build)  # last one wins
-target_compile_options(native_simulator INTERFACE ...same maps...)   # native_sim only
+zephyr_compile_options(-ffile-prefix-map=${WEST_TOPDIR}=ws              # first
+                       -ffile-prefix-map=${APPLICATION_SOURCE_DIR}=app
+                       -ffile-prefix-map=${CMAKE_BINARY_DIR}=build)     # last one wins
+zephyr_compile_options(-ffile-prefix-map=$ENV{ZEPHYR_SDK_INSTALL_DIR}=sdk)  # if set
+target_compile_options(native_simulator INTERFACE ...same maps...)       # native_sim only
 ```
+
+The application map was added for releases built from a copy of `app/` (below); the SDK
+map makes the ELF independent of where the SDK is installed (the cloud test environment
+and the tooling image used different SDK paths, and that was the only ELF difference).
 
 **The first version of this fix was itself wrong, and `make reproduce-check` caught it.**
 GCC applies the *last* matching `-ffile-prefix-map`. We listed the build-dir map first
@@ -66,3 +72,14 @@ the prefix maps make the result independent of that convention too.
 
 - SPDX documents (`Created:` timestamp, see `docs/sbom.md`).
 - The provenance statement (`finishedOn`, `sourceDirty`) and its signature.
+
+## Releases after v1.0: the release overlay
+
+Zephyr reads the application version only from `<application dir>/VERSION`. A later
+release that changes only the version and the configuration (v1.1: IPv6 on) is described
+by `releases/<version>/VERSION` and `releases/<version>/release.conf`.
+`scripts/build-firmware.sh` copies `app/` next to the build directory, puts the release's
+VERSION into the copy and passes `release.conf` as `EXTRA_CONF_FILE`. The tracked `app/`
+is never edited, so `git status` stays clean and the provenance says "clean tree".
+Because the copy lives in another directory, the `APPLICATION_SOURCE_DIR=app` map above is
+what keeps `make reproduce-check VERSION=v1.1` identical.

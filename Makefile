@@ -27,8 +27,11 @@ PY        := /opt/cra-venv/bin/python
 DOCKER_RUN = docker run --rm $(TTY_FLAG) \
 	-u $(HOST_UID):$(HOST_GID) -e HOME=/tmp \
 	-e CRA_IMAGE_ID="$$(docker image inspect -f '{{.Id}}' $(IMAGE))" \
-	-v $(WS_VOLUME):/ws -v "$(CURDIR)":/ws/demo -w /ws/demo \
+	-v $(WS_VOLUME):/ws -v "$(CURDIR)":/ws/demo -w /ws/demo $(DOCKER_ENV) \
 	$(if $(VULNDB_MIRROR),-v "$(abspath $(VULNDB_MIRROR))":/mirror:ro -e CRA_VULNDB_MIRROR=/mirror)
+# Settings passed into every container (decisions folder for the scenarios, gate date).
+DOCKER_ENV = -e CRA_DECISIONS_DIR="$(DECISIONS)" $(if $(GATE_DATE),-e GATE_DATE="$(GATE_DATE)") \
+	$(if $(REVIEWER),-e REVIEWER="$(REVIEWER)")
 RUN_OFFLINE = $(DOCKER_RUN) --network none $(IMAGE)
 RUN_ONLINE  = $(DOCKER_RUN) $(IMAGE)
 
@@ -67,13 +70,13 @@ snapshot: ## (network) Record a new DB snapshot: make snapshot NAME=baseline [FO
 	$(RUN_OFFLINE) $(PY) -m pipeline.lockdoc
 
 .PHONY: fetch
-fetch: ## (network, once) West workspace + recorded DB snapshots [VULNDB_MIRROR=dir]
+fetch: ## (network, once) West workspace + recorded DB snapshots [VULNDB_MIRROR=dir] [SNAPSHOTS=a,b]
 	$(RUN_ONLINE) bash -c '\
 		if [[ ! -d /ws/.west ]]; then west init -l /ws/demo; fi; \
 		west update --narrow -o=--depth=1; \
 		git -C /ws/zephyr fetch -q --depth=1 --no-tags "$$(west list -f "{url}" zephyr)" \
 			"refs/tags/$(ZEPHYR_VERSION):refs/tags/$(ZEPHYR_VERSION)"; \
-		$(PY) -m pipeline.vulndb fetch'
+		$(PY) -m pipeline.vulndb fetch $(if $(SNAPSHOTS),--only $(SNAPSHOTS))'
 	@if [[ -n "$(MOSQUITTO_DIGEST)" ]]; then docker pull -q $(MOSQUITTO_IMAGE)@$(MOSQUITTO_DIGEST); fi
 
 .PHONY: doctor
@@ -105,9 +108,12 @@ clean-ws: ## Delete the west workspace volume (next `make fetch` re-downloads)
 
 # ---------------------------------------------------------------- Phase 1
 
-# Firmware version comes from app/VERSION; `make build` requires VERSION=v<major>.<minor>
+# Firmware version comes from app/VERSION, or releases/<VERSION>/VERSION for a later
+# release (see scripts/build-firmware.sh); `make build` requires VERSION=v<major>.<minor>
 # and refuses to build if the two disagree.
-APP_VERSION := v$(shell sed -n 's/^VERSION_MAJOR *= *//p' app/VERSION).$(shell sed -n 's/^VERSION_MINOR *= *//p' app/VERSION)
+version_of = v$(shell sed -n 's/^VERSION_MAJOR *= *//p' $(1)).$(shell sed -n 's/^VERSION_MINOR *= *//p' $(1))
+APP_VERSION := $(call version_of,app/VERSION)
+VERSION_FILE = $(if $(wildcard releases/$(VERSION)/VERSION),releases/$(VERSION)/VERSION,app/VERSION)
 BOARD       ?= native_sim/native/64
 BOARD_DIR   := $(subst /,_,$(BOARD))
 TOOLCHAIN   := $(if $(filter native_sim%,$(BOARD)),host,zephyr)
@@ -115,6 +121,12 @@ MOSQUITTO_REF = $(MOSQUITTO_IMAGE)@$(MOSQUITTO_DIGEST)
 RUN_SECONDS ?= 6
 NET_NAME    ?= cra-demo-net
 BROKER_NAME ?= cra-demo-mosquitto
+# Where results go and which decisions/map apply. The scenarios (Phase 8) point these
+# at their own copies under out/scenarios/, so they never change tracked files.
+OUT_ROOT    ?= out
+DECISIONS   ?= decisions
+MAP         ?= identifiers/component-map.yaml
+OUT_BOARD    = $(OUT_ROOT)/$(VERSION)/$(BOARD_DIR)
 
 .PHONY: pin-mosquitto
 pin-mosquitto: ## (network, once) Pull the Mosquitto image tag and record its digest in pins.env
@@ -132,15 +144,15 @@ certs: ## Generate the demo-only CA and broker certificate (FORCE=1 regenerates)
 .PHONY: check-version
 check-version:
 	@if [[ -z "$(VERSION)" ]]; then echo "usage: make build VERSION=$(APP_VERSION) [BOARD=...]" >&2; exit 2; fi
-	@if [[ "$(VERSION)" != "$(APP_VERSION)" ]]; then \
-		echo "ERROR: VERSION=$(VERSION) but app/VERSION is $(APP_VERSION)" >&2; exit 1; fi
+	@if [[ "$(VERSION)" != "$(call version_of,$(VERSION_FILE))" ]]; then \
+		echo "ERROR: VERSION=$(VERSION) but $(VERSION_FILE) is $(call version_of,$(VERSION_FILE))" >&2; exit 1; fi
 	@if [[ ! -f certs/generated/demo-ca.der ]]; then echo "ERROR: run 'make certs' first" >&2; exit 1; fi
 
 .PHONY: build
 build: check-version ## Build firmware (offline): make build VERSION=v1.0 [BOARD=w5500_evb_pico2/rp2350a/m33]
-	@echo "building $(VERSION) for $(BOARD) (toolchain: $(TOOLCHAIN)), log: out/$(VERSION)/$(BOARD_DIR)/build.log"
+	@echo "building $(VERSION) for $(BOARD) (toolchain: $(TOOLCHAIN)), log: $(OUT_BOARD)/build.log"
 	@$(DOCKER_RUN) -e ZEPHYR_TOOLCHAIN_VARIANT=$(TOOLCHAIN) --network none $(IMAGE) \
-		bash scripts/build-firmware.sh $(BOARD) $(VERSION) /ws/build/$(VERSION)/$(BOARD_DIR) out/$(VERSION)/$(BOARD_DIR)
+		bash scripts/build-firmware.sh $(BOARD) $(VERSION) /ws/build/$(VERSION)/$(BOARD_DIR) $(OUT_BOARD)
 
 .PHONY: run
 run: check-mosquitto-pinned ## Run the native_sim firmware against local Mosquitto over TLS (internal network only)
@@ -152,7 +164,7 @@ run: check-mosquitto-pinned ## Run the native_sim firmware against local Mosquit
 
 # ---------------------------------------------------------------- Phase 2
 
-SBOM_DIR = out/$(VERSION)/$(BOARD_DIR)/sbom
+SBOM_DIR = $(OUT_BOARD)/sbom
 
 .PHONY: sbom
 sbom: check-version ## SPDX 2.3 SBOM for a build (offline): make sbom VERSION=v1.0 [BOARD=...]
@@ -162,14 +174,13 @@ sbom: check-version ## SPDX 2.3 SBOM for a build (offline): make sbom VERSION=v1
 			echo "ERROR: no SBOM-ready build for $(VERSION) $(BOARD); run: make build VERSION=$(VERSION) BOARD=$(BOARD)" >&2; exit 1; fi; \
 		rm -rf $(SBOM_DIR); \
 		west spdx -d $$b -s $(SBOM_DIR) --spdx-version 2.3 --analyze-includes --include-sdk \
-			-n "https://spdx.org/spdxdocs/cra-evidence-demo/$(VERSION)/$(BOARD_DIR)/$$(sha256sum out/$(VERSION)/$(BOARD_DIR)/zephyr.elf | cut -c1-16)" \
-			> out/$(VERSION)/$(BOARD_DIR)/sbom.log 2>&1 \
-			|| { tail -n 20 out/$(VERSION)/$(BOARD_DIR)/sbom.log; exit 1; }; \
+			-n "https://spdx.org/spdxdocs/cra-evidence-demo/$(VERSION)/$(BOARD_DIR)/$$(sha256sum $(OUT_BOARD)/zephyr.elf | cut -c1-16)" \
+			> $(OUT_BOARD)/sbom.log 2>&1 \
+			|| { tail -n 20 $(OUT_BOARD)/sbom.log; exit 1; }; \
 		$(PY) -m pipeline.sbom_report --sbom-dir $(SBOM_DIR) --build-dir $$b'
 
 # ---------------------------------------------------------------- Phase 3
 
-OUT_BOARD     = out/$(VERSION)/$(BOARD_DIR)
 # Offline, key-based signing: no TUF signing config, no transparency log upload.
 COSIGN_SIGN   = --use-signing-config=false --tlog-upload=false --yes
 COSIGN_ENV    = -e COSIGN_PASSWORD="$${COSIGN_PASSWORD:-}"
@@ -185,14 +196,14 @@ keys: ## Generate the local cosign key pair (keys/cosign.key is git-ignored)
 provenance: check-version ## Signed SLSA provenance (offline): make provenance VERSION=v1.0 [BOARD=...]
 	@if [[ ! -f keys/cosign.key ]]; then echo "ERROR: run 'make keys' first" >&2; exit 1; fi
 	@$(DOCKER_RUN) $(COSIGN_ENV) --network none $(IMAGE) bash -c 'set -euo pipefail; \
-		$(PY) -m pipeline.provenance generate --version $(VERSION) --board $(BOARD); \
+		$(PY) -m pipeline.provenance generate --version $(VERSION) --board $(BOARD) --out-root $(OUT_ROOT); \
 		cosign attest-blob --key keys/cosign.key --statement $(OUT_BOARD)/provenance.intoto.json \
 			--bundle $(OUT_BOARD)/provenance.sigstore.json $(COSIGN_SIGN) 2>&1 | grep -v -e deprecated -e "Using statement"; \
-		$(PY) -m pipeline.provenance summary --version $(VERSION) --board $(BOARD)'
+		$(PY) -m pipeline.provenance summary --version $(VERSION) --board $(BOARD) --out-root $(OUT_ROOT)'
 
 .PHONY: verify
 verify: check-version ## Verify provenance signature, digests and pins (offline)
-	@$(RUN_OFFLINE) $(PY) -m pipeline.provenance verify --version $(VERSION) --board $(BOARD)
+	@$(RUN_OFFLINE) $(PY) -m pipeline.provenance verify --version $(VERSION) --board $(BOARD) --out-root $(OUT_ROOT)
 
 .PHONY: reproduce-check
 reproduce-check: check-version ## Two clean builds in fresh containers, different paths: compare hashes
@@ -212,7 +223,7 @@ validate: check-version ## Check SBOM documents: SPDX, NTIA, FSCT3, CPE/PURL (of
 
 .PHONY: normalize
 normalize: check-version ## One component SBOM from west spdx + identifiers/component-map.yaml (offline)
-	@$(RUN_OFFLINE) $(PY) -m pipeline.normalize --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION)
+	@$(RUN_OFFLINE) $(PY) -m pipeline.normalize --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) --map $(MAP)
 
 # ---------------------------------------------------------------- Phase 5
 
@@ -221,7 +232,8 @@ ROWS     ?= 15
 
 .PHONY: scan
 scan: check-version ## Grype + OSV-Scanner on the normalized SBOM, offline [SNAPSHOT=baseline]
-	@$(RUN_OFFLINE) $(PY) -m pipeline.scan --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) --snapshot $(SNAPSHOT)
+	@$(RUN_OFFLINE) $(PY) -m pipeline.scan --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) --snapshot $(SNAPSHOT) \
+		$(if $(OSV_EXTRA),--osv-extra $(OSV_EXTRA),)
 
 .PHONY: queue
 queue: check-version ## Review queue: findings without a decision for this firmware hash [ROWS=15]
@@ -230,12 +242,137 @@ queue: check-version ## Review queue: findings without a decision for this firmw
 # ---------------------------------------------------------------- Phase 6
 
 .PHONY: decide
-decide: check-version ## Draft decision file(s) from findings: VULN=<id>|open [COMPONENT=..] [FORCE=1]
+decide: check-version ## Draft decision file(s): VULN=<id>|open [COMPONENT=..] [FORCE=1] [FROM=<release>]
 	@if [[ -z "$(VULN)" ]]; then echo "usage: make decide VERSION=$(VERSION) VULN=<id>|open [COMPONENT=<name>]" >&2; exit 2; fi
 	@$(RUN_OFFLINE) $(PY) -m pipeline.decide --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) \
-		--vuln "$(VULN)" $(if $(COMPONENT),--component "$(COMPONENT)",) $(if $(FORCE),--force,)
+		--vuln "$(VULN)" $(if $(COMPONENT),--component "$(COMPONENT)",) $(if $(FORCE),--force,) \
+		$(if $(FROM),--from $(FROM),)
 
 .PHONY: vex
 vex: check-version ## OpenVEX from the decisions of this firmware (vexctl), offline [SIGN=1]
 	@$(DOCKER_RUN) $(COSIGN_ENV) --network none $(IMAGE) $(PY) -m pipeline.vex \
 		--out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) $(if $(SIGN),--sign,)
+
+.PHONY: evidence
+evidence: check-version ## Is a source file in this firmware? FILE=subsys/net/ip/icmpv6.c [SYMBOL=..] [KCONFIG=..]
+	@if [[ -z "$(FILE)" ]]; then echo "usage: make evidence VERSION=$(VERSION) FILE=<path> [SYMBOL=f1,f2] [KCONFIG=CONFIG_X]" >&2; exit 2; fi
+	@$(RUN_OFFLINE) \
+		$(PY) -m pipeline.evidence_compiled --out-dir $(OUT_BOARD) --file "$(FILE)" \
+		$(if $(SYMBOL),--symbol "$(SYMBOL)",) $(if $(KCONFIG),--kconfig "$(KCONFIG)",)
+
+# ---------------------------------------------------------------- Phase 7
+
+POLICY ?= policy/gate.yaml
+
+.PHONY: gate
+gate: check-version ## Release gate, PASS/FAIL per rule of policy/gate.yaml [GATE_DATE=YYYY-MM-DD]
+	@$(RUN_OFFLINE) $(PY) -m pipeline.gate --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) \
+		--policy $(POLICY) $(if $(SOFT),--soft,) --rows $(or $(GATE_ROWS),8)
+
+.PHONY: pipeline
+pipeline: check-version ## Build -> SBOM -> provenance -> normalize -> scan -> VEX -> gate, one release
+	@$(MAKE) --no-print-directory build
+	@$(MAKE) --no-print-directory sbom
+	@$(MAKE) --no-print-directory provenance
+	@$(MAKE) --no-print-directory normalize
+	@$(MAKE) --no-print-directory scan
+	@$(MAKE) --no-print-directory vex SIGN=1 || echo "(no VEX: decisions incomplete, see make queue)"
+	@$(MAKE) --no-print-directory gate
+
+.PHONY: cjson-test
+cjson-test: ## Scenario 2 evidence: CVE-2024-31755 test against upstream and patched cJSON (host gcc)
+	@$(RUN_OFFLINE) bash scripts/cjson-patch-test.sh
+
+.PHONY: review
+review: check-version ## Review and sign decision drafts, one by one: REVIEWER="<your name>" [VULN=<id>]
+	@$(RUN_OFFLINE) $(PY) -m pipeline.review --out-dir $(OUT_BOARD) --board $(BOARD) --version $(VERSION) \
+		--reviewer "$(REVIEWER)" $(if $(VULN),--vuln "$(VULN)",)
+
+# ---------------------------------------------------------------- Phase 8
+
+A ?= v1.0
+B ?= v1.1
+
+.PHONY: diff
+diff: ## What changed between two releases, which decisions it breaks: make diff A=v1.0 B=v1.1
+	@$(RUN_OFFLINE) $(PY) -m pipeline.diff --out-root $(OUT_ROOT) --board $(BOARD) --a $(A) --b $(B)
+
+.PHONY: finding decision vex-statement map-entry triage
+finding: check-version ## Show one finding of the last scan: VULN=<id>
+	@$(RUN_OFFLINE) $(PY) -m pipeline.scenario show-finding --out-dir $(OUT_BOARD) --vuln "$(VULN)"
+decision: check-version ## Show the decision file(s) for VULN=<id> (short form)
+	@f=($(wildcard $(DECISIONS)/$(VERSION)/$(BOARD_DIR)/$(VULN)--*.yaml)); \
+	if [[ $${#f[@]} -eq 0 ]]; then echo "no decision for $(VULN) in $(DECISIONS)/$(VERSION)/$(BOARD_DIR)" >&2; exit 1; fi; \
+	for x in "$${f[@]}"; do $(RUN_OFFLINE) $(PY) -m pipeline.scenario show-decision --file "$$x"; done
+vex-statement: check-version ## Show the OpenVEX statement for VULN=<id>
+	@$(RUN_OFFLINE) $(PY) -m pipeline.scenario show-vex --out-dir $(OUT_BOARD) --vuln "$(VULN)"
+map-entry: ## Show one entry of the identifier map: ID=cjson
+	@$(RUN_OFFLINE) $(PY) -m pipeline.scenario show-map --map $(MAP) --id "$(ID)"
+triage: check-version ## Open an investigation for the first new finding [VULN=] [DAYS=14], REVIEWER="<name>"
+	@$(RUN_OFFLINE) $(PY) -m pipeline.scenario triage --out-dir $(OUT_BOARD) --board $(BOARD) \
+		--version $(VERSION) --days $(or $(DAYS),14) $(if $(VULN),--vuln "$(VULN)",)
+
+# Internal: helper commands for scenarios/*/run.sh (ARGS without spaces)
+.PHONY: scenario-helper
+scenario-helper:
+	@$(RUN_OFFLINE) $(PY) -m pipeline.scenario $(ARGS)
+
+SCENARIO_BOARD ?= w5500_evb_pico2/rp2350a/m33
+
+.PHONY: scenario-1 scenario-2 scenario-3 scenario-4 scenario-5
+scenario-1: ## Scenario 1: vendored cJSON, invisible until identified (AUTO=1: no pauses)
+	@BOARD=$(SCENARIO_BOARD) bash scenarios/1-identifiers/run.sh
+scenario-2: ## Scenario 2: supplier backport, version unchanged, scanners still report it
+	@BOARD=$(SCENARIO_BOARD) bash scenarios/2-supplier-patch/run.sh
+scenario-3: ## Scenario 3: ICMPv6 CVE, IPv6 disabled: evidence that the code is not compiled
+	@BOARD=$(SCENARIO_BOARD) bash scenarios/3-config-dependent/run.sh
+scenario-4: ## Scenario 4: v1.1 enables IPv6: decisions of v1.0 no longer hold
+	@BOARD=$(SCENARIO_BOARD) bash scenarios/4-config-change/run.sh
+scenario-5: ## Scenario 5: new advisory after release: rescan, gate, triage, updated VEX
+	@BOARD=$(SCENARIO_BOARD) bash scenarios/5-new-cve/run.sh
+
+# ---------------------------------------------------------------- Phase 9
+
+.PHONY: prepare
+prepare: ## Before the talk: build + scan v1.0 and v1.1, VEX + gate v1.0, readiness check (slow)
+	@$(MAKE) --no-print-directory pipeline VERSION=v1.0 BOARD=$(SCENARIO_BOARD)
+	@for t in build sbom provenance normalize scan; do \
+		$(MAKE) --no-print-directory $$t VERSION=v1.1 BOARD=$(SCENARIO_BOARD) || exit 1; done
+	@$(MAKE) --no-print-directory diff A=v1.0 B=v1.1 BOARD=$(SCENARIO_BOARD) > /dev/null
+	@$(MAKE) --no-print-directory gate VERSION=v1.1 BOARD=$(SCENARIO_BOARD) SOFT=1 > /dev/null
+	@$(MAKE) --no-print-directory cjson-test
+	@$(MAKE) --no-print-directory ready
+
+.PHONY: ready
+ready: ## Readiness check for the scenarios (fast) [REVIEWER=...]
+	@$(RUN_OFFLINE) $(PY) -m pipeline.scenario check --board $(SCENARIO_BOARD)
+
+.PHONY: reset
+reset: ## Delete all scenario workspaces (out/scenarios); release outputs stay
+	@rm -rf out/scenarios
+	@echo "scenario workspaces deleted; release outputs in out/v1.0, out/v1.1 kept"
+
+.PHONY: demo
+demo: ## Presenter menu: pick a scenario
+	@BOARD=$(SCENARIO_BOARD) bash scenarios/menu.sh
+
+REC_DIR ?= recordings
+
+.PHONY: record-1 record-2 record-3 record-4 record-5
+record-%: ## Record scenario N as fallback (util-linux script): make record-3
+	@mkdir -p $(REC_DIR)
+	@script -q --log-timing $(REC_DIR)/scenario-$*.timing --log-out $(REC_DIR)/scenario-$*.log \
+		-c "AUTO=1 PAUSE_SECONDS=$${PAUSE_SECONDS:-3} $(MAKE) --no-print-directory scenario-$*"
+	@echo "recorded -> $(REC_DIR)/scenario-$*.log (+ .timing); play: make play-$*"
+
+.PHONY: play-1 play-2 play-3 play-4 play-5
+play-%: ## Replay a recorded scenario (no Docker, no network): make play-3 [SPEED=2]
+	@if [[ ! -f $(REC_DIR)/scenario-$*.timing ]]; then echo "no recording: make record-$*" >&2; exit 1; fi
+	@scriptreplay --log-timing $(REC_DIR)/scenario-$*.timing --log-out $(REC_DIR)/scenario-$*.log \
+		--divisor $${SPEED:-1}
+
+# ---------------------------------------------------------------- Phase 10
+
+.PHONY: samples
+samples: ## Copy the v1.0/v1.1 evidence outputs into samples/ (commit them; run after make prepare)
+	@bash scripts/make-samples.sh $(SCENARIO_BOARD)

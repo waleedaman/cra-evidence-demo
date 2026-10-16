@@ -8,6 +8,7 @@ Schema: schema/decision.schema.json (JSON Schema 2020-12, validated with jsonsch
 from __future__ import annotations
 
 import json
+import os
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -18,7 +19,8 @@ import yaml
 
 from pipeline.common import REPO
 
-DECISIONS_DIR = REPO / "decisions"
+# Scenarios point this at their own copy (Makefile DECISIONS=..., env CRA_DECISIONS_DIR).
+DECISIONS_DIR = REPO / (os.environ.get("CRA_DECISIONS_DIR") or "decisions")
 SCHEMA_FILE = REPO / "schema" / "decision.schema.json"
 
 

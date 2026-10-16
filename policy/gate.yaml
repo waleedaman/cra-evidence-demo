@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Release gate policy, read by pipeline/gate.py (make gate). Every rule is evaluated
+# for ONE firmware build (release + board) and reported as PASS or FAIL; the gate
+# passes only if every enabled rule passes. Docs: docs/gate.md
+schema: 1
+
+# Findings at or above this severity block a release unless decided as not_affected
+# or fixed, or covered by an approved, unexpired exception. Critical > High > Medium > Low.
+severity_threshold: High
+
+rules:
+  # R1: the normalized SBOM parses, passes SPDX 2.3 validation and NTIA minimum elements
+  sbom_valid: true
+  # R2: signed provenance verifies (cosign, offline) and matches the pins
+  provenance_verified: true
+  # R3: findings belong to THIS firmware and THIS SBOM, from a recent DB snapshot
+  findings_current:
+    max_snapshot_age_days: 60
+  # R4: every finding has a valid decision bound to this release and firmware hash
+  every_finding_decided: true
+  # R5: decisions are signed off by a person and rest on more than scanner output
+  decision_quality:
+    # Evidence of these types alone is not enough
+    insufficient_evidence_types: [scanner-report]
+    # A reviewer is a person. Names matching this (case-insensitive) are rejected.
+    # A heuristic only: the real control is code review of the decisions/ folder.
+    reviewer_not_matching: "(claude|chatgpt|copilot|gpt|llm|\\bai\\b|assistant|bot|grype|osv|scanner|pipeline|todo|tbd)"
+  # R6: no affected finding at/above the threshold without an approved, unexpired exception
+  no_unaccepted_affected: true
+  # R7: under_investigation is allowed only below the threshold and before its due date
+  investigations_in_time: true
+  # R8: the OpenVEX document is current (same firmware, one statement per decision) and signed
+  vex_current:
+    require_signed: true

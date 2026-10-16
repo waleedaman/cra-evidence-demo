@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# The talk's pipeline in CI, for the board the decisions are for. It records its OWN
+# vulnerability DB snapshot ("ci", today's data; the committed snapshots stay untouched)
+# and signs with an ephemeral key, so its signatures prove nothing beyond this run.
+#
+# Expected result: the build is reproducible (same firmware hash as the committed
+# decisions), and the gate FAILS as soon as today's databases contain a finding without a
+# reviewed decision. That failure is the point: it is the "new advisory after release"
+# signal (scenario 5) on a schedule. See docs/ci-checklist.md.
+name: pipeline
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"     # weekly, Monday 05:17 UTC
+  pull_request:
+    paths: ["decisions/**", "identifiers/**", "policy/**", "app/**", "releases/**", "pins.env"]
+
+permissions:
+  contents: read
+
+env:
+  BOARD: w5500_evb_pico2/rp2350a/m33
+  COSIGN_PASSWORD: ""
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1
+      - name: Tooling image (pinned base digest, pinned tools)
+        run: make env
+      - name: Record today's DB snapshot "ci" (network)
+        run: make snapshot NAME=ci FORCE=1
+      - name: West workspace + the ci snapshot (network)
+        run: make fetch SNAPSHOTS=ci
+      - name: Doctor (offline)
+        run: make doctor || true      # the committed snapshots' archives are not in CI
+      - name: Ephemeral signing key
+        run: rm -f keys/cosign.pub && make keys
+      - name: Commit the CI-local changes (snapshot record, key) so the tree is clean; never pushed
+        run: git -c user.name=ci -c user.email=ci@invalid commit -qam "CI-local: snapshot ci, ephemeral key"
+      - name: Pipeline v1.0 (offline from here)
+        run: make pipeline VERSION=v1.0 BOARD="$BOARD" SNAPSHOT=ci
+      - name: Same firmware as the committed decisions?
+        if: always()
+        run: |
+          expected=$(sed -n 's/^  firmware_sha256: "\(.*\)"/\1/p' decisions/v1.0/w5500_evb_pico2_rp2350a_m33/*.yaml | sort -u)
+          actual=$(sha256sum out/v1.0/w5500_evb_pico2_rp2350a_m33/zephyr.uf2 | cut -d' ' -f1)
+          echo "decisions: ${expected}"; echo "this build: ${actual}"
+          [[ "${expected}" == "${actual}" ]]
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a   # v7.0.1
+        if: always()
+        with:
+          name: evidence-v1.0
+          path: |
+            out/v1.0/w5500_evb_pico2_rp2350a_m33/*.json
+            out/v1.0/w5500_evb_pico2_rp2350a_m33/normalized/
+            out/v1.0/w5500_evb_pico2_rp2350a_m33/vex/
+            out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/

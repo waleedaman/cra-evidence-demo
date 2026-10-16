@@ -70,9 +70,14 @@ assumed the older `osv-scanner/` sub-directory, which is how our archives are st
 | gcc 14.3.0 (board) | 1 CPE | 1 | no GitHub PURL | - |
 | picolibc 1.8.10 (board) | no CPE | - | repo@1.8.10 | 0 |
 | cmsis_6, hal_rpi_pico (board) | no CPE | - | commit only | - |
+| cjson 1.7.17 (vendored, from `identifiers/component-map.yaml`) | 2 CPE | 6 | repo@v1.7.17 | 8 |
 
-Board: 29 findings (27 Grype only, 2 OSV-Scanner only, 0 found by both).
-native_sim: 28 (no gcc component, see `docs/sbom-quality.md`).
+Board: 37 findings (27 Grype only, 4 OSV-Scanner only, 6 found by both).
+Before cJSON was vendored (and without its map entry, scenario 1) the board had 29.
+
+cJSON shows the CPE vendor split: NVD files older cJSON CVEs under `davegamble:cjson`
+and newer ones under `cjson_project:cjson`. With only one of the two CPEs Grype finds 2
+instead of 6. 5 of the 8 cJSON findings concern `cJSON_Utils.c`, which is not vendored.
 
 ### The two databases disagree, in both directions
 

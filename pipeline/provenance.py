@@ -33,6 +33,7 @@ PREDICATE_TYPE = "https://slsa.dev/provenance/v1"
 BUILD_TYPE = "https://cra-evidence-demo.invalid/buildtypes/zephyr-west-docker/v1"
 BUILDER_ID = "https://cra-evidence-demo.invalid/builders/local-docker/v1"
 STATEMENT_FILE = "provenance.intoto.json"
+OUT_ROOT = "out"
 BUNDLE_FILE = "provenance.sigstore.json"
 GH = "https://github.com"
 BUILD_ROOT = Path(os.environ.get("CRA_BUILD_ROOT", "/ws/build"))
@@ -126,7 +127,7 @@ def resolved_dependencies(build_dir: Path, pins: dict[str, str]) -> list[dict[st
 
 def cmd_generate(version: str, board: str) -> int:
     pins = load_pins()
-    out_dir = REPO / "out" / version / board_dir(board)
+    out_dir = REPO / OUT_ROOT / version / board_dir(board)
     build_dir = BUILD_ROOT / version / board_dir(board)
     for need in (out_dir / "artifacts.json", out_dir / "sbom" / "build.spdx",
                  build_dir / "zephyr" / "zephyr.meta"):
@@ -193,13 +194,12 @@ def signed_statement(bundle: Path) -> dict[str, Any]:
     return payload
 
 
-def cmd_verify(version: str, board: str, pubkey: Path) -> int:
+def verify_rows(out_dir: Path, pubkey: Path) -> list[tuple[str, str, bool]]:
+    """All provenance checks for one build directory (used by make verify and the gate)."""
     pins = load_pins()
-    out_dir = REPO / "out" / version / board_dir(board)
     bundle = out_dir / BUNDLE_FILE
     if not bundle.exists():
-        console.print(f"[bold red]missing {bundle}[/]: run make provenance first")
-        return 1
+        return [("signed provenance present", f"missing {bundle.name}", False)]
     rows: list[tuple[str, str, bool]] = []
 
     # 1. signature + subject digest, per firmware artifact, by cosign (offline: no tlog)
@@ -242,7 +242,15 @@ def cmd_verify(version: str, board: str, pubkey: Path) -> int:
     rows.append(("Zephyr SDK archive = pins.env", sdk[:12] or "-", sdk == pins["ZEPHYR_SDK_MINIMAL_SHA256"]))
     dirty = bool(bd["externalParameters"].get("sourceDirty"))
     rows.append(("built from committed source", "dirty tree" if dirty else "clean", not dirty))
+    return rows
 
+
+def cmd_verify(version: str, board: str, pubkey: Path) -> int:
+    out_dir = REPO / OUT_ROOT / version / board_dir(board)
+    if not (out_dir / BUNDLE_FILE).exists():
+        console.print(f"[bold red]missing {out_dir / BUNDLE_FILE}[/]: run make provenance first")
+        return 1
+    rows = verify_rows(out_dir, pubkey)
     table = Table(title=f"make verify  |  {version}  {board}")
     table.add_column("Check")
     table.add_column("Actual")
@@ -259,7 +267,7 @@ def cmd_verify(version: str, board: str, pubkey: Path) -> int:
 
 
 def cmd_summary(version: str, board: str) -> int:
-    out_dir = REPO / "out" / version / board_dir(board)
+    out_dir = REPO / OUT_ROOT / version / board_dir(board)
     st = signed_statement(out_dir / BUNDLE_FILE)
     table = Table(title=f"Signed provenance  |  {version}  {board}")
     table.add_column("Subject")
@@ -280,7 +288,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--version", required=True)
     parser.add_argument("--board", required=True)
     parser.add_argument("--pubkey", type=Path, default=REPO / "keys" / "cosign.pub")
+    parser.add_argument("--out-root", default="out", help="results root (default: out)")
     args = parser.parse_args(argv)
+    global OUT_ROOT
+    OUT_ROOT = args.out_root
     if args.command == "generate":
         return cmd_generate(args.version, args.board)
     if args.command == "summary":

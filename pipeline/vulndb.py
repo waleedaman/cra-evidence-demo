@@ -263,8 +263,11 @@ def import_grype(name: str, entry: dict[str, Any]) -> str:
     return "imported"
 
 
-def cmd_fetch() -> int:
+def cmd_fetch(only: list[str] | None = None) -> int:
     data = load_snapshots()
+    if only:
+        data = {"grype": {k: v for k, v in data["grype"].items() if k in only},
+                "osv": {k: v for k, v in data["osv"].items() if k in only}}
     if not data["grype"] and not data["osv"]:
         console.print("[bold red]no snapshot recorded[/]: run `make snapshot NAME=baseline` first")
         return 1
@@ -319,14 +322,15 @@ def main(argv: list[str] | None = None) -> int:
     rec = sub.add_parser("record")
     rec.add_argument("name")
     rec.add_argument("--force", action="store_true")
-    sub.add_parser("fetch")
+    fetch = sub.add_parser("fetch")
+    fetch.add_argument("--only", default="", help="comma-separated snapshot names (CI)")
     sub.add_parser("status")
     args = parser.parse_args(argv)
     try:
         if args.cmd == "record":
             return cmd_record(args.name, args.force)
         if args.cmd == "fetch":
-            return cmd_fetch()
+            return cmd_fetch([n for n in args.only.split(",") if n])
         return cmd_status()
     except (SnapshotError, OSError) as exc:
         console.print(f"[bold red]ERROR[/] {escape(str(exc))}")

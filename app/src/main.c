@@ -4,7 +4,8 @@
  * Connected sensor node for the CRA evidence demo.
  *
  * Reads a simulated temperature sensor and publishes the value over MQTT
- * with TLS (Zephyr MQTT library + TLS sockets backed by Mbed TLS). The broker
+ * with TLS (Zephyr MQTT library + TLS sockets backed by Mbed TLS). The payload
+ * is built with the vendored cJSON library (lib/cjson). The broker
  * certificate is verified against a demo CA that is embedded at build time.
  */
 
@@ -21,6 +22,7 @@
 
 #include <app_version.h>
 
+#include "cJSON.h"
 #include "sensor_sim.h"
 
 LOG_MODULE_REGISTER(sensor_node, LOG_LEVEL_INF);
@@ -161,19 +163,27 @@ static int publish_reading(uint32_t seq)
 {
 	struct mqtt_publish_param param = {0};
 	char payload[128];
-	int32_t mdegc = sensor_sim_read_mdegc(seq);
-	int len;
+	cJSON *msg = cJSON_CreateObject();
+	bool ok;
 
-	len = snprintf(payload, sizeof(payload),
-		       "{\"device\":\"%s\",\"fw\":\"%s\",\"seq\":%u,\"temp_c\":%d.%03d}",
-		       CONFIG_APP_DEVICE_ID, APP_VERSION_STRING, seq, mdegc / 1000,
-		       mdegc % 1000);
+	/* Integers only: the board's C library is built without float printf. */
+	ok = msg != NULL &&
+	     cJSON_AddStringToObject(msg, "device", CONFIG_APP_DEVICE_ID) != NULL &&
+	     cJSON_AddStringToObject(msg, "fw", APP_VERSION_STRING) != NULL &&
+	     cJSON_AddNumberToObject(msg, "seq", (double)seq) != NULL &&
+	     cJSON_AddNumberToObject(msg, "temp_mc", (double)sensor_sim_read_mdegc(seq)) != NULL &&
+	     cJSON_PrintPreallocated(msg, payload, sizeof(payload), false);
+	cJSON_Delete(msg);
+	if (!ok) {
+		LOG_ERR("Cannot build payload");
+		return -ENOMEM;
+	}
 
 	param.message.topic.topic.utf8 = (const uint8_t *)TOPIC;
 	param.message.topic.topic.size = strlen(TOPIC);
 	param.message.topic.qos = MQTT_QOS_0_AT_MOST_ONCE;
 	param.message.payload.data = payload;
-	param.message.payload.len = len;
+	param.message.payload.len = strlen(payload);
 	param.message_id = (uint16_t)(seq + 1);
 
 	LOG_INF("publish %s %s", TOPIC, payload);

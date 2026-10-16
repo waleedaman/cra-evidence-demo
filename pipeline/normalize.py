@@ -119,7 +119,10 @@ def load_map(path: Path = MAP_FILE) -> dict[str, Any]:
     return data
 
 
-def app_version(path: Path = APP_VERSION_FILE) -> str:
+def app_version(release: str = "") -> str:
+    """Firmware version: releases/<release>/VERSION if that release exists, else app/VERSION."""
+    rel = REPO / "releases" / release / "VERSION"
+    path = rel if release and rel.exists() else APP_VERSION_FILE
     fields = dict(re.findall(r"^(\w+)\s*=\s*(\S*)\s*$", path.read_text(encoding="utf-8"), re.M))
     return f"{fields['VERSION_MAJOR']}.{fields['VERSION_MINOR']}.{fields['PATCHLEVEL']}"
 
@@ -181,7 +184,7 @@ def build(out_dir: Path, board: str, version: str, cmap: dict[str, Any],
 
     # -- root package: the firmware as delivered -----------------------------------------
     prod = cmap["product"]
-    fw_version = app_version()
+    fw_version = app_version(version)
     primary = next(a for a in PRIMARY_ARTIFACTS if a in artifacts)
     primary_path = out_dir / primary
     if sha256_file(primary_path) != artifacts[primary]["sha256"]:
@@ -245,6 +248,10 @@ def build(out_dir: Path, board: str, version: str, cmap: dict[str, Any],
                                 if c.algorithm == ChecksumAlgorithm.SHA256), "")
                  for f in raw["sdk"].files}
     covered: set[str] = set()
+    app_files = {f.name: next((c.value for c in f.checksums
+                               if c.algorithm == ChecksumAlgorithm.SHA256), "")
+                 for f in raw["app"].files}
+    vendored: set[str] = set()
 
     for entry in cmap["components"]:
         if "spdx_package" in entry:
@@ -259,6 +266,31 @@ def build(out_dir: Path, board: str, version: str, cmap: dict[str, Any],
                                f"build has {target.package.version}: review the entry again")
             apply_entry(target, entry)
             target.source += " + map"
+        elif "app_paths" in entry["evidence_required"]:
+            # a library copied into the application tree (no package metadata)
+            ev = entry["evidence_required"]
+            files = [f for f in app_files if any(f.startswith(p) for p in ev["app_paths"])]
+            if not files:
+                report["map_unused"].append({"entry": entry["id"], "reason": "files not in this build"})
+                continue
+            bad = [path_ for path_, digest in ev.get("app_file_sha256", {}).items()
+                   if app_files.get(path_) != digest]
+            if bad:
+                raise MapError(f"map entry '{entry['id']}': {', '.join(bad)} changed or missing in "
+                               "app.spdx -- library updated? review the entry again")
+            vendored.update(files)
+            pkg = Package(
+                spdx_id=spdx_id(entry["id"]), name=entry["id"], version=entry["version"],
+                download_location=SpdxNoAssertion(), files_analyzed=False,
+                license_concluded=SpdxNoAssertion(), license_declared=SpdxNoAssertion(),
+                copyright_text=SpdxNoAssertion(), primary_package_purpose=PackagePurpose.LIBRARY,
+                comment=(f"Vendored into the application tree: {len(files)} files under "
+                         f"{', '.join(ev['app_paths'])} in app.spdx."),
+            )
+            c = Component(entry["id"], pkg, "map", files=len(files))
+            apply_entry(c, entry)
+            c.added.insert(0, f"component added, version {entry['version']}")
+            components.append(c)
         else:
             ev = entry["evidence_required"]
             files = [f for f in sdk_files if any(f.startswith(p) for p in ev["sdk_paths"])]
@@ -292,6 +324,16 @@ def build(out_dir: Path, board: str, version: str, cmap: dict[str, Any],
             apply_entry(c, entry)
             c.added.insert(0, f"component added, version {entry['version']}")
             components.append(c)
+
+    if vendored:
+        root.comment = (root.comment or "") + (f" {len(vendored)} of the application files are a "
+                                               "vendored library, listed as its own component.")
+    # Files in the application tree outside src/ are often copied third-party code.
+    # Without a map entry nobody can tell what they are; say so instead of guessing.
+    stray = sorted(f for f in app_files if not f.startswith("./src/") and f not in vendored)
+    if stray:
+        report["gaps"].append(f"{len(stray)} application files outside src/ are not attributed "
+                              f"to any component (e.g. {stray[0]})")
 
     # -- gaps that stay visible ----------------------------------------------------------
     uncovered = sorted(set(sdk_files) - covered)

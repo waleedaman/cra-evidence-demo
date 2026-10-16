@@ -2,11 +2,14 @@
 /out/
 # vulnerability DB archives (only vulndb/snapshots.yaml is committed)
 /vulndb/archives/
-# demo certificates and keys (make certs)
-/certs/generated/
+# demo certificates (make certs): committed so every clone builds the same firmware
+# hash; only the CA private key stays local (see certs/README.md)
+/certs/generated/demo-ca.key
+/certs/generated/*.srl
 # signing keys: the private key never leaves the presenter machine
 *.key
 /keys/*.key
+!/certs/generated/server.key
 # python
 __pycache__/
 .mypy_cache/

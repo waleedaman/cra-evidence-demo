@@ -1,0 +1,28 @@
+From 7e4d5dabe7a9b754c601f214e65b544e67ba9f59 Mon Sep 17 00:00:00 2001
+From: Up-wind <lj.upwind@gmail.com>
+Date: Mon, 25 Mar 2024 20:07:11 +0800
+Subject: [PATCH] Add NULL check to cJSON_SetValuestring()
+
+If the valuestring passed to cJSON_SetValuestring is NULL, a null pointer dereference will happen.
+
+This commit adds the NULL check of valuestring before it is dereferenced.
+---
+ cJSON.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cJSON.c b/cJSON.c
+index 4e4979e..8903e4c 100644
+--- a/cJSON.c
++++ b/cJSON.c
+@@ -406,7 +406,7 @@ CJSON_PUBLIC(char*) cJSON_SetValuestring(cJSON *object, const char *valuestring)
+         return NULL;
+     }
+     /* return NULL if the object is corrupted */
+-    if (object->valuestring == NULL)
++    if (object->valuestring == NULL || valuestring == NULL)
+     {
+         return NULL;
+     }
+-- 
+2.43.0
+
