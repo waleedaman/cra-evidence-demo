@@ -42,7 +42,7 @@ NEEDED = ("artifacts.json", "config", "zephyr.elf", "sbom/zephyr.spdx", "provena
 
 
 def syntax(text: str, lexer: str) -> None:
-    console.print(Syntax(text, lexer, theme="ansi_dark", word_wrap=False, background_color="default"))
+    console.print(Syntax(text, lexer, theme="ansi_dark", word_wrap=True, background_color="default"))
 
 
 def cmd_setup(n: str, releases: list[str], board: str) -> int:
@@ -115,13 +115,23 @@ def cmd_show_map(path: Path, cid: str) -> int:
         return 1
     shown = {k: v for k, v in entry.items() if k not in ("comment", "rationale")}
     console.print(f"[bold]{path.relative_to(REPO) if path.is_absolute() else path}[/], entry '{cid}':")
-    syntax(yaml.safe_dump([shown], sort_keys=False, allow_unicode=True, width=80), "yaml")
+    syntax(yaml.safe_dump([shown], sort_keys=False, allow_unicode=True, width=70), "yaml")
     return 0
 
 
 def load_findings(out_dir: Path) -> dict[str, Any]:
     data: dict[str, Any] = json.loads((out_dir / "findings.json").read_text(encoding="utf-8"))
     return data
+
+
+def first_sentences(text: str, n: int) -> str:
+    """Whole sentences up to about n characters (at least the first one, shortened)."""
+    out = ""
+    for sentence in re.split(r"(?<=[.!?])\s+", text):
+        if out and len(out) + len(sentence) + 1 > n:
+            break
+        out = f"{out} {sentence}".strip()
+    return out if len(out) <= n + 60 else out[:n].rsplit(" ", 1)[0] + " ..."
 
 
 def cmd_show_finding(out_dir: Path, vuln: str) -> int:
@@ -146,7 +156,7 @@ def cmd_show_finding(out_dir: Path, vuln: str) -> int:
             t.add_row("OSV match", escape(f"{x['osv']['repo']} @ {x['osv']['version']}"))
         if x.get("osv_view"):
             t.add_row("OSV view", escape(x["osv_view"]))
-        t.add_row("summary", escape(x.get("summary", "")[:160]))
+        t.add_row("summary", escape(first_sentences(x.get("summary", ""), 170)))
         console.print(t)
     return 0
 
@@ -166,7 +176,7 @@ def cmd_show_decision(path: Path) -> int:
     data = {k: v for k, v in data.items() if v not in (None, "", [])}
     data["bound_to"] = f"{d.get('product', 'version')} firmware {str(d.get('product', 'firmware_sha256'))[:12]}"
     console.print(f"[bold]{d.rel}[/]  ({'valid' if d.valid else '[red]draft: ' + escape(d.todo) + '[/]'})")
-    syntax(yaml.safe_dump(data, sort_keys=False, allow_unicode=True, width=80), "yaml")
+    syntax(yaml.safe_dump(data, sort_keys=False, allow_unicode=True, width=70), "yaml")
     return 0
 
 

@@ -37,8 +37,8 @@ make reset                 # delete all scenario workspaces (< 1 s)
 Every step prints the command as you would type it, waits for Enter, then runs it.
 Behind the scenes it adds `OUT_ROOT=out/scenarios/<N> DECISIONS=out/scenarios/<N>/decisions`,
 so a scenario works on a copy of the release outputs and of `decisions/` and can be run
-any number of times. Nothing tracked is modified. Step durations are appended to
-`out/scenarios/<N>/timings.txt`.
+any number of times. Nothing tracked is modified. Step durations go to
+`out/scenarios/<N>/timings.txt`, the full screen output to `out/scenarios/<N>/transcript.log`.
 
 `AUTO=1` runs without pauses (`PAUSE_SECONDS=3` waits instead), used by `make record-N`.
 Fallback recordings and replay: `docs/presenting.md`.

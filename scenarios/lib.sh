@@ -4,6 +4,10 @@
 #   AUTO=1            no pauses (recordings, rehearsal); PAUSE_SECONDS=n waits n s instead
 #   BOARD=...         board (default: the W5500-EVB-Pico2, the board the decisions are for)
 #   REVIEWER="name"   the person on stage (scenario 5 opens an investigation in this name)
+#   CLEAR=0           do not clear the screen at the start
+#
+# The whole run is also written to out/scenarios/<N>/transcript.log (with colours;
+# view with `cat`, or `sed 's/\x1b\[[0-9;]*m//g'` for plain text).
 #
 # Every step prints the command as the audience would type it, waits for Enter, then runs
 # it. The real call adds OUT_ROOT/DECISIONS so the scenario works on its own copy under
@@ -25,7 +29,8 @@ smake() {
 helper() { ${MAKE_CMD} --no-print-directory -s scenario-helper ARGS="$*"; }
 
 title() {
-  clear 2>/dev/null || true
+  TITLE_TEXT="Scenario ${SCENARIO}: $1"$'\n'"$2"
+  [[ "${CLEAR:-1}" == "1" ]] && { clear 2>/dev/null || true; }
   printf '%s\n' "${CY}Scenario ${SCENARIO}: $1${R}"
   printf '%s\n\n' "${DIM}$2${R}"
 }
@@ -54,6 +59,11 @@ say() { printf '\n%s\n' "${B}$*${R}"; pause; }
 setup() {  # setup v1.0[,v1.1]
   helper setup "${SCENARIO}" --releases "$1" --board "${BOARD}" || exit 1
   : > "${SC}/timings.txt"
+  # from here on everything on screen also goes to the transcript
+  printf '%s\n\n' "${TITLE_TEXT:-Scenario ${SCENARIO}}" > "${SC}/transcript.log"
+  exec 3>&1 4>&2 > >(tee -a "${SC}/transcript.log") 2>&1
+  TEE_PID=$!
+  trap 'exec 1>&3 2>&4; wait "${TEE_PID}" 2>/dev/null' EXIT
 }
 
 done_msg() {

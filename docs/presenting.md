@@ -14,19 +14,21 @@ with `GATE_DATE=2026-11-12` exported, so due dates and snapshot age are evaluate
 
 ## On stage
 
-| Command | What it does | Time (cloud test run, AUTO=1) |
+| Command | What it does | Tool time (presenter PC, 2026-10-17) |
 | --- | --- | --- |
 | `make demo` | menu of the five scenarios + readiness + reset | - |
-| `make scenario-1` | 8 steps | about 50 s (two scans, about 20 s each: OSV loads its 200 MB database) |
-| `make scenario-2` | 6 steps | about 3 s |
-| `make scenario-3` | 4 steps | about 1 s |
-| `make scenario-4` | 6 steps | about 3 s |
-| `make scenario-5` | 7 steps | about 30 s (one scan; the first synthetic scan also builds the OSV copy) |
+| `make scenario-1` | 8 steps | 32 s (two scans of about 13 s each) |
+| `make scenario-2` | 6 steps | 4 s |
+| `make scenario-3` | 4 steps | 2 s |
+| `make scenario-4` | 6 steps | 6 s |
+| `make scenario-5` | 7 steps | 21 s (one scan; the first synthetic scan builds the OSV copy) |
 | `make reset` | deletes `out/scenarios/` | < 1 s |
 
-Times are tool time only, measured in the cloud test environment; each run writes the
-real numbers of your machine to `out/scenarios/<N>/timings.txt`. Each step waits for Enter
-before it runs, so the pace is yours.
+Tool time only; each step waits for Enter before it runs, so the pace is yours. Every
+run writes the real step times to `out/scenarios/<N>/timings.txt` and everything that
+was on screen to `out/scenarios/<N>/transcript.log` (with colours: `cat` it, or strip
+them with `sed 's/\x1b\[[0-9;]*m//g'`). `CLEAR=0 make scenario-1` keeps the screen
+instead of clearing it at the start.
 
 Terminal: dark background, font size so that 100 columns fit (the tables are rendered for
 100 columns, `CRA_WIDTH` changes it), at most about 25 lines per step.

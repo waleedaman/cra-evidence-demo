@@ -98,10 +98,12 @@ def render(r: dict[str, Any]) -> None:
     for name, (va, vb) in list(r["components_changed"].items())[:4]:
         t.add_row(f"component {name}", va, vb, "[yellow]version[/]")
     kc = r["kconfig_changed"]
-    net = sorted(kc, key=lambda k: (k != "CONFIG_NET_IPV6", "LOG_LEVEL" in k,
-                                    not k.startswith("CONFIG_NET_"), k))
+    # most telling first: CONFIG_NET_IPV6, options named in reassess triggers, other n -> y
+    hit_names = {h.split("=")[0] for d in r["decisions_of_a"] for h in d["trigger_holds_in_b"]}
+    net = sorted(kc, key=lambda k: (k != "CONFIG_NET_IPV6", k not in hit_names, kc[k] != ["n", "y"],
+                                    "LOG_LEVEL" in k, not k.startswith("CONFIG_NET_"), k))
     for k in net[:4]:
-        t.add_row(k, kc[k][0], kc[k][1], "[yellow]Kconfig[/]")
+        t.add_row(k, kc[k][0] or '""', kc[k][1] or '""', "[yellow]Kconfig[/]")
     t.add_row("Kconfig options changed", "", "", f"[yellow]{len(kc)}[/]" if kc else "0")
     t.add_row("source files compiled", "", "",
               f"[yellow]+{len(r['sources_added'])} / -{len(r['sources_removed'])}[/]")
