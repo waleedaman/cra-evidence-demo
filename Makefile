@@ -31,7 +31,7 @@ DOCKER_RUN = docker run --rm $(TTY_FLAG) \
 	$(if $(VULNDB_MIRROR),-v "$(abspath $(VULNDB_MIRROR))":/mirror:ro -e CRA_VULNDB_MIRROR=/mirror)
 # Settings passed into every container (decisions folder for the scenarios, gate date).
 DOCKER_ENV = -e CRA_DECISIONS_DIR="$(DECISIONS)" $(if $(GATE_DATE),-e GATE_DATE="$(GATE_DATE)") \
-	$(if $(REVIEWER),-e REVIEWER="$(REVIEWER)")
+	$(if $(REVIEWER),-e REVIEWER="$(REVIEWER)") $(if $(SNAPSHOTS),-e CRA_SNAPSHOTS="$(SNAPSHOTS)")
 RUN_OFFLINE = $(DOCKER_RUN) --network none $(IMAGE)
 RUN_ONLINE  = $(DOCKER_RUN) $(IMAGE)
 
@@ -80,7 +80,7 @@ fetch: ## (network, once) West workspace + recorded DB snapshots [VULNDB_MIRROR=
 	@if [[ -n "$(MOSQUITTO_DIGEST)" ]]; then docker pull -q $(MOSQUITTO_IMAGE)@$(MOSQUITTO_DIGEST); fi
 
 .PHONY: doctor
-doctor: ## Check every tool version, pin and checksum (offline)
+doctor: ## Check every tool version, pin and checksum (offline) [SNAPSHOTS=a,b: only these DB snapshots]
 	$(RUN_OFFLINE) $(PY) -m pipeline.doctor
 
 .PHONY: lock-doc

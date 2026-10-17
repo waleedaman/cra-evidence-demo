@@ -11,4 +11,5 @@ Real outputs of the pipeline for the W5500-EVB-Pico2 board, copied from `out/` b
 
 Not included: firmware binaries, ELF, linker map and logs (size). Their SHA-256 are in
 `artifacts.json` and in the signed provenance. The provenance and VEX are signed with the
-presenter's key; `keys/cosign.pub` verifies them.
+presenter's key; the committed `keys/cosign.pub` verifies them (if you created your own
+key as described in the main README, the presenter's key is in `keys/presenter.pub`).

@@ -11,8 +11,8 @@ HERE=scenarios/5-new-cve
 if grep -qE '^  after:' vulndb/snapshots.yaml; then
   DB=(SNAPSHOT=after); DB_TEXT="snapshot 'after'"
 else
-  DB=(SNAPSHOT=baseline OSV_EXTRA="${HERE}/DEMO-2026-0001.osv.json")
-  DB_TEXT="baseline + SYNTHETIC record DEMO-2026-0001"
+  DB=(SNAPSHOT="${SNAPSHOT:-baseline}" OSV_EXTRA="${HERE}/DEMO-2026-0001.osv.json")
+  DB_TEXT="${SNAPSHOT:-baseline} + SYNTHETIC record DEMO-2026-0001"
 fi
 if [[ -z "${REVIEWER:-}" ]]; then
   read -r -p "Your name (the person who opens the investigation): " REVIEWER

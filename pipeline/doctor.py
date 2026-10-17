@@ -264,6 +264,10 @@ def check_grype_config() -> None:
 
 def check_snapshots() -> None:
     snaps = load_snapshots()
+    only = [n for n in os.environ.get("CRA_SNAPSHOTS", "").split(",") if n]
+    if only:   # make doctor SNAPSHOTS=mine: check only the snapshots this clone fetched
+        snaps = {"grype": {k: v for k, v in snaps["grype"].items() if k in only},
+                 "osv": {k: v for k, v in snaps["osv"].items() if k in only}}
     if not snaps["grype"] and not snaps["osv"]:
         add("DB snapshots", "recorded", "none: run `make snapshot NAME=baseline`", False)
         return
