@@ -1,0 +1,117 @@
+{
+  "document": "sdk.spdx",
+  "spdx_validation_errors": [],
+  "ntia": {
+    "isConformant": false,
+    "isNtiaConformant": false,
+    "complianceStandard": "ntia",
+    "sbomSpec": "spdx2",
+    "validationMessages": [],
+    "conformanceMessages": [],
+    "parsingError": [],
+    "sbomName": "sdk",
+    "specVersionProvided": true,
+    "authorNameProvided": true,
+    "timestampProvided": true,
+    "dependencyRelationshipsProvided": true,
+    "totalNumberComponents": 1,
+    "componentsEvaluated": true,
+    "graphValidation": {
+      "unknownPointers": {
+        "hasUnknownPointers": false,
+        "unknownPointerEdges": {}
+      },
+      "floatingComponents": {
+        "floatingComponentCount": 0,
+        "floatingComponentIds": []
+      }
+    },
+    "componentNames": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentVersions": {
+      "nonconformantComponents": [
+        "sdk"
+      ],
+      "allProvided": false
+    },
+    "componentIdentifiers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentSuppliers": {
+      "nonconformantComponents": [
+        "sdk"
+      ],
+      "allProvided": false
+    },
+    "componentConcludedLicenses": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentCopyrightTexts": {
+      "nonconformantComponents": [
+        "sdk"
+      ],
+      "allProvided": false
+    }
+  },
+  "fsct3-min": {
+    "isConformant": false,
+    "isNtiaConformant": false,
+    "complianceStandard": "fsct3-min",
+    "sbomSpec": "spdx2",
+    "validationMessages": [],
+    "conformanceMessages": [],
+    "parsingError": [],
+    "sbomName": "sdk",
+    "specVersionProvided": true,
+    "authorNameProvided": true,
+    "timestampProvided": true,
+    "dependencyRelationshipsProvided": true,
+    "totalNumberComponents": 1,
+    "componentsEvaluated": true,
+    "graphValidation": {
+      "unknownPointers": {
+        "hasUnknownPointers": false,
+        "unknownPointerEdges": {}
+      },
+      "floatingComponents": {
+        "floatingComponentCount": 0,
+        "floatingComponentIds": []
+      }
+    },
+    "componentNames": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentVersions": {
+      "nonconformantComponents": [
+        "sdk"
+      ],
+      "allProvided": false
+    },
+    "componentIdentifiers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentSuppliers": {
+      "nonconformantComponents": [
+        "sdk"
+      ],
+      "allProvided": false
+    },
+    "componentConcludedLicenses": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentCopyrightTexts": {
+      "nonconformantComponents": [
+        "sdk"
+      ],
+      "allProvided": false
+    }
+  },
+  "floating_packages": []
+}

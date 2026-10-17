@@ -1,0 +1,79 @@
+{
+  "schema": "cra-evidence-demo/gate/v1",
+  "result": "PASS",
+  "evaluated_for": "2026-10-17",
+  "policy": "policy/gate.yaml",
+  "policy_sha256": "c9a77db62dcf826ca8ce6375e9be4820724624957110a2b3f5a11e0bfb6aa10c",
+  "severity_threshold": "High",
+  "product": {
+    "name": "cra-evidence-demo-firmware",
+    "version": "1.0.0",
+    "release": "v1.0",
+    "board": "w5500_evb_pico2/rp2350a/m33",
+    "firmware_file": "zephyr.uf2",
+    "firmware_sha256": "0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+    "purl": "pkg:generic/cra-evidence-demo-firmware@1.0.0"
+  },
+  "snapshot": "baseline",
+  "findings": 37,
+  "open_findings": 0,
+  "decisions_bound": 37,
+  "rules": [
+    {
+      "rule": "sbom_valid",
+      "title": "R1 SBOM valid (SPDX 2.3, NTIA)",
+      "ok": true,
+      "detail": "9 packages, 9 with CPE/PURL",
+      "blocking": []
+    },
+    {
+      "rule": "provenance_verified",
+      "title": "R2 Provenance signed and verified",
+      "ok": true,
+      "detail": "10 checks",
+      "blocking": []
+    },
+    {
+      "rule": "findings_current",
+      "title": "R3 Findings current for this build",
+      "ok": true,
+      "detail": "snapshot 'baseline', 2 days old",
+      "blocking": []
+    },
+    {
+      "rule": "every_finding_decided",
+      "title": "R4 Every finding has a decision",
+      "ok": true,
+      "detail": "37 findings, all decided",
+      "blocking": []
+    },
+    {
+      "rule": "decision_quality",
+      "title": "R5 Decisions: reviewer + evidence",
+      "ok": true,
+      "detail": "37 valid decisions checked",
+      "blocking": []
+    },
+    {
+      "rule": "no_unaccepted_affected",
+      "title": "R6 No affected >= High without exception",
+      "ok": true,
+      "detail": "0 affected, none blocking",
+      "blocking": []
+    },
+    {
+      "rule": "investigations_in_time",
+      "title": "R7 Investigations below threshold, in time",
+      "ok": true,
+      "detail": "0 under investigation",
+      "blocking": []
+    },
+    {
+      "rule": "vex_current",
+      "title": "R8 OpenVEX current and signed",
+      "ok": true,
+      "detail": "37 statements, signed",
+      "blocking": []
+    }
+  ]
+}

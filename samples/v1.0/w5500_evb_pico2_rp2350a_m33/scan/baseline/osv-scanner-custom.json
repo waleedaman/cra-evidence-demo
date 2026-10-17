@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "source": {
+        "path": "normalized/firmware.spdx.json",
+        "type": "sbom"
+      },
+      "packages": [
+        {
+          "package": {
+            "name": "https://github.com/zephyrproject-rtos/zephyr",
+            "version": "v4.4.2",
+            "ecosystem": "GIT"
+          }
+        },
+        {
+          "package": {
+            "name": "https://github.com/Mbed-TLS/mbedtls",
+            "version": "v4.1.0",
+            "ecosystem": "GIT"
+          }
+        },
+        {
+          "package": {
+            "name": "https://github.com/mbed-tls/mbedtls",
+            "version": "v4.1.0",
+            "ecosystem": "GIT"
+          }
+        },
+        {
+          "package": {
+            "name": "https://github.com/Mbed-TLS/TF-PSA-Crypto",
+            "version": "v1.1.0",
+            "ecosystem": "GIT"
+          }
+        },
+        {
+          "package": {
+            "name": "https://github.com/mbed-tls/tf-psa-crypto",
+            "version": "v1.1.0",
+            "ecosystem": "GIT"
+          }
+        },
+        {
+          "package": {
+            "name": "https://github.com/picolibc/picolibc",
+            "version": "1.8.10",
+            "ecosystem": "GIT"
+          }
+        },
+        {
+          "package": {
+            "name": "https://github.com/davegamble/cjson",
+            "version": "v1.7.17",
+            "ecosystem": "GIT"
+          }
+        }
+      ]
+    }
+  ]
+}

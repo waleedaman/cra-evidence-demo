@@ -1,0 +1,576 @@
+[
+  {
+    "document": "app.spdx",
+    "packages": 1,
+    "reachable": 1,
+    "with_ids": 0,
+    "spdx_errors": [],
+    "ntia": {
+      "compliant": false,
+      "failed": [
+        "All component versions provided?",
+        "All component suppliers provided?"
+      ],
+      "missing": {
+        "version": [
+          "app-sources"
+        ],
+        "supplier": [
+          "app-sources"
+        ]
+      }
+    },
+    "fsct3": {
+      "compliant": false,
+      "failed": [
+        "All component versions provided?",
+        "All component suppliers provided?",
+        "All component copyright notice provided?",
+        "SBOM generation context (SBOM type) provided?"
+      ],
+      "missing": {
+        "version": [
+          "app-sources"
+        ],
+        "supplier": [
+          "app-sources"
+        ],
+        "copyright_text": [
+          "app-sources"
+        ]
+      }
+    }
+  },
+  {
+    "document": "zephyr.spdx",
+    "packages": 5,
+    "reachable": 5,
+    "with_ids": 1,
+    "spdx_errors": [],
+    "ntia": {
+      "compliant": false,
+      "failed": [
+        "All component suppliers provided?"
+      ],
+      "missing": {
+        "supplier": [
+          "cmsis_6-sources",
+          "hal_rpi_pico-sources",
+          "mbedtls-sources",
+          "tf-psa-crypto-sources"
+        ]
+      }
+    },
+    "fsct3": {
+      "compliant": false,
+      "failed": [
+        "All component suppliers provided?",
+        "All component copyright notice provided?",
+        "SBOM generation context (SBOM type) provided?"
+      ],
+      "missing": {
+        "supplier": [
+          "cmsis_6-sources",
+          "hal_rpi_pico-sources",
+          "mbedtls-sources",
+          "tf-psa-crypto-sources"
+        ],
+        "copyright_text": [
+          "zephyr",
+          "cmsis_6-sources",
+          "hal_rpi_pico-sources",
+          "mbedtls-sources",
+          "tf-psa-crypto-sources"
+        ]
+      }
+    }
+  },
+  {
+    "document": "build.spdx",
+    "packages": 94,
+    "reachable": 57,
+    "with_ids": 0,
+    "spdx_errors": [],
+    "ntia": {
+      "compliant": false,
+      "failed": [
+        "All component versions provided?",
+        "All component suppliers provided?"
+      ],
+      "missing": {
+        "version": [
+          "app",
+          "app_version_h",
+          "arch__arm__core",
+          "arch__arm__core__cortex_m",
+          "arch__arm__core__cortex_m__cmse",
+          "arch__common",
+          "builtin",
+          "device_api_ld_target",
+          "driver_validation_h_target",
+          "drivers__clock_control",
+          "drivers__console",
+          "drivers__entropy",
+          "drivers__ethernet",
+          "drivers__gpio",
+          "drivers__pinctrl",
+          "drivers__reset",
+          "drivers__serial",
+          "drivers__spi",
+          "drivers__timer",
+          "everest",
+          "extras",
+          "gen_demo_ca_der_inc_2d36a1a01ecaa7dd5d8011b347875df1",
+          "heap_constants",
+          "heap_constants_h",
+          "isr_tables",
+          "kernel",
+          "kobj_types_h_target",
+          "lib__libc__common",
+          "lib__libc__picolibc",
+          "lib__net_buf",
+          "lib__os__zvfs",
+          "lib__posix__c_lib_ext",
+          "linker_zephyr_final_script_target",
+          "linker_zephyr_prebuilt_script_target",
+          "mbedtls",
+          "mbedx509",
+          "modules__hal_rpi_pico",
+          "modules__mbedtls",
+          "offsets",
+          "offsets_h",
+          "p256-m",
+          "platform",
+          "pqcp",
+          "soc__raspberrypi__rpi_pico__rp2350",
+          "subsys__net",
+          "subsys__net__ip",
+          "subsys__net__l2__ethernet",
+          "subsys__net__lib__config",
+          "subsys__net__lib__mqtt",
+          "subsys__random",
+          "syscall_list_h_target",
+          "tfpsacrypto",
+          "utilities",
+          "version_h",
+          "zephyr",
+          "zephyr_final",
+          "zephyr_pre0"
+        ],
+        "supplier": [
+          "app",
+          "app_version_h",
+          "arch__arm__core",
+          "arch__arm__core__cortex_m",
+          "arch__arm__core__cortex_m__cmse",
+          "arch__common",
+          "builtin",
+          "device_api_ld_target",
+          "driver_validation_h_target",
+          "drivers__clock_control",
+          "drivers__console",
+          "drivers__entropy",
+          "drivers__ethernet",
+          "drivers__gpio",
+          "drivers__pinctrl",
+          "drivers__reset",
+          "drivers__serial",
+          "drivers__spi",
+          "drivers__timer",
+          "everest",
+          "extras",
+          "gen_demo_ca_der_inc_2d36a1a01ecaa7dd5d8011b347875df1",
+          "heap_constants",
+          "heap_constants_h",
+          "isr_tables",
+          "kernel",
+          "kobj_types_h_target",
+          "lib__libc__common",
+          "lib__libc__picolibc",
+          "lib__net_buf",
+          "lib__os__zvfs",
+          "lib__posix__c_lib_ext",
+          "linker_zephyr_final_script_target",
+          "linker_zephyr_prebuilt_script_target",
+          "mbedtls",
+          "mbedx509",
+          "modules__hal_rpi_pico",
+          "modules__mbedtls",
+          "offsets",
+          "offsets_h",
+          "p256-m",
+          "platform",
+          "pqcp",
+          "soc__raspberrypi__rpi_pico__rp2350",
+          "subsys__net",
+          "subsys__net__ip",
+          "subsys__net__l2__ethernet",
+          "subsys__net__lib__config",
+          "subsys__net__lib__mqtt",
+          "subsys__random",
+          "syscall_list_h_target",
+          "tfpsacrypto",
+          "utilities",
+          "version_h",
+          "zephyr",
+          "zephyr_final",
+          "zephyr_pre0"
+        ]
+      }
+    },
+    "fsct3": {
+      "compliant": false,
+      "failed": [
+        "All component versions provided?",
+        "All component suppliers provided?",
+        "All component concluded license provided?",
+        "All component copyright notice provided?",
+        "SBOM generation context (SBOM type) provided?"
+      ],
+      "missing": {
+        "version": [
+          "app",
+          "app_version_h",
+          "arch__arm__core",
+          "arch__arm__core__cortex_m",
+          "arch__arm__core__cortex_m__cmse",
+          "arch__common",
+          "builtin",
+          "device_api_ld_target",
+          "driver_validation_h_target",
+          "drivers__clock_control",
+          "drivers__console",
+          "drivers__entropy",
+          "drivers__ethernet",
+          "drivers__gpio",
+          "drivers__pinctrl",
+          "drivers__reset",
+          "drivers__serial",
+          "drivers__spi",
+          "drivers__timer",
+          "everest",
+          "extras",
+          "gen_demo_ca_der_inc_2d36a1a01ecaa7dd5d8011b347875df1",
+          "heap_constants",
+          "heap_constants_h",
+          "isr_tables",
+          "kernel",
+          "kobj_types_h_target",
+          "lib__libc__common",
+          "lib__libc__picolibc",
+          "lib__net_buf",
+          "lib__os__zvfs",
+          "lib__posix__c_lib_ext",
+          "linker_zephyr_final_script_target",
+          "linker_zephyr_prebuilt_script_target",
+          "mbedtls",
+          "mbedx509",
+          "modules__hal_rpi_pico",
+          "modules__mbedtls",
+          "offsets",
+          "offsets_h",
+          "p256-m",
+          "platform",
+          "pqcp",
+          "soc__raspberrypi__rpi_pico__rp2350",
+          "subsys__net",
+          "subsys__net__ip",
+          "subsys__net__l2__ethernet",
+          "subsys__net__lib__config",
+          "subsys__net__lib__mqtt",
+          "subsys__random",
+          "syscall_list_h_target",
+          "tfpsacrypto",
+          "utilities",
+          "version_h",
+          "zephyr",
+          "zephyr_final",
+          "zephyr_pre0"
+        ],
+        "supplier": [
+          "app",
+          "app_version_h",
+          "arch__arm__core",
+          "arch__arm__core__cortex_m",
+          "arch__arm__core__cortex_m__cmse",
+          "arch__common",
+          "builtin",
+          "device_api_ld_target",
+          "driver_validation_h_target",
+          "drivers__clock_control",
+          "drivers__console",
+          "drivers__entropy",
+          "drivers__ethernet",
+          "drivers__gpio",
+          "drivers__pinctrl",
+          "drivers__reset",
+          "drivers__serial",
+          "drivers__spi",
+          "drivers__timer",
+          "everest",
+          "extras",
+          "gen_demo_ca_der_inc_2d36a1a01ecaa7dd5d8011b347875df1",
+          "heap_constants",
+          "heap_constants_h",
+          "isr_tables",
+          "kernel",
+          "kobj_types_h_target",
+          "lib__libc__common",
+          "lib__libc__picolibc",
+          "lib__net_buf",
+          "lib__os__zvfs",
+          "lib__posix__c_lib_ext",
+          "linker_zephyr_final_script_target",
+          "linker_zephyr_prebuilt_script_target",
+          "mbedtls",
+          "mbedx509",
+          "modules__hal_rpi_pico",
+          "modules__mbedtls",
+          "offsets",
+          "offsets_h",
+          "p256-m",
+          "platform",
+          "pqcp",
+          "soc__raspberrypi__rpi_pico__rp2350",
+          "subsys__net",
+          "subsys__net__ip",
+          "subsys__net__l2__ethernet",
+          "subsys__net__lib__config",
+          "subsys__net__lib__mqtt",
+          "subsys__random",
+          "syscall_list_h_target",
+          "tfpsacrypto",
+          "utilities",
+          "version_h",
+          "zephyr",
+          "zephyr_final",
+          "zephyr_pre0"
+        ],
+        "concluded_license": [
+          "app",
+          "app_version_h",
+          "arch__arm__core",
+          "arch__arm__core__cortex_m",
+          "arch__arm__core__cortex_m__cmse",
+          "arch__common",
+          "builtin",
+          "device_api_ld_target",
+          "driver_validation_h_target",
+          "drivers__clock_control",
+          "drivers__console",
+          "drivers__entropy",
+          "drivers__ethernet",
+          "drivers__gpio",
+          "drivers__pinctrl",
+          "drivers__reset",
+          "drivers__serial",
+          "drivers__spi",
+          "drivers__timer",
+          "everest",
+          "extras",
+          "gen_demo_ca_der_inc_2d36a1a01ecaa7dd5d8011b347875df1",
+          "heap_constants",
+          "heap_constants_h",
+          "isr_tables",
+          "kernel",
+          "kobj_types_h_target",
+          "lib__libc__common",
+          "lib__libc__picolibc",
+          "lib__net_buf",
+          "lib__os__zvfs",
+          "lib__posix__c_lib_ext",
+          "linker_zephyr_final_script_target",
+          "linker_zephyr_prebuilt_script_target",
+          "mbedtls",
+          "mbedx509",
+          "modules__hal_rpi_pico",
+          "modules__mbedtls",
+          "offsets",
+          "offsets_h",
+          "p256-m",
+          "platform",
+          "pqcp",
+          "soc__raspberrypi__rpi_pico__rp2350",
+          "subsys__net",
+          "subsys__net__ip",
+          "subsys__net__l2__ethernet",
+          "subsys__net__lib__config",
+          "subsys__net__lib__mqtt",
+          "subsys__random",
+          "syscall_list_h_target",
+          "tfpsacrypto",
+          "utilities",
+          "version_h",
+          "zephyr",
+          "zephyr_final",
+          "zephyr_pre0"
+        ],
+        "copyright_text": [
+          "app",
+          "app_version_h",
+          "arch__arm__core",
+          "arch__arm__core__cortex_m",
+          "arch__arm__core__cortex_m__cmse",
+          "arch__common",
+          "builtin",
+          "device_api_ld_target",
+          "driver_validation_h_target",
+          "drivers__clock_control",
+          "drivers__console",
+          "drivers__entropy",
+          "drivers__ethernet",
+          "drivers__gpio",
+          "drivers__pinctrl",
+          "drivers__reset",
+          "drivers__serial",
+          "drivers__spi",
+          "drivers__timer",
+          "everest",
+          "extras",
+          "gen_demo_ca_der_inc_2d36a1a01ecaa7dd5d8011b347875df1",
+          "heap_constants",
+          "heap_constants_h",
+          "isr_tables",
+          "kernel",
+          "kobj_types_h_target",
+          "lib__libc__common",
+          "lib__libc__picolibc",
+          "lib__net_buf",
+          "lib__os__zvfs",
+          "lib__posix__c_lib_ext",
+          "linker_zephyr_final_script_target",
+          "linker_zephyr_prebuilt_script_target",
+          "mbedtls",
+          "mbedx509",
+          "modules__hal_rpi_pico",
+          "modules__mbedtls",
+          "offsets",
+          "offsets_h",
+          "p256-m",
+          "platform",
+          "pqcp",
+          "soc__raspberrypi__rpi_pico__rp2350",
+          "subsys__net",
+          "subsys__net__ip",
+          "subsys__net__l2__ethernet",
+          "subsys__net__lib__config",
+          "subsys__net__lib__mqtt",
+          "subsys__random",
+          "syscall_list_h_target",
+          "tfpsacrypto",
+          "utilities",
+          "version_h",
+          "zephyr",
+          "zephyr_final",
+          "zephyr_pre0"
+        ]
+      }
+    }
+  },
+  {
+    "document": "modules-deps.spdx",
+    "packages": 5,
+    "reachable": 1,
+    "with_ids": 1,
+    "spdx_errors": [],
+    "ntia": {
+      "compliant": true,
+      "failed": [],
+      "missing": {}
+    },
+    "fsct3": {
+      "compliant": false,
+      "failed": [
+        "All component concluded license provided?",
+        "All component copyright notice provided?",
+        "SBOM generation context (SBOM type) provided?"
+      ],
+      "missing": {
+        "concluded_license": [
+          "zephyr"
+        ],
+        "copyright_text": [
+          "zephyr"
+        ]
+      }
+    }
+  },
+  {
+    "document": "sdk.spdx",
+    "packages": 1,
+    "reachable": 1,
+    "with_ids": 0,
+    "spdx_errors": [],
+    "ntia": {
+      "compliant": false,
+      "failed": [
+        "All component versions provided?",
+        "All component suppliers provided?"
+      ],
+      "missing": {
+        "version": [
+          "sdk"
+        ],
+        "supplier": [
+          "sdk"
+        ]
+      }
+    },
+    "fsct3": {
+      "compliant": false,
+      "failed": [
+        "All component versions provided?",
+        "All component suppliers provided?",
+        "All component copyright notice provided?",
+        "SBOM generation context (SBOM type) provided?"
+      ],
+      "missing": {
+        "version": [
+          "sdk"
+        ],
+        "supplier": [
+          "sdk"
+        ],
+        "copyright_text": [
+          "sdk"
+        ]
+      }
+    }
+  },
+  {
+    "document": "normalized/firmware.spdx.json",
+    "packages": 8,
+    "reachable": 8,
+    "with_ids": 8,
+    "spdx_errors": [],
+    "ntia": {
+      "compliant": true,
+      "failed": [],
+      "missing": {}
+    },
+    "fsct3": {
+      "compliant": false,
+      "failed": [
+        "All component concluded license provided?",
+        "All component copyright notice provided?",
+        "SBOM generation context (SBOM type) provided?"
+      ],
+      "missing": {
+        "concluded_license": [
+          "picolibc",
+          "gcc"
+        ],
+        "copyright_text": [
+          "cra-evidence-demo-firmware",
+          "zephyr",
+          "cmsis_6",
+          "hal_rpi_pico",
+          "mbedtls",
+          "tf-psa-crypto",
+          "picolibc",
+          "gcc"
+        ]
+      }
+    }
+  }
+]

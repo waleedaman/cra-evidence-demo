@@ -1,0 +1,55 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "check": "signature + digest: zephyr.elf",
+      "actual": "Verified OK",
+      "ok": true
+    },
+    {
+      "check": "signature + digest: zephyr.uf2",
+      "actual": "Verified OK",
+      "ok": true
+    },
+    {
+      "check": "signature + digest: zephyr.hex",
+      "actual": "Verified OK",
+      "ok": true
+    },
+    {
+      "check": "signature + digest: zephyr.bin",
+      "actual": "Verified OK",
+      "ok": true
+    },
+    {
+      "check": "SBOM documents (5) match signed digests",
+      "actual": "match",
+      "ok": true
+    },
+    {
+      "check": "zephyr commit = pins.env",
+      "actual": "dccb09599635",
+      "ok": true
+    },
+    {
+      "check": "module commits = pins.env",
+      "actual": "match",
+      "ok": true
+    },
+    {
+      "check": "ci-base digest = pins.env",
+      "actual": "0a4e08683a55",
+      "ok": true
+    },
+    {
+      "check": "Zephyr SDK archive = pins.env",
+      "actual": "ca9bc0ff66fa",
+      "ok": true
+    },
+    {
+      "check": "built from committed source",
+      "actual": "clean",
+      "ok": true
+    }
+  ]
+}

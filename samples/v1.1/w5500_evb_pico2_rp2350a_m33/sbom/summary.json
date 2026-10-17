@@ -1,0 +1,1101 @@
+{
+  "documents": {
+    "app": {
+      "describes": [
+        "SPDXRef-app-sources"
+      ],
+      "packages": [
+        {
+          "name": "app-sources",
+          "spdx_id": "SPDXRef-app-sources",
+          "version": "",
+          "supplier": "",
+          "license": "Apache-2.0",
+          "cpe": [],
+          "purl": []
+        }
+      ],
+      "files": 5,
+      "relationships": 1
+    },
+    "build": {
+      "describes": [
+        "SPDXRef-zephyr-final"
+      ],
+      "packages": [
+        {
+          "name": "app",
+          "spdx_id": "SPDXRef-app",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "app_version_h",
+          "spdx_id": "SPDXRef-app-version-h",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "arch__arm__core",
+          "spdx_id": "SPDXRef-arch--arm--core",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "arch__arm__core__cortex_m",
+          "spdx_id": "SPDXRef-arch--arm--core--cortex-m",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "arch__arm__core__cortex_m__cmse",
+          "spdx_id": "SPDXRef-arch--arm--core--cortex-m--cmse",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "arch__common",
+          "spdx_id": "SPDXRef-arch--common",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "asm",
+          "spdx_id": "SPDXRef-asm",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "attach",
+          "spdx_id": "SPDXRef-attach",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "bintools",
+          "spdx_id": "SPDXRef-bintools",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "boards",
+          "spdx_id": "SPDXRef-boards",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "build_info_yaml_saved",
+          "spdx_id": "SPDXRef-build-info-yaml-saved",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "builtin",
+          "spdx_id": "SPDXRef-builtin",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "code_data_relocation_target",
+          "spdx_id": "SPDXRef-code-data-relocation-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "compiler",
+          "spdx_id": "SPDXRef-compiler",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "compiler-cpp",
+          "spdx_id": "SPDXRef-compiler-cpp",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "config-twister",
+          "spdx_id": "SPDXRef-config-twister",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "dashboard",
+          "spdx_id": "SPDXRef-dashboard",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "debug",
+          "spdx_id": "SPDXRef-debug",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "debugserver",
+          "spdx_id": "SPDXRef-debugserver",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "device_api_ld_target",
+          "spdx_id": "SPDXRef-device-api-ld-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "devicetree_target",
+          "spdx_id": "SPDXRef-devicetree-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "driver_validation_h_target",
+          "spdx_id": "SPDXRef-driver-validation-h-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__clock_control",
+          "spdx_id": "SPDXRef-drivers--clock-control",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__console",
+          "spdx_id": "SPDXRef-drivers--console",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__entropy",
+          "spdx_id": "SPDXRef-drivers--entropy",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__ethernet",
+          "spdx_id": "SPDXRef-drivers--ethernet",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__gpio",
+          "spdx_id": "SPDXRef-drivers--gpio",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__interrupt_controller",
+          "spdx_id": "SPDXRef-drivers--interrupt-controller",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__pinctrl",
+          "spdx_id": "SPDXRef-drivers--pinctrl",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__reset",
+          "spdx_id": "SPDXRef-drivers--reset",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__serial",
+          "spdx_id": "SPDXRef-drivers--serial",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__spi",
+          "spdx_id": "SPDXRef-drivers--spi",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "drivers__timer",
+          "spdx_id": "SPDXRef-drivers--timer",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "everest",
+          "spdx_id": "SPDXRef-everest",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "extras",
+          "spdx_id": "SPDXRef-extras",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "flash",
+          "spdx_id": "SPDXRef-flash",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "footprint",
+          "spdx_id": "SPDXRef-footprint",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "gen_demo_ca_der_inc_9a3a9141c95b1e950b3649c6882a1c70",
+          "spdx_id": "SPDXRef-gen-demo-ca-der-inc-9a3a9141c95b1e950b3649c6882a1c70",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "guiconfig",
+          "spdx_id": "SPDXRef-guiconfig",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "hardenconfig",
+          "spdx_id": "SPDXRef-hardenconfig",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "heap_constants",
+          "spdx_id": "SPDXRef-heap-constants",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "heap_constants_h",
+          "spdx_id": "SPDXRef-heap-constants-h",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "initlevels",
+          "spdx_id": "SPDXRef-initlevels",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "isr_tables",
+          "spdx_id": "SPDXRef-isr-tables",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "kernel",
+          "spdx_id": "SPDXRef-kernel",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "kobj_types_h_target",
+          "spdx_id": "SPDXRef-kobj-types-h-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "lib",
+          "spdx_id": "SPDXRef-lib",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "lib__libc__common",
+          "spdx_id": "SPDXRef-lib--libc--common",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "lib__libc__picolibc",
+          "spdx_id": "SPDXRef-lib--libc--picolibc",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "lib__net_buf",
+          "spdx_id": "SPDXRef-lib--net-buf",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "lib__os__zvfs",
+          "spdx_id": "SPDXRef-lib--os--zvfs",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "lib__posix__c_lib_ext",
+          "spdx_id": "SPDXRef-lib--posix--c-lib-ext",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "linker",
+          "spdx_id": "SPDXRef-linker",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "linker_zephyr_final_script_target",
+          "spdx_id": "SPDXRef-linker-zephyr-final-script-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "linker_zephyr_prebuilt_script_target",
+          "spdx_id": "SPDXRef-linker-zephyr-prebuilt-script-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "mbedtls",
+          "spdx_id": "SPDXRef-mbedtls",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "mbedtls-apidoc",
+          "spdx_id": "SPDXRef-mbedtls-apidoc",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "mbedx509",
+          "spdx_id": "SPDXRef-mbedx509",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "menuconfig",
+          "spdx_id": "SPDXRef-menuconfig",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "modules__hal_rpi_pico",
+          "spdx_id": "SPDXRef-modules--hal-rpi-pico",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "modules__mbedtls",
+          "spdx_id": "SPDXRef-modules--mbedtls",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "offsets",
+          "spdx_id": "SPDXRef-offsets",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "offsets_h",
+          "spdx_id": "SPDXRef-offsets-h",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "p256-m",
+          "spdx_id": "SPDXRef-p256-m",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "platform",
+          "spdx_id": "SPDXRef-platform",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "pqcp",
+          "spdx_id": "SPDXRef-pqcp",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "pristine",
+          "spdx_id": "SPDXRef-pristine",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "ram_plot",
+          "spdx_id": "SPDXRef-ram-plot",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "ram_report",
+          "spdx_id": "SPDXRef-ram-report",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "rom_plot",
+          "spdx_id": "SPDXRef-rom-plot",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "rom_report",
+          "spdx_id": "SPDXRef-rom-report",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "rtt",
+          "spdx_id": "SPDXRef-rtt",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "run",
+          "spdx_id": "SPDXRef-run",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "runners_yaml_props_target",
+          "spdx_id": "SPDXRef-runners-yaml-props-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "shields",
+          "spdx_id": "SPDXRef-shields",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "snippets",
+          "spdx_id": "SPDXRef-snippets",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "soc__raspberrypi__rpi_pico__rp2350",
+          "spdx_id": "SPDXRef-soc--raspberrypi--rpi-pico--rp2350",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "subsys__net",
+          "spdx_id": "SPDXRef-subsys--net",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "subsys__net__ip",
+          "spdx_id": "SPDXRef-subsys--net--ip",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "subsys__net__l2__ethernet",
+          "spdx_id": "SPDXRef-subsys--net--l2--ethernet",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "subsys__net__lib__config",
+          "spdx_id": "SPDXRef-subsys--net--lib--config",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "subsys__net__lib__mqtt",
+          "spdx_id": "SPDXRef-subsys--net--lib--mqtt",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "subsys__random",
+          "spdx_id": "SPDXRef-subsys--random",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "syscall_list_h_target",
+          "spdx_id": "SPDXRef-syscall-list-h-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "tfpsacrypto",
+          "spdx_id": "SPDXRef-tfpsacrypto",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "tfpsacrypto-apidoc",
+          "spdx_id": "SPDXRef-tfpsacrypto-apidoc",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "traceconfig",
+          "spdx_id": "SPDXRef-traceconfig",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "usage",
+          "spdx_id": "SPDXRef-usage",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "utilities",
+          "spdx_id": "SPDXRef-utilities",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "version_h",
+          "spdx_id": "SPDXRef-version-h",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "zephyr",
+          "spdx_id": "SPDXRef-zephyr",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "zephyr_final",
+          "spdx_id": "SPDXRef-zephyr-final",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "zephyr_pre0",
+          "spdx_id": "SPDXRef-zephyr-pre0",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "zephyr_property_target",
+          "spdx_id": "SPDXRef-zephyr-property-target",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        }
+      ],
+      "files": 151,
+      "relationships": 7907
+    },
+    "modules-deps": {
+      "describes": [
+        "SPDXRef-zephyr-deps"
+      ],
+      "packages": [
+        {
+          "name": "zephyr",
+          "spdx_id": "SPDXRef-zephyr-deps",
+          "version": "4.4.2",
+          "supplier": "Organization: zephyrproject",
+          "license": "NOASSERTION",
+          "cpe": [
+            "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+          ],
+          "purl": [
+            "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+          ]
+        },
+        {
+          "name": "cmsis_6-deps",
+          "spdx_id": "SPDXRef-cmsis-6-deps",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "hal_rpi_pico-deps",
+          "spdx_id": "SPDXRef-hal-rpi-pico-deps",
+          "version": "",
+          "supplier": "",
+          "license": "NOASSERTION",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "mbed_tls",
+          "spdx_id": "SPDXRef-mbedtls-deps",
+          "version": "4.1.0",
+          "supplier": "Organization: arm",
+          "license": "NOASSERTION",
+          "cpe": [
+            "cpe:2.3:a:arm:mbed_tls:4.1.0:*:*:*:*:*:*:*"
+          ],
+          "purl": [
+            "pkg:github/Mbed-TLS/mbedtls@v4.1.0"
+          ]
+        },
+        {
+          "name": "tf-psa-crypto",
+          "spdx_id": "SPDXRef-tf-psa-crypto-deps",
+          "version": "1.1.0",
+          "supplier": "Organization: arm",
+          "license": "NOASSERTION",
+          "cpe": [
+            "cpe:2.3:a:arm:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*"
+          ],
+          "purl": [
+            "pkg:github/Mbed-TLS/TF-PSA-Crypto@v1.1.0"
+          ]
+        }
+      ],
+      "files": 0,
+      "relationships": 5
+    },
+    "sdk": {
+      "describes": [
+        "SPDXRef-sdk"
+      ],
+      "packages": [
+        {
+          "name": "sdk",
+          "spdx_id": "SPDXRef-sdk",
+          "version": "",
+          "supplier": "",
+          "license": "BSD-2-Clause-FreeBSD AND BSD-3-Clause",
+          "cpe": [],
+          "purl": []
+        }
+      ],
+      "files": 49,
+      "relationships": 1
+    },
+    "zephyr": {
+      "describes": [
+        "SPDXRef-zephyr-sources",
+        "SPDXRef-cmsis-6-sources",
+        "SPDXRef-hal-rpi-pico-sources",
+        "SPDXRef-mbedtls-sources",
+        "SPDXRef-tf-psa-crypto-sources"
+      ],
+      "packages": [
+        {
+          "name": "zephyr",
+          "spdx_id": "SPDXRef-zephyr-sources",
+          "version": "4.4.2",
+          "supplier": "Organization: zephyrproject",
+          "license": "Apache-2.0 AND BSD-3-Clause AND MIT",
+          "cpe": [
+            "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+          ],
+          "purl": [
+            "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+          ]
+        },
+        {
+          "name": "cmsis_6-sources",
+          "spdx_id": "SPDXRef-cmsis-6-sources",
+          "version": "30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74",
+          "supplier": "",
+          "license": "Apache-2.0",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "hal_rpi_pico-sources",
+          "spdx_id": "SPDXRef-hal-rpi-pico-sources",
+          "version": "562b41e10a1d8b1a761b253b107c5c6a84cf4535",
+          "supplier": "",
+          "license": "BSD-3-Clause",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "mbedtls-sources",
+          "spdx_id": "SPDXRef-mbedtls-sources",
+          "version": "a3e190fe44c78d1ba67f55979e1257328cc7d0d8",
+          "supplier": "",
+          "license": "(Apache-2.0 OR GPL-2.0-or-later)",
+          "cpe": [],
+          "purl": []
+        },
+        {
+          "name": "tf-psa-crypto-sources",
+          "spdx_id": "SPDXRef-tf-psa-crypto-sources",
+          "version": "dc575a2ddcc8cb16275d24c42a52eaf79ebe2231",
+          "supplier": "",
+          "license": "Apache-2.0 AND (Apache-2.0 OR GPL-2.0-or-later)",
+          "cpe": [],
+          "purl": []
+        }
+      ],
+      "files": 883,
+      "relationships": 5
+    }
+  },
+  "components": [
+    {
+      "component": "zephyr",
+      "version": "4.4.2",
+      "cpe": [
+        "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+      ],
+      "purl": [
+        "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+      ],
+      "source_document": "zephyr",
+      "license": "Apache-2.0 AND BSD-3-Clause AND MIT"
+    },
+    {
+      "component": "cmsis-6",
+      "version": "30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74",
+      "cpe": [],
+      "purl": [],
+      "source_document": "zephyr",
+      "license": "Apache-2.0"
+    },
+    {
+      "component": "hal-rpi-pico",
+      "version": "562b41e10a1d8b1a761b253b107c5c6a84cf4535",
+      "cpe": [],
+      "purl": [],
+      "source_document": "zephyr",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "component": "mbedtls",
+      "version": "4.1.0",
+      "cpe": [
+        "cpe:2.3:a:arm:mbed_tls:4.1.0:*:*:*:*:*:*:*"
+      ],
+      "purl": [
+        "pkg:github/Mbed-TLS/mbedtls@v4.1.0"
+      ],
+      "source_document": "zephyr",
+      "license": "(Apache-2.0 OR GPL-2.0-or-later)"
+    },
+    {
+      "component": "tf-psa-crypto",
+      "version": "1.1.0",
+      "cpe": [
+        "cpe:2.3:a:arm:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*"
+      ],
+      "purl": [
+        "pkg:github/Mbed-TLS/TF-PSA-Crypto@v1.1.0"
+      ],
+      "source_document": "zephyr",
+      "license": "Apache-2.0 AND (Apache-2.0 OR GPL-2.0-or-later)"
+    },
+    {
+      "component": "app",
+      "version": "-",
+      "cpe": [],
+      "purl": [],
+      "source_document": "app",
+      "license": "Apache-2.0"
+    },
+    {
+      "component": "sdk",
+      "version": "-",
+      "cpe": [],
+      "purl": [],
+      "source_document": "sdk",
+      "license": "BSD-2-Clause-FreeBSD AND BSD-3-Clause"
+    }
+  ],
+  "elf_sha256_in_build_spdx": "faf7d694942423a8ac0b9a07b5aec7e7d92a0ab80f50975a2d11d06a8c2bcf79",
+  "elf_matches_artifact": true,
+  "toolchain_archives_not_described": [
+    "libc.a",
+    "libgcc.a"
+  ],
+  "host_libc_not_described": false,
+  "sdk_files_missing": false
+}

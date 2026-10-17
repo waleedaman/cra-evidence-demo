@@ -1,0 +1,511 @@
+SPDXVersion: SPDX-2.3
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: sdk
+DocumentNamespace: https://spdx.org/spdxdocs/cra-evidence-demo/v1.0/w5500_evb_pico2_rp2350a_m33/5e646b377e2f3207/sdk
+Creator: Tool: Zephyr SPDX builder
+Created: 2026-10-17T16:11:40Z
+
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-sdk
+
+##### Package: sdk
+
+PackageName: sdk
+SPDXID: SPDXRef-sdk
+PackageLicenseConcluded: BSD-2-Clause-FreeBSD AND BSD-3-Clause
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+PackageLicenseInfoFromFiles: BSD-2-Clause-FreeBSD
+PackageLicenseInfoFromFiles: BSD-3-Clause
+FilesAnalyzed: true
+PackageVerificationCode: e9785cdd021febdf61277d8eb21eabb2f3be1e6a
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/arpa/inet.h
+SPDXID: SPDXRef-File-inet.h
+FileChecksum: SHA1: 7dd6caa8beb7a59c7998a7676cf5909cea6fbccd
+FileChecksum: SHA256: 663f2d5d934e73714e931dfd6a90110a937cf85e0fe5d39f1c8093882b7ed459
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (c) 2004 Jeff Johnston  <jjohnstn@redhat.com> 
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/assert.h
+SPDXID: SPDXRef-File-assert.h
+FileChecksum: SHA1: 3db4fc61b2243a6987b254199af66aa8d8d5847f
+FileChecksum: SHA256: b77dea645f2c12a0ab75d9bbd32182ef3873f4559e2e29e9c1ca638206633e97
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1991, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/ctype.h
+SPDXID: SPDXRef-File-ctype.h
+FileChecksum: SHA1: 207f6a829a21e4bac571234d746d3a728aa64026
+FileChecksum: SHA256: e5d8dcc5c97f65f5c203fc8d60b3c2717294d206f236d767dd9a3b9ae07d6704
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1991, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/endian.h
+SPDXID: SPDXRef-File-endian.h
+FileChecksum: SHA1: dda8dc7c5d9b83f83aeb8b11d25dacfbf7ba897c
+FileChecksum: SHA256: e73d6844fc8c0fddaa61f6280f0bd13e6bd8f028a4e4271a6457fe22be6eec7f
+LicenseConcluded: BSD-3-Clause
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>
+ * Copyright © 2019 Keith Packard
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/errno.h
+SPDXID: SPDXRef-File-errno.h
+FileChecksum: SHA1: b1458eb3aa640944fdef9bab8f865fd0bfa284e6
+FileChecksum: SHA256: 27a509fbaa29fd6c381fe94017e8bd161f1950c600e4280fc52cb73e9d1c695b
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1991, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/inttypes.h
+SPDXID: SPDXRef-File-inttypes.h
+FileChecksum: SHA1: 8243a6107321d57a2872f4f58da2fac19911a590
+FileChecksum: SHA256: 74e0f12b13faa0950367815b1d8640ec4482e2b8ecee367660d76ae79136ef21
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+ * Copyright (c) 2004, 2005 by
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/limits.h
+SPDXID: SPDXRef-File-limits.h
+FileChecksum: SHA1: d757171c4f1cc7bbf5140ca4140600fa34849222
+FileChecksum: SHA256: 300fdce5c01169b6ce3ba182f74a9c068036a4e5fd29dae2eb481209c60116ba
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (c) 2002 Jeff Johnston  <jjohnstn@redhat.com> 
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/machine/_default_types.h
+SPDXID: SPDXRef-File--default-types.h
+FileChecksum: SHA1: 46e66f006bc503df85579302909c621093c14cac
+FileChecksum: SHA256: 27f8a718fc89397117254832c4ac2ab2dabd8e0dc7847b76460b0c0cdb2fa04f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+ *  Copyright (c) 2007 Patrick Mansfield <patmans@us.ibm.com>
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/machine/_endian.h
+SPDXID: SPDXRef-File--endian.h
+FileChecksum: SHA1: 3b7a24127c4e366729acf0e5ff7f6cc81845a856
+FileChecksum: SHA256: 4b886bc7fadb6712ef700478167e0b2cf921563bbf5a0f0beacb4925ff016f31
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+   Copyright (c) 2015 ARM Ltd.  All rights reserved.
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/machine/_time.h
+SPDXID: SPDXRef-File--time.h
+FileChecksum: SHA1: 319a572916655febce62dfe64ecc2bd22bf3d991
+FileChecksum: SHA256: 2b4b0a4b5f1acdeb060d79878436d9bf30808b047ee0a1ec78a75f943431fad7
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (c) 2016 Sebastian Huber <sebastian.huber@embedded-brains.de> 
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/machine/_types.h
+SPDXID: SPDXRef-File--types.h
+FileChecksum: SHA1: 36581deeedab3b2161f43e6cadf1844014e4b764
+FileChecksum: SHA256: 31f3742d445b0e7607c8ca270d4c84c1a4897c39ad2a3b04adc00a8364fbad8d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+ *  Copyright (c) 2005 Ralf Corsepious  <ralf.corsepius@rtems.org>
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/machine/endian.h
+SPDXID: SPDXRef-File-endian.h-2
+FileChecksum: SHA1: a44f1ea6a43f75a0788a9d6a7746cd9105a304a4
+FileChecksum: SHA256: a0a584152b2305f32f77ffb8c2ec278f4222d065d41473e799f0e3eaa3a436e6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (c) 2004 Jeff Johnston  <jjohnstn@redhat.com> 
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/machine/ieeefp.h
+SPDXID: SPDXRef-File-ieeefp.h
+FileChecksum: SHA1: 40b735ea077f0cf78f13a292fffa31ea18c47427
+FileChecksum: SHA256: 7ee7a565c4158658ebd7da2f63e6b5d3147ed94ca68860d62563d421d0ea4cc9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (C) 1991 DJ Delorie
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/machine/math.h
+SPDXID: SPDXRef-File-math.h
+FileChecksum: SHA1: 1e28233a06747ba323e78ce2fdd764cfdae2822d
+FileChecksum: SHA256: ee191f649a999c8fecbceea764d0adc5751dd7b97c2b2a11648d32ceb0571212
+LicenseConcluded: BSD-3-Clause
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>
+   Copyright (c) 2011, 2012 ARM Ltd.  All rights reserved.
+ * Copyright (c) 2017 embedded brains GmbH. All rights reserved
+ * Copyright © 2020 Keith Packard
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/machine/stdlib.h
+SPDXID: SPDXRef-File-stdlib.h
+FileChecksum: SHA1: 1a49a539b91f97650c6ead1f66ed5af91daf9467
+FileChecksum: SHA256: ca6afd3778d215889f9bf4e18e4ed5670f9481cd47e6025d44ab78c8b660f098
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (c) 2002 Jeff Johnston  <jjohnstn@redhat.com> 
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/machine/types.h
+SPDXID: SPDXRef-File-types.h
+FileChecksum: SHA1: 5a1db4a24c07500396f647ee98499b2959b0adde
+FileChecksum: SHA256: 2e3cfd448092c5a86bd3f96bcdb8023c3e9c089e8128daae0adb83c87188aa20
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (C) 1991 DJ Delorie
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/math.h
+SPDXID: SPDXRef-File-math.h-2
+FileChecksum: SHA1: 8e96c7ea7fa1c36e2630c79b4f2f85191af18ff4
+FileChecksum: SHA256: 0312a76cc224a08255c247d16db274072281ba0b73745aa8d499b8e1332fd8eb
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1991, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/picolibc.h
+SPDXID: SPDXRef-File-picolibc.h
+FileChecksum: SHA1: f4b829e52ed1a71f6707e083de91e4462782a67d
+FileChecksum: SHA256: d939be11c314a7efecf01e677e306adea9e3730c709682d437f0c67c3844394c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/stdint.h
+SPDXID: SPDXRef-File-stdint.h
+FileChecksum: SHA1: 0f34159fac578cf811c812bafee6f2a03fef4e1a
+FileChecksum: SHA256: 3363e43f95fb6f9340f1cb90e58eec71bbea8146252d6482e0a88d2a2dd9dba6
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+ * Copyright (c) 2004, 2005 by
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/stdio.h
+SPDXID: SPDXRef-File-stdio.h
+FileChecksum: SHA1: 093564a65910dafef08dd79e395e6224bd3167ab
+FileChecksum: SHA256: 1cbcd940ab58a8a51b78de13badbf54e9db882f31d81c5fd1fca5af69a6599f2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (c) 2002, 2005, 2007 Joerg Wunsch
+   Portions of documentation Copyright (c) 1990, 1991, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/stdlib.h
+SPDXID: SPDXRef-File-stdlib.h-2
+FileChecksum: SHA1: 6bc76af454abd75fcb01d0f494fdfa79f42dda34
+FileChecksum: SHA256: e86d335cbf4495010f926a082297b5aebd745983a7487cb2d1abd99ce1f80b17
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1991, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/string.h
+SPDXID: SPDXRef-File-string.h
+FileChecksum: SHA1: bc965311df87e755349b6412f5415bef2bbf0170
+FileChecksum: SHA256: 2e198a6dda9c77f15b7f8143185c1f2f8e39a84fe2779653397a6cb75196f0b2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1991, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/strings.h
+SPDXID: SPDXRef-File-strings.h
+FileChecksum: SHA1: 881d050d230e8630ab140bab325e3e048b4deb7e
+FileChecksum: SHA256: 36b5cab31f6ed0b6951458c6b3eb32f4d907362b4346c79289eef19d38b9d022
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+ * Copyright (c) 2002 Mike Barcroft <mike@FreeBSD.org>
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/_intsup.h
+SPDXID: SPDXRef-File--intsup.h
+FileChecksum: SHA1: 63614245a8c7321a734b7701c1f6c9b66f1e1f88
+FileChecksum: SHA256: acca8771a05e2effaaf7019cd1c1fefe2426f8255f0b5a1eec59f05c7c9321a4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+ * Copyright (c) 2004, 2005 by
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/_locale.h
+SPDXID: SPDXRef-File--locale.h
+FileChecksum: SHA1: 03df72d3a04da374eed3f26e863f5ae359a1cae8
+FileChecksum: SHA256: 9c33916e9c0deb89f68a9babf700502cf2cf6c6fb4b7d7b0fadd93c7fc6c8a29
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (c) 2016 Corinna Vinschen <corinna@vinschen.de> 
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/_select.h
+SPDXID: SPDXRef-File--select.h
+FileChecksum: SHA1: bc29099cae4954153d84de5b26fab2ebd1dd9ce6
+FileChecksum: SHA256: b2c6b20abaa8ba9734a85fb9fa1435d1e5cc40c900a280567d9060cda9b2e6e3
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1982, 1986, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/_stdint.h
+SPDXID: SPDXRef-File--stdint.h
+FileChecksum: SHA1: 8997b2f3d36fb5e719f062d5cb0628d8f75256e6
+FileChecksum: SHA256: 06480c0354947c53153841fcfc7f93f79d5459d9d8072eec7ae663ea9def60af
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+ * Copyright (c) 2004, 2005 by
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/_timespec.h
+SPDXID: SPDXRef-File--timespec.h
+FileChecksum: SHA1: efdf8a6de694d476d78fb805c83e256acdc79101
+FileChecksum: SHA256: 8286b93e24409cada66cd9ad21d6cb8b993cff00a47c668c65439ec9914a6168
+LicenseConcluded: BSD-3-Clause
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>
+ * Copyright (c) 1982, 1986, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/_timeval.h
+SPDXID: SPDXRef-File--timeval.h
+FileChecksum: SHA1: f59c62289aa9f766fd4f697f454379b3b385713a
+FileChecksum: SHA256: 0d4ddbcb87df55f97d53f5b949bcd9629f32da15a20b4416dab437f9c4b20d06
+LicenseConcluded: BSD-2-Clause-FreeBSD
+LicenseInfoInFile: BSD-2-Clause-FreeBSD
+FileCopyrightText: <text>
+ * Copyright (c) 2002 Mike Barcroft <mike@FreeBSD.org>
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/_types.h
+SPDXID: SPDXRef-File--types.h-2
+FileChecksum: SHA1: dc00728bb7974bb94181fb3da3ab3e1d4725a3dc
+FileChecksum: SHA256: 947d8a55d20d7f0eb56091cb94b2e9caba55305b6a03cd2eb26faf35c1be6ff1
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1982, 1986, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/_wait.h
+SPDXID: SPDXRef-File--wait.h
+FileChecksum: SHA1: aeedfc1c85fe2146c9a95b8a8720b05ba254c4e8
+FileChecksum: SHA256: 34ea7550f9f53458dcfda21a87ed97a88735ab3b06a1a442b12322b6519bf8f4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1982, 1986, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/cdefs.h
+SPDXID: SPDXRef-File-cdefs.h
+FileChecksum: SHA1: d5347e7219d2dd9cfe1232391b59c0c68c2a8805
+FileChecksum: SHA256: c9bf4fd409ed28a7b0f61a00193b62164c1a11dddbbfad1370ca2c60bb57d27d
+LicenseConcluded: BSD-3-Clause
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>
+ * Copyright (c) 1991, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/config.h
+SPDXID: SPDXRef-File-config.h
+FileChecksum: SHA1: 6048fb672ee73a2c70ef05cc77f20a468d24c61d
+FileChecksum: SHA256: bd471750ae043a6e7417cd4b41a6e48a33dc699e3376501f574fb24cabe0ff00
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+  Copyright (c) 1982, 1986, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/errno.h
+SPDXID: SPDXRef-File-errno.h-2
+FileChecksum: SHA1: 6c50b559a1b146fe1dbb66e1fbebbf7232cf4d6e
+FileChecksum: SHA256: cf3b9af03e3d2da9e0abacae831324d4883cd0d9630d15ce0a6249da3e094292
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1982, 1986, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/features.h
+SPDXID: SPDXRef-File-features.h
+FileChecksum: SHA1: 7dc8da2e747ad378d364c802d7538f8aa1ed5b60
+FileChecksum: SHA256: e436459c71f66e9ecb23f6670fa00ed7c693266ba94becc2b8d092a55aa886b9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/lock.h
+SPDXID: SPDXRef-File-lock.h
+FileChecksum: SHA1: 90eec2ca5d17d0e145d71e6a2c26aa5d4713b053
+FileChecksum: SHA256: 2f7ff3de05941dd0c910a16d8a565efaa30b3c44b783c9c942066e436c022815
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (c) 2002 Jeff Johnston  <jjohnstn@redhat.com> 
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/string.h
+SPDXID: SPDXRef-File-string.h-2
+FileChecksum: SHA1: 6cd7d480f789e6c3378b09b3e6528274c6332770
+FileChecksum: SHA256: c1891d16631f057d16b09dc3927bd3eb675fb7ca39fce4d4612db056685757d2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (c) 2005 Jeff Johnston  <jjohnstn@redhat.com> 
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/syslimits.h
+SPDXID: SPDXRef-File-syslimits.h
+FileChecksum: SHA1: e30e766cf856693c1be6c5d6b4db3f8b095005de
+FileChecksum: SHA256: 6fb8da6f30f9c6fca1da684518734608cde2b44791f68bdf5dca54ad8d760c06
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+ * Copyright (c) 1988, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/time.h
+SPDXID: SPDXRef-File-time.h-2
+FileChecksum: SHA1: 402af8e38f54c806b80c2bcfb3e08ce23668f91f
+FileChecksum: SHA256: fac11d60299feec432f7bf01941b44779ce1f684079be0d879f8b46e43ec9675
+LicenseConcluded: BSD-3-Clause
+LicenseInfoInFile: BSD-3-Clause
+FileCopyrightText: <text>
+ * Copyright (c) 1982, 1986, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/sys/types.h
+SPDXID: SPDXRef-File-types.h-2
+FileChecksum: SHA1: d46edf6232d7c9cdde4c6f595b83e1c411f172e3
+FileChecksum: SHA256: 2d7bb9a17ee3bd56c5fdf8986974b1c7b0a7f923a7ba4c3726bad17bf1db09c5
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1982, 1986, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/arm-zephyr-eabi/sys-include/time.h
+SPDXID: SPDXRef-File-time.h
+FileChecksum: SHA1: 0b6fb8a6efc5e9b3515ac901979ffcb8b467c25e
+FileChecksum: SHA256: c26d4f2c388c5f0a4c7419428b830d8829aba4615c9c3d3c273f46ca2631df76
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+Copyright (c) 1991, 1993
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/lib/gcc/arm-zephyr-eabi/14.3.0/include/arm_acle.h
+SPDXID: SPDXRef-File-arm-acle.h
+FileChecksum: SHA1: dfca27dad8a9b216235dc69e82139d9919b834c5
+FileChecksum: SHA256: 2f9552d858f598096b0cb2bd7fec466ec5bdcbb3a6e4f8bb9ba3694f72a0dfa2
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+   Copyright (C) 2013-2024 Free Software Foundation, Inc.
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/lib/gcc/arm-zephyr-eabi/14.3.0/include/arm_cmse.h
+SPDXID: SPDXRef-File-arm-cmse.h
+FileChecksum: SHA1: 723d7539e8b884d435623ae1e48d2939990d0966
+FileChecksum: SHA256: 8695a5274aec0005132023aaa1de2a93e112d4a2e3222e28314fee23c3db9ca8
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+   Copyright (C) 2015-2024 Free Software Foundation, Inc.
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/lib/gcc/arm-zephyr-eabi/14.3.0/include/float.h
+SPDXID: SPDXRef-File-float.h
+FileChecksum: SHA1: 1e26ca11a2d7ec59f2a7a0b6d5e1f1e17d0831b2
+FileChecksum: SHA256: 0924f0708449d918e3152d00087efdf18e3f26c92030c464a6b4a77da1439f57
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (C) 2002-2024 Free Software Foundation, Inc.
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/lib/gcc/arm-zephyr-eabi/14.3.0/include/limits.h
+SPDXID: SPDXRef-File-limits.h-2
+FileChecksum: SHA1: 764da9e338c454d97d858f7fe71eb3f74d0beb34
+FileChecksum: SHA256: bc572350077d8caa24f82d5439119aa2dc184e72cc4ea325b4cd0137db51580f
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (C) 1992-2024 Free Software Foundation, Inc.
+/* Copyright (C) 1991-2024 Free Software Foundation, Inc.
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/lib/gcc/arm-zephyr-eabi/14.3.0/include/stdarg.h
+SPDXID: SPDXRef-File-stdarg.h
+FileChecksum: SHA1: 57e40b8fdf3ea4250526739e7810b42211bfcd74
+FileChecksum: SHA256: 7ead4a2428691baf94bec3fd2db8984dbb1c5f597edf0f9bc3068fb43dad22f7
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/lib/gcc/arm-zephyr-eabi/14.3.0/include/stdbool.h
+SPDXID: SPDXRef-File-stdbool.h
+FileChecksum: SHA1: 74302f8f299be2729b0f33977f015b37af87da39
+FileChecksum: SHA256: 7b9c438a5b2f082a560a72da8d752da51062cc6f84d1c4acec45ff0a68e8d037
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (C) 1998-2024 Free Software Foundation, Inc.
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/lib/gcc/arm-zephyr-eabi/14.3.0/include/stddef.h
+SPDXID: SPDXRef-File-stddef.h
+FileChecksum: SHA1: 8e8217dac069f943412dc74d9743512133be730f
+FileChecksum: SHA256: bac7ab773a3e3d9568d5cbe61632cfb96292ef5039df54a7ffaf15ba54af0ba0
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+/* Copyright (C) 1989-2024 Free Software Foundation, Inc.
+</text>
+
+FileName: ./gnu/arm-zephyr-eabi/lib/gcc/arm-zephyr-eabi/14.3.0/include/syslimits.h
+SPDXID: SPDXRef-File-syslimits.h-2
+FileChecksum: SHA1: 238c8a1b9ec309de5bac212baf0a655a56da3a28
+FileChecksum: SHA256: 22dd0ab81baadd5a8d455b445855f341d419c7b0267beca235de00b7ec78e529
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: NOASSERTION
+

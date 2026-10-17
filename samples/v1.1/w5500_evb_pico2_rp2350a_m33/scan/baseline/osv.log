@@ -1,0 +1,4 @@
+Starting filesystem walk for root: /
+Scanned /ws/demo/out/v1.1/w5500_evb_pico2_rp2350a_m33/scan/baseline/osv-scanner-custom.json file and found 7 packages
+End status: 0 dirs visited, 1 inodes visited, 1 Extract calls, 3.253574ms elapsed, 3.253623ms wall time
+Loaded GIT local db from /ws/cache/osv/baseline/osv-scalibr/GIT/all.zip

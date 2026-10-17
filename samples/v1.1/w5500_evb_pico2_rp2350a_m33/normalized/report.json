@@ -1,0 +1,173 @@
+{
+  "dropped": [
+    {
+      "component": "build.spdx targets",
+      "reason": "94 CMake targets are build steps, not components (raw document kept)"
+    }
+  ],
+  "gaps": [],
+  "unreviewed": [
+    "product",
+    "mbedtls",
+    "tf-psa-crypto",
+    "cmsis_6",
+    "hal_rpi_pico",
+    "picolibc",
+    "gcc",
+    "cjson"
+  ],
+  "map_unused": [],
+  "inputs": {
+    "sbom/app.spdx": "a3ccb62ac34c84261bc3280fd78e8bcbccee226809b65dceed76ac3d7004a5cb",
+    "sbom/zephyr.spdx": "4636534dfbc473ca2460ac6946f75acd33117d59072177a80d53a36401882e02",
+    "sbom/modules-deps.spdx": "7cbe710bf4d9562a54183a562111dd012fb65af0d370b641d9ff4914baeb0cb9",
+    "sbom/sdk.spdx": "31dfc9286a4ec159f595049d21fd8ff027bbc89809bfe9c926647f2d52241a87",
+    "sbom/build.spdx": "068748cc6c4f1d9f8d53a707fdc5e26a5b1f983dd4068d798c57208a50f4ec51",
+    "sbom/summary.json": "ff19225d53f9794937db768e112a8520089bd7cca5ee849cf06a9cfa29fa04b9",
+    "artifacts.json": "05658ec23401972fb5ff271baa946b1bf8b2d3a2f54cb1328eea51a2e7f87d96",
+    "identifiers/component-map.yaml": "8f9eff87b7756579f65414b8e95c7f9525eff844e839580ddd1af6881eaa0351"
+  },
+  "components": [
+    {
+      "id": "firmware",
+      "spdx_id": "SPDXRef-firmware",
+      "version": "1.1.0",
+      "supplier": "Organization: CRA evidence demo project",
+      "identifiers": [
+        "pkg:generic/cra-evidence-demo-firmware@1.1.0"
+      ],
+      "source": "app.spdx + map",
+      "files": 0,
+      "map_changes": []
+    },
+    {
+      "id": "zephyr",
+      "spdx_id": "SPDXRef-zephyr",
+      "version": "4.4.2",
+      "supplier": "Organization: zephyrproject",
+      "identifiers": [
+        "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+        "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+      ],
+      "source": "west spdx",
+      "files": 529,
+      "map_changes": []
+    },
+    {
+      "id": "cmsis_6",
+      "spdx_id": "SPDXRef-cmsis-6",
+      "version": "30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74",
+      "supplier": "Organization: ARM Limited",
+      "identifiers": [
+        "pkg:github/zephyrproject-rtos/cmsis_6@30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74"
+      ],
+      "source": "west spdx + map",
+      "files": 6,
+      "map_changes": [
+        "supplier Organization: ARM Limited",
+        "added pkg:github/zephyrproject-rtos/cmsis_6@30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74"
+      ]
+    },
+    {
+      "id": "hal_rpi_pico",
+      "spdx_id": "SPDXRef-hal-rpi-pico",
+      "version": "562b41e10a1d8b1a761b253b107c5c6a84cf4535",
+      "supplier": "Organization: Raspberry Pi (Trading) Ltd.",
+      "identifiers": [
+        "pkg:github/zephyrproject-rtos/hal_rpi_pico@562b41e10a1d8b1a761b253b107c5c6a84cf4535"
+      ],
+      "source": "west spdx + map",
+      "files": 92,
+      "map_changes": [
+        "supplier Organization: Raspberry Pi (Trading) Ltd.",
+        "added pkg:github/zephyrproject-rtos/hal_rpi_pico@562b41e10a1d8b1a761b253b107c5c6a84cf4535"
+      ]
+    },
+    {
+      "id": "mbedtls",
+      "spdx_id": "SPDXRef-mbedtls",
+      "version": "4.1.0",
+      "supplier": "Organization: arm",
+      "identifiers": [
+        "cpe:2.3:a:arm:mbed_tls:4.1.0:*:*:*:*:*:*:*",
+        "pkg:github/Mbed-TLS/mbedtls@v4.1.0",
+        "cpe:2.3:a:trustedfirmware:mbed_tls:4.1.0:*:*:*:*:*:*:*",
+        "cpe:2.3:a:mbed-tls:mbedtls:4.1.0:*:*:*:*:*:*:*"
+      ],
+      "source": "west spdx + map",
+      "files": 63,
+      "map_changes": [
+        "added cpe:2.3:a:trustedfirmware:mbed_tls:4.1.0:*:*:*:*:*:*:*",
+        "added cpe:2.3:a:mbed-tls:mbedtls:4.1.0:*:*:*:*:*:*:*"
+      ]
+    },
+    {
+      "id": "tf-psa-crypto",
+      "spdx_id": "SPDXRef-tf-psa-crypto",
+      "version": "1.1.0",
+      "supplier": "Organization: arm",
+      "identifiers": [
+        "cpe:2.3:a:arm:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*",
+        "pkg:github/Mbed-TLS/TF-PSA-Crypto@v1.1.0",
+        "cpe:2.3:a:trustedfirmware:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*"
+      ],
+      "source": "west spdx + map",
+      "files": 193,
+      "map_changes": [
+        "added cpe:2.3:a:trustedfirmware:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*"
+      ]
+    },
+    {
+      "id": "picolibc",
+      "spdx_id": "SPDXRef-picolibc",
+      "version": "1.8.10",
+      "supplier": "Organization: picolibc project",
+      "identifiers": [
+        "pkg:github/picolibc/picolibc@1.8.10"
+      ],
+      "source": "map",
+      "files": 41,
+      "map_changes": [
+        "component added, version 1.8.10",
+        "supplier Organization: picolibc project",
+        "added pkg:github/picolibc/picolibc@1.8.10"
+      ]
+    },
+    {
+      "id": "gcc",
+      "spdx_id": "SPDXRef-gcc",
+      "version": "14.3.0",
+      "supplier": "Organization: GNU Project",
+      "identifiers": [
+        "cpe:2.3:a:gnu:gcc:14.3.0:*:*:*:*:*:*:*"
+      ],
+      "source": "map",
+      "files": 8,
+      "map_changes": [
+        "component added, version 14.3.0",
+        "supplier Organization: GNU Project",
+        "added cpe:2.3:a:gnu:gcc:14.3.0:*:*:*:*:*:*:*"
+      ]
+    },
+    {
+      "id": "cjson",
+      "spdx_id": "SPDXRef-cjson",
+      "version": "1.7.17",
+      "supplier": "Organization: Dave Gamble and cJSON contributors",
+      "identifiers": [
+        "cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:*",
+        "cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*",
+        "pkg:github/davegamble/cjson@v1.7.17"
+      ],
+      "source": "map",
+      "files": 2,
+      "map_changes": [
+        "component added, version 1.7.17",
+        "supplier Organization: Dave Gamble and cJSON contributors",
+        "added cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:*",
+        "added cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*",
+        "added pkg:github/davegamble/cjson@v1.7.17"
+      ]
+    }
+  ]
+}

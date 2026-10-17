@@ -1,0 +1,67 @@
+SPDXVersion: SPDX-2.3
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: app-sources
+DocumentNamespace: https://spdx.org/spdxdocs/cra-evidence-demo/v1.1/w5500_evb_pico2_rp2350a_m33/faf7d694942423a8/app
+Creator: Tool: Zephyr SPDX builder
+Created: 2026-10-17T16:12:32Z
+
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-app-sources
+
+##### Package: app-sources
+
+PackageName: app-sources
+SPDXID: SPDXRef-app-sources
+PackageLicenseConcluded: Apache-2.0
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PrimaryPackagePurpose: SOURCE
+PackageDownloadLocation: NOASSERTION
+PackageLicenseInfoFromFiles: Apache-2.0
+FilesAnalyzed: true
+PackageVerificationCode: 302ac7de5a9fc9ab9d7c257c4fa444999307e013
+
+FileName: ./lib/cjson/cJSON.c
+SPDXID: SPDXRef-File-cJSON.c
+FileChecksum: SHA1: 7d6203bcb49de19409feeedc0020b2551dc058aa
+FileChecksum: SHA256: 246525a76ff5a10dfe7b0bee24150f77a2dc38bbbcc68a22b9df8729ea0fba62
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+  Copyright (c) 2009-2017 Dave Gamble and cJSON contributors
+</text>
+
+FileName: ./lib/cjson/cJSON.h
+SPDXID: SPDXRef-File-cJSON.h
+FileChecksum: SHA1: 6f971a471dd1c602f37e33789855f287080fa783
+FileChecksum: SHA256: c01a8ca5609bb2c956dd1ae836d5d926ec68153ecebc5a75ea0febc2e076da8d
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NONE
+FileCopyrightText: <text>
+  Copyright (c) 2009-2017 Dave Gamble and cJSON contributors
+</text>
+
+FileName: ./src/main.c
+SPDXID: SPDXRef-File-main.c
+FileChecksum: SHA1: 6ff5e5107d29e4211876acbfb764841460b71c8b
+FileChecksum: SHA256: df6e87fb092f74d5be810e4da03be191a6ec72f5de739bd0797724ef74c5a77e
+LicenseConcluded: Apache-2.0
+LicenseInfoInFile: Apache-2.0
+FileCopyrightText: NOASSERTION
+
+FileName: ./src/sensor_sim.c
+SPDXID: SPDXRef-File-sensor-sim.c
+FileChecksum: SHA1: 81a73678bc24fa14cb099bc3a69812803cbb9cb8
+FileChecksum: SHA256: 1a6e35a950ce84c43bf27dde8ff04b25afaa997ba14f106dd933b0214138d01b
+LicenseConcluded: Apache-2.0
+LicenseInfoInFile: Apache-2.0
+FileCopyrightText: NOASSERTION
+
+FileName: ./src/sensor_sim.h
+SPDXID: SPDXRef-File-sensor-sim.h
+FileChecksum: SHA1: 3a09a3940b59f7eb3bc83241d3e128568b8c359d
+FileChecksum: SHA256: 0ea18ce37d38e32a6fd3868ec0d77c5f8f5b04513b96c30d3f8c17de9a7eff46
+LicenseConcluded: Apache-2.0
+LicenseInfoInFile: Apache-2.0
+FileCopyrightText: NOASSERTION
+

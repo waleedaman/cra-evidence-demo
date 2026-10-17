@@ -1,0 +1,401 @@
+{
+    "SPDXID": "SPDXRef-DOCUMENT",
+    "creationInfo": {
+        "created": "2026-10-17T16:11:40Z",
+        "creators": [
+            "Tool: Zephyr SPDX builder",
+            "Tool: cra-evidence-demo-normalize-1"
+        ],
+        "comment": "Normalized from the west spdx documents referenced as DocumentRef-raw-* with identifiers/component-map.yaml (sha256 8f9eff87b7756579f65414b8e95c7f9525eff844e839580ddd1af6881eaa0351)."
+    },
+    "dataLicense": "CC0-1.0",
+    "externalDocumentRefs": [
+        {
+            "externalDocumentId": "DocumentRef-raw-app",
+            "spdxDocument": "https://spdx.org/spdxdocs/cra-evidence-demo/v1.0/w5500_evb_pico2_rp2350a_m33/5e646b377e2f3207/app",
+            "checksum": {
+                "algorithm": "SHA1",
+                "checksumValue": "1145c2e739934fd9f92da5bfb44efb5f0688db6e"
+            }
+        },
+        {
+            "externalDocumentId": "DocumentRef-raw-zephyr",
+            "spdxDocument": "https://spdx.org/spdxdocs/cra-evidence-demo/v1.0/w5500_evb_pico2_rp2350a_m33/5e646b377e2f3207/zephyr",
+            "checksum": {
+                "algorithm": "SHA1",
+                "checksumValue": "f4c58ac4a45a169576ee3e4bfb9b236afacbd117"
+            }
+        },
+        {
+            "externalDocumentId": "DocumentRef-raw-build",
+            "spdxDocument": "https://spdx.org/spdxdocs/cra-evidence-demo/v1.0/w5500_evb_pico2_rp2350a_m33/5e646b377e2f3207/build",
+            "checksum": {
+                "algorithm": "SHA1",
+                "checksumValue": "36cf61c7fceefee034ebd446208d22df66f0dc94"
+            }
+        },
+        {
+            "externalDocumentId": "DocumentRef-raw-modules-deps",
+            "spdxDocument": "https://spdx.org/spdxdocs/cra-evidence-demo/v1.0/w5500_evb_pico2_rp2350a_m33/5e646b377e2f3207/modules-deps",
+            "checksum": {
+                "algorithm": "SHA1",
+                "checksumValue": "c0f0857aaa503d08e5c4e401c6d90c2fcf30be75"
+            }
+        },
+        {
+            "externalDocumentId": "DocumentRef-raw-sdk",
+            "spdxDocument": "https://spdx.org/spdxdocs/cra-evidence-demo/v1.0/w5500_evb_pico2_rp2350a_m33/5e646b377e2f3207/sdk",
+            "checksum": {
+                "algorithm": "SHA1",
+                "checksumValue": "2d853ee816fa37f2e16229913b1cb520e33b2447"
+            }
+        }
+    ],
+    "name": "cra-evidence-demo-firmware-v1.0-w5500_evb_pico2_rp2350a_m33",
+    "spdxVersion": "SPDX-2.3",
+    "documentNamespace": "https://spdx.org/spdxdocs/cra-evidence-demo/v1.0/w5500_evb_pico2_rp2350a_m33/5e646b377e2f3207/normalized-6f5b4c9a89653f21",
+    "packages": [
+        {
+            "SPDXID": "SPDXRef-firmware",
+            "annotations": [
+                {
+                    "annotationDate": "2026-10-15T00:00:00Z",
+                    "annotationType": "OTHER",
+                    "annotator": "Tool: cra-evidence-demo-normalize-1",
+                    "comment": "identifiers/component-map.yaml entry 'product': product package from map: supplier, PURL, declared license. Rationale: The firmware is this repository's own product. It is not published in a package registry and has no CPE in NVD, so it gets a generic PURL (purl type \"generic\") and no CPE. Version comes from app/VERSION. Evidence: n/a Added by Claude (AI assistant) on 2026-10-15; NOT reviewed by a person yet."
+                }
+            ],
+            "checksums": [
+                {
+                    "algorithm": "SHA256",
+                    "checksumValue": "0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5"
+                },
+                {
+                    "algorithm": "SHA512",
+                    "checksumValue": "f30072e0c7ffd5c8bb78c3c48cfe6f403d1880e848f1fbe004dddfc3eeb1bc1dc5927505ca474ae43d7bd6c83c6c594cd63447e8344f19eeee89c62fd0ab1a98"
+                }
+            ],
+            "comment": "Release v1.0 for w5500_evb_pico2/rp2350a/m33. Application sources: 5 files (app.spdx). Artifacts (sha256): zephyr.bin a93d8254389bdf0a63b1e926b1aca8a82b5aa5c5b9e5745f0e8fc2968e9c8945, zephyr.elf 5e646b377e2f32076ad26d91ddedda7f23deeca0636ac361aec21a6f0e9a0ce1, zephyr.hex e96398b7fa86bce798e6a8eb83162656a899ab5adf2af4f5cf81f506f46a1d9b, zephyr.uf2 0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5 2 of the application files are a vendored library, listed as its own component.",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:generic/cra-evidence-demo-firmware@1.0.0",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0",
+            "licenseDeclared": "Apache-2.0",
+            "name": "cra-evidence-demo-firmware",
+            "packageFileName": "zephyr.uf2",
+            "primaryPackagePurpose": "FIRMWARE",
+            "supplier": "Organization: CRA evidence demo project",
+            "versionInfo": "1.0.0"
+        },
+        {
+            "SPDXID": "SPDXRef-zephyr",
+            "comment": "522 source files in this build (zephyr.spdx SPDXRef-zephyr-sources).",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/zephyrproject-rtos/zephyr@dccb09599635bdff17633fa7e9dab014b91dce90",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0 AND BSD-3-Clause AND MIT",
+            "licenseDeclared": "NOASSERTION",
+            "name": "zephyr",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: zephyrproject",
+            "versionInfo": "4.4.2"
+        },
+        {
+            "SPDXID": "SPDXRef-cmsis-6",
+            "annotations": [
+                {
+                    "annotationDate": "2026-10-15T00:00:00Z",
+                    "annotationType": "OTHER",
+                    "annotator": "Tool: cra-evidence-demo-normalize-1",
+                    "comment": "identifiers/component-map.yaml entry 'cmsis_6': supplier Organization: ARM Limited; added pkg:github/zephyrproject-rtos/cmsis_6@30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74. Rationale: No module.yml identifiers. The PURL names the exact repository and commit that was built. No CPE: NVD has none for CMSIS 6 (grype DB baseline: only arm:cmsis-rtos, a different product). Evidence: download location in zephyr.spdx; copyright header \"ARM Limited\" in CMSIS/Core/Include/cmsis_version.h; ARM.CMSIS.pdsc release 6.2.0-dev. Added by Claude (AI assistant) on 2026-10-15; NOT reviewed by a person yet."
+                }
+            ],
+            "comment": "6 source files in this build (zephyr.spdx SPDXRef-cmsis-6-sources). Zephyr fork of ARM-software/CMSIS_6. ARM.CMSIS.pdsc says 6.2.0-dev, CMSIS-Core(M) header says 6.1; no upstream tag matches, so the version stays the commit.",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/zephyrproject-rtos/CMSIS_6@30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/zephyrproject-rtos/cmsis_6@30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0",
+            "licenseDeclared": "NOASSERTION",
+            "name": "cmsis_6",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: ARM Limited",
+            "versionInfo": "30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74"
+        },
+        {
+            "SPDXID": "SPDXRef-hal-rpi-pico",
+            "annotations": [
+                {
+                    "annotationDate": "2026-10-15T00:00:00Z",
+                    "annotationType": "OTHER",
+                    "annotator": "Tool: cra-evidence-demo-normalize-1",
+                    "comment": "identifiers/component-map.yaml entry 'hal_rpi_pico': supplier Organization: Raspberry Pi (Trading) Ltd.; added pkg:github/zephyrproject-rtos/hal_rpi_pico@562b41e10a1d8b1a761b253b107c5c6a84cf4535. Rationale: No module.yml identifiers. The PURL names the fork commit that was built; a pkg:github/raspberrypi/pico-sdk@2.2.0 PURL would hide the patches. No CPE: none for the Pico SDK in the grype DB baseline. Evidence: download location in zephyr.spdx; LICENSE.TXT \"Raspberry Pi (Trading) Ltd.\"; upstream tag 2.2.0 exists (git ls-remote, 2026-10-15). Added by Claude (AI assistant) on 2026-10-15; NOT reviewed by a person yet."
+                }
+            ],
+            "comment": "92 source files in this build (zephyr.spdx SPDXRef-hal-rpi-pico-sources). Zephyr fork of raspberrypi/pico-sdk 2.2.0 (pico_sdk_version.cmake) with 9 Zephyr patches (ChangeLog.zephyr.md).",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/zephyrproject-rtos/hal_rpi_pico@562b41e10a1d8b1a761b253b107c5c6a84cf4535",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/zephyrproject-rtos/hal_rpi_pico@562b41e10a1d8b1a761b253b107c5c6a84cf4535",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "NOASSERTION",
+            "name": "hal_rpi_pico",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: Raspberry Pi (Trading) Ltd.",
+            "versionInfo": "562b41e10a1d8b1a761b253b107c5c6a84cf4535"
+        },
+        {
+            "SPDXID": "SPDXRef-mbedtls",
+            "annotations": [
+                {
+                    "annotationDate": "2026-10-15T00:00:00Z",
+                    "annotationType": "OTHER",
+                    "annotator": "Tool: cra-evidence-demo-normalize-1",
+                    "comment": "identifiers/component-map.yaml entry 'mbedtls': added cpe:2.3:a:trustedfirmware:mbed_tls:4.1.0:*:*:*:*:*:*:*; added cpe:2.3:a:mbed-tls:mbedtls:4.1.0:*:*:*:*:*:*:*. Rationale: NVD files Mbed TLS vulnerabilities under three different CPE vendor:product pairs. The module's module.yml declares only arm:mbed_tls, so a CPE-based scanner would silently miss every CVE filed under the other two names. Evidence: grype DB baseline: arm:mbed_tls 58 CVEs, trustedfirmware:mbed_tls 31, mbed-tls:mbedtls 14; 73 distinct, 15 of them not under arm:mbed_tls (e.g. CVE-2024-45157, CVE-2026-25833). Added by Claude (AI assistant) on 2026-10-15; NOT reviewed by a person yet."
+                }
+            ],
+            "comment": "63 source files in this build (zephyr.spdx SPDXRef-mbedtls-sources).",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/zephyrproject-rtos/mbedtls@a3e190fe44c78d1ba67f55979e1257328cc7d0d8",
+            "externalRefs": [
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:arm:mbed_tls:4.1.0:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/Mbed-TLS/mbedtls@v4.1.0",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:trustedfirmware:mbed_tls:4.1.0:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                },
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:mbed-tls:mbedtls:4.1.0:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0 OR GPL-2.0-or-later",
+            "licenseDeclared": "NOASSERTION",
+            "name": "mbedtls",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: arm",
+            "versionInfo": "4.1.0"
+        },
+        {
+            "SPDXID": "SPDXRef-tf-psa-crypto",
+            "annotations": [
+                {
+                    "annotationDate": "2026-10-15T00:00:00Z",
+                    "annotationType": "OTHER",
+                    "annotator": "Tool: cra-evidence-demo-normalize-1",
+                    "comment": "identifiers/component-map.yaml entry 'tf-psa-crypto': added cpe:2.3:a:trustedfirmware:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*. Rationale: Same problem as Mbed TLS: module.yml declares arm:tf-psa-crypto, NVD also uses trustedfirmware:tf-psa-crypto, and the two lists do not overlap. Evidence: grype DB baseline: arm:tf-psa-crypto CVE-2025-66442, CVE-2026-34872; trustedfirmware:tf-psa-crypto CVE-2026-25835, CVE-2026-34871, CVE-2026-34875. Added by Claude (AI assistant) on 2026-10-15; NOT reviewed by a person yet."
+                }
+            ],
+            "comment": "193 source files in this build (zephyr.spdx SPDXRef-tf-psa-crypto-sources).",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "git+https://github.com/zephyrproject-rtos/tf-psa-crypto@dc575a2ddcc8cb16275d24c42a52eaf79ebe2231",
+            "externalRefs": [
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:arm:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/Mbed-TLS/TF-PSA-Crypto@v1.1.0",
+                    "referenceType": "purl"
+                },
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:trustedfirmware:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "Apache-2.0 AND (Apache-2.0 OR GPL-2.0-or-later)",
+            "licenseDeclared": "NOASSERTION",
+            "name": "tf-psa-crypto",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: arm",
+            "versionInfo": "1.1.0"
+        },
+        {
+            "SPDXID": "SPDXRef-picolibc",
+            "annotations": [
+                {
+                    "annotationDate": "2026-10-15T00:00:00Z",
+                    "annotationType": "OTHER",
+                    "annotator": "Tool: cra-evidence-demo-normalize-1",
+                    "comment": "identifiers/component-map.yaml entry 'picolibc': component added, version 1.8.10; supplier Organization: picolibc project; added pkg:github/picolibc/picolibc@1.8.10. Rationale: west spdx lists the picolibc headers only inside one unversioned \"sdk\" package and does not list libc.a at all, although its code is in the firmware. Version from __PICOLIBC_VERSION__ in the picolibc.h whose hash is pinned here. No CPE: none in the grype DB baseline. Its ancestor newlib has CVEs under newlib_project:newlib; that is a different product and is NOT mapped (needs a human decision). Evidence: picolibc.h sha256 in sdk.spdx = hash above, which says 1.8.10; libc.a in the linker map (sbom/summary.json); upstream tag 1.8.10 exists (git ls-remote, 2026-10-15). Added by Claude (AI assistant) on 2026-10-15; NOT reviewed by a person yet."
+                }
+            ],
+            "comment": "Not described by west spdx. Evidence: libc.a in the linker map, 41 SDK files in sdk.spdx. C library, prebuilt in Zephyr SDK 1.0.1 (CONFIG_PICOLIBC_USE_TOOLCHAIN=y) and statically linked as libc.a.",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/picolibc/picolibc@1.8.10",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "picolibc",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: picolibc project",
+            "versionInfo": "1.8.10"
+        },
+        {
+            "SPDXID": "SPDXRef-gcc",
+            "annotations": [
+                {
+                    "annotationDate": "2026-10-15T00:00:00Z",
+                    "annotationType": "OTHER",
+                    "annotator": "Tool: cra-evidence-demo-normalize-1",
+                    "comment": "identifiers/component-map.yaml entry 'gcc': component added, version 14.3.0; supplier Organization: GNU Project; added cpe:2.3:a:gnu:gcc:14.3.0:*:*:*:*:*:*:*. Rationale: libgcc.a is statically linked but appears nowhere in the raw SBOM. NVD tracks GCC as gnu:gcc; most GCC CVEs concern the compiler, not libgcc, so expect findings that need a VEX decision (Phase 6) rather than a silent omission. Evidence: libgcc.a in the linker map (sbom/summary.json); headers under .../14.3.0/include in sdk.spdx; grype DB baseline: gnu:gcc 14 CVEs. Added by Claude (AI assistant) on 2026-10-15; NOT reviewed by a person yet."
+                }
+            ],
+            "comment": "Not described by west spdx. Evidence: libgcc.a in the linker map, 8 SDK files in sdk.spdx. Only the compiler runtime (libgcc.a) and compiler headers end up in the firmware, from Zephyr SDK 1.0.1 (arm-zephyr-eabi-gcc 14.3.0).",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "externalRefs": [
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:gnu:gcc:14.3.0:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "gcc",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: GNU Project",
+            "versionInfo": "14.3.0"
+        },
+        {
+            "SPDXID": "SPDXRef-cjson",
+            "annotations": [
+                {
+                    "annotationDate": "2026-10-15T00:00:00Z",
+                    "annotationType": "OTHER",
+                    "annotator": "Tool: cra-evidence-demo-normalize-1",
+                    "comment": "identifiers/component-map.yaml entry 'cjson': component added, version 1.7.17; supplier Organization: Dave Gamble and cJSON contributors; added cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:*; added cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*; added pkg:github/davegamble/cjson@v1.7.17. Rationale: west spdx lists vendored files as application sources, so no scanner can see a library here. NVD uses two vendor names for cJSON (cjson_project for recent CVEs, davegamble for older ones); both are added. The PURL uses the upstream repository and tag, which is also how OSV records name it. Evidence: cJSON.h defines CJSON_VERSION 1.7.17 and is byte-identical to the upstream tag; cJSON.c is the tag plus the patch in app/lib/cjson/patches (both hashes pinned here). grype DB baseline: cjson_project:cjson CVE-2023-53154, CVE-2024-31755; davegamble:cjson older CVEs (<= 1.7.6). Added by Claude (AI assistant) on 2026-10-15; NOT reviewed by a person yet."
+                }
+            ],
+            "comment": "Vendored into the application tree: 2 files under ./lib/cjson/ in app.spdx. Copied into app/lib/cjson from tag v1.7.17 with one local patch (backport of upstream commit 7e4d5dab, CVE-2024-31755). The version string is unchanged.",
+            "copyrightText": "NOASSERTION",
+            "downloadLocation": "NOASSERTION",
+            "externalRefs": [
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                },
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceLocator": "cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*",
+                    "referenceType": "cpe23Type"
+                },
+                {
+                    "referenceCategory": "PACKAGE_MANAGER",
+                    "referenceLocator": "pkg:github/davegamble/cjson@v1.7.17",
+                    "referenceType": "purl"
+                }
+            ],
+            "filesAnalyzed": false,
+            "licenseConcluded": "NOASSERTION",
+            "licenseDeclared": "NOASSERTION",
+            "name": "cjson",
+            "primaryPackagePurpose": "LIBRARY",
+            "supplier": "Organization: Dave Gamble and cJSON contributors",
+            "versionInfo": "1.7.17"
+        }
+    ],
+    "relationships": [
+        {
+            "spdxElementId": "SPDXRef-DOCUMENT",
+            "relatedSpdxElement": "SPDXRef-firmware",
+            "relationshipType": "DESCRIBES"
+        },
+        {
+            "spdxElementId": "SPDXRef-firmware",
+            "relatedSpdxElement": "SPDXRef-zephyr",
+            "relationshipType": "STATIC_LINK"
+        },
+        {
+            "spdxElementId": "SPDXRef-firmware",
+            "relatedSpdxElement": "SPDXRef-cmsis-6",
+            "relationshipType": "STATIC_LINK"
+        },
+        {
+            "spdxElementId": "SPDXRef-firmware",
+            "relatedSpdxElement": "SPDXRef-hal-rpi-pico",
+            "relationshipType": "STATIC_LINK"
+        },
+        {
+            "spdxElementId": "SPDXRef-firmware",
+            "relatedSpdxElement": "SPDXRef-mbedtls",
+            "relationshipType": "STATIC_LINK"
+        },
+        {
+            "spdxElementId": "SPDXRef-firmware",
+            "relatedSpdxElement": "SPDXRef-tf-psa-crypto",
+            "relationshipType": "STATIC_LINK"
+        },
+        {
+            "spdxElementId": "SPDXRef-firmware",
+            "relatedSpdxElement": "SPDXRef-picolibc",
+            "relationshipType": "STATIC_LINK"
+        },
+        {
+            "spdxElementId": "SPDXRef-firmware",
+            "relatedSpdxElement": "SPDXRef-gcc",
+            "relationshipType": "STATIC_LINK"
+        },
+        {
+            "spdxElementId": "SPDXRef-firmware",
+            "relatedSpdxElement": "SPDXRef-cjson",
+            "relationshipType": "STATIC_LINK"
+        }
+    ]
+}

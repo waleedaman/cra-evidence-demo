@@ -1,0 +1,1313 @@
+{
+  "schema": "cra-evidence-demo/findings/v1",
+  "generated_at": "2026-10-17T16:11:56Z",
+  "product": {
+    "name": "cra-evidence-demo-firmware",
+    "version": "1.0.0",
+    "release": "v1.0",
+    "board": "w5500_evb_pico2/rp2350a/m33",
+    "firmware_file": "zephyr.uf2",
+    "firmware_sha256": "0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+    "purl": "pkg:generic/cra-evidence-demo-firmware@1.0.0"
+  },
+  "sbom": {
+    "path": "normalized/firmware.spdx.json",
+    "sha256": "8f2d05b03bce329edd85efb7667cc40d171e248d9165b4afd39dbe19f0b0a7bc",
+    "namespace": "https://spdx.org/spdxdocs/cra-evidence-demo/v1.0/w5500_evb_pico2_rp2350a_m33/5e646b377e2f3207/normalized-6f5b4c9a89653f21"
+  },
+  "snapshot": {
+    "name": "baseline",
+    "grype": {
+      "built": "2026-10-15T06:30:36Z",
+      "schema_version": "v6.1.10",
+      "sha256": "2f1597f25b5089e966272b251eb4d1f9977e59d57029af1c8810deb6e5321aa2",
+      "file": "grype/baseline/vulnerability-db_v6.1.10_2026-10-15T00:29:08Z_1792045836.tar.zst"
+    },
+    "osv": {
+      "recorded_at": "2026-10-15T13:53:50+00:00",
+      "ecosystems": {
+        "GIT": {
+          "sha256": "9ca7f47a96f84ed4ad54bb4d11a4a851db1b827c8395f1bf072c55e14433498d",
+          "file": "osv/baseline/osv-scanner/GIT/all.zip",
+          "last_modified": "Thu, 15 Oct 2026 13:18:17 GMT"
+        }
+      }
+    }
+  },
+  "tools": {
+    "grype": "0.120.1",
+    "osv-scanner": "2.7.0"
+  },
+  "coverage": [
+    {
+      "component": "cra-evidence-demo-firmware",
+      "version": "1.0.0",
+      "cpes": [],
+      "osv_query": null,
+      "osv_note": "no GitHub PURL",
+      "grype_hits": 0,
+      "osv_hits": 0
+    },
+    {
+      "component": "zephyr",
+      "version": "4.4.2",
+      "cpes": [
+        "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+      ],
+      "osv_query": [
+        "https://github.com/zephyrproject-rtos/zephyr@v4.4.2"
+      ],
+      "osv_note": "repo@v4.4.2",
+      "grype_hits": 26,
+      "osv_hits": 2
+    },
+    {
+      "component": "cmsis_6",
+      "version": "30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74",
+      "cpes": [],
+      "osv_query": null,
+      "osv_note": "commit only (needs online OSV)",
+      "grype_hits": 0,
+      "osv_hits": 0
+    },
+    {
+      "component": "hal_rpi_pico",
+      "version": "562b41e10a1d8b1a761b253b107c5c6a84cf4535",
+      "cpes": [],
+      "osv_query": null,
+      "osv_note": "commit only (needs online OSV)",
+      "grype_hits": 0,
+      "osv_hits": 0
+    },
+    {
+      "component": "mbedtls",
+      "version": "4.1.0",
+      "cpes": [
+        "cpe:2.3:a:arm:mbed_tls:4.1.0:*:*:*:*:*:*:*",
+        "cpe:2.3:a:trustedfirmware:mbed_tls:4.1.0:*:*:*:*:*:*:*",
+        "cpe:2.3:a:mbed-tls:mbedtls:4.1.0:*:*:*:*:*:*:*"
+      ],
+      "osv_query": [
+        "https://github.com/Mbed-TLS/mbedtls@v4.1.0",
+        "https://github.com/mbed-tls/mbedtls@v4.1.0"
+      ],
+      "osv_note": "repo@v4.1.0",
+      "grype_hits": 0,
+      "osv_hits": 0
+    },
+    {
+      "component": "tf-psa-crypto",
+      "version": "1.1.0",
+      "cpes": [
+        "cpe:2.3:a:arm:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*",
+        "cpe:2.3:a:trustedfirmware:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*"
+      ],
+      "osv_query": [
+        "https://github.com/Mbed-TLS/TF-PSA-Crypto@v1.1.0",
+        "https://github.com/mbed-tls/tf-psa-crypto@v1.1.0"
+      ],
+      "osv_note": "repo@v1.1.0",
+      "grype_hits": 0,
+      "osv_hits": 0
+    },
+    {
+      "component": "picolibc",
+      "version": "1.8.10",
+      "cpes": [],
+      "osv_query": [
+        "https://github.com/picolibc/picolibc@1.8.10"
+      ],
+      "osv_note": "repo@1.8.10",
+      "grype_hits": 0,
+      "osv_hits": 0
+    },
+    {
+      "component": "gcc",
+      "version": "14.3.0",
+      "cpes": [
+        "cpe:2.3:a:gnu:gcc:14.3.0:*:*:*:*:*:*:*"
+      ],
+      "osv_query": null,
+      "osv_note": "no GitHub PURL",
+      "grype_hits": 1,
+      "osv_hits": 0
+    },
+    {
+      "component": "cjson",
+      "version": "1.7.17",
+      "cpes": [
+        "cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:*",
+        "cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*"
+      ],
+      "osv_query": [
+        "https://github.com/davegamble/cjson@v1.7.17"
+      ],
+      "osv_note": "repo@v1.7.17",
+      "grype_hits": 6,
+      "osv_hits": 8
+    }
+  ],
+  "findings": [
+    {
+      "id": "CVE-2025-57052",
+      "aliases": [],
+      "component": "cjson",
+      "component_version": "1.7.17",
+      "component_purl": "pkg:github/davegamble/cjson@v1.7.17",
+      "component_spdx_id": "SPDXRef-cjson",
+      "severity": "Critical",
+      "cvss": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "score": 9.8,
+      "found_by": [
+        "grype",
+        "osv-scanner"
+      ],
+      "summary": "cJSON 1.5.0 through 1.7.18 allows out-of-bounds access via the decode_array_index_from_pointer function in cJSON_Utils.c, allowing remote attackers to bypass array bounds checking and access restricte",
+      "urls": [
+        "https://x-0r.com/posts/cJSON-Array-Index-Parsing-Vulnerability",
+        "https://lists.debian.org/debian-lts-announce/2025/09/msg00019.html"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 1.5.0, <= 1.7.18 (unknown)",
+        "fix_state": "",
+        "fix_versions": []
+      },
+      "osv": {
+        "repo": "https://github.com/davegamble/cjson",
+        "version": "v1.7.17",
+        "modified": "2026-10-08T02:49:56.189504547Z",
+        "max_severity": 9.8
+      }
+    },
+    {
+      "id": "CVE-2024-31755",
+      "aliases": [],
+      "component": "cjson",
+      "component_version": "1.7.17",
+      "component_purl": "pkg:github/davegamble/cjson@v1.7.17",
+      "component_spdx_id": "SPDXRef-cjson",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:H",
+      "score": 7.6,
+      "found_by": [
+        "grype",
+        "osv-scanner"
+      ],
+      "summary": "cJSON v1.7.17 was discovered to contain a segmentation violation, which can trigger through the second parameter of function cJSON_SetValuestring at cJSON.c.",
+      "urls": [
+        "https://github.com/DaveGamble/cJSON/issues/839"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:*"
+        ],
+        "version_constraint": "= 1.7.17 (unknown)",
+        "fix_state": "",
+        "fix_versions": []
+      },
+      "osv": {
+        "repo": "https://github.com/davegamble/cjson",
+        "version": "v1.7.17",
+        "modified": "2026-08-12T03:51:22.351930579Z",
+        "max_severity": 7.6
+      }
+    },
+    {
+      "id": "CVE-2026-29036",
+      "aliases": [],
+      "component": "cjson",
+      "component_version": "1.7.17",
+      "component_purl": "pkg:github/davegamble/cjson@v1.7.17",
+      "component_spdx_id": "SPDXRef-cjson",
+      "severity": "High",
+      "cvss": null,
+      "score": 8.7,
+      "found_by": [
+        "osv-scanner"
+      ],
+      "summary": "cJSON 1.7.19 Wrong-Key Modification via JSON Pointer Escape Decoding",
+      "urls": [
+        "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/29xxx/CVE-2026-29036.json",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-29036",
+        "https://www.vulncheck.com/advisories/cjson-wrong-key-modification-via-json-pointer-escape-decoding"
+      ],
+      "osv": {
+        "repo": "https://github.com/davegamble/cjson",
+        "version": "v1.7.17",
+        "modified": "2026-09-26T08:12:47.554669Z",
+        "max_severity": 8.7
+      }
+    },
+    {
+      "id": "CVE-2026-67215",
+      "aliases": [],
+      "component": "cjson",
+      "component_version": "1.7.17",
+      "component_purl": "pkg:github/davegamble/cjson@v1.7.17",
+      "component_spdx_id": "SPDXRef-cjson",
+      "severity": "High",
+      "cvss": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+      "score": 8.7,
+      "found_by": [
+        "grype",
+        "osv-scanner"
+      ],
+      "summary": "cJSON through 1.7.19 is vulnerable to uncontrolled recursion leading to stack exhaustion when an untrusted RFC 6902 JSON Patch is applied via cJSONUtils_ApplyPatches() or cJSONUtils_ApplyPatchesCaseSe",
+      "urls": [
+        "https://github.com/DaveGamble/cJSON/blob/v1.7.19/cJSON.c#L253-L261",
+        "https://github.com/DaveGamble/cJSON/blob/v1.7.19/cJSON_Utils.c#L906-L940",
+        "https://joshua.hu/cjson-json-parser-cve-vulnerabilities"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*"
+        ],
+        "version_constraint": "<= 1.7.19 (unknown)",
+        "fix_state": "",
+        "fix_versions": []
+      },
+      "osv": {
+        "repo": "https://github.com/davegamble/cjson",
+        "version": "v1.7.17",
+        "modified": "2026-08-12T03:51:14.499232132Z",
+        "max_severity": 8.7
+      }
+    },
+    {
+      "id": "CVE-2026-67216",
+      "aliases": [],
+      "component": "cjson",
+      "component_version": "1.7.17",
+      "component_purl": "pkg:github/davegamble/cjson@v1.7.17",
+      "component_spdx_id": "SPDXRef-cjson",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 7.5,
+      "found_by": [
+        "grype",
+        "osv-scanner"
+      ],
+      "summary": "cJSON through 1.7.19 contains an inefficient algorithmic complexity flaw in cJSON_Compare(). When comparing objects, the function recurses into each shared subtree twice, once in each direction, with ",
+      "urls": [
+        "https://github.com/DaveGamble/cJSON/blob/v1.7.19/cJSON.c#L3057-L3180",
+        "https://joshua.hu/cjson-json-parser-cve-vulnerabilities",
+        "https://www.vulncheck.com/advisories/cjson-cjson-compare-exponential-complexity-denial-of-service"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*"
+        ],
+        "version_constraint": "<= 1.7.19 (unknown)",
+        "fix_state": "",
+        "fix_versions": []
+      },
+      "osv": {
+        "repo": "https://github.com/davegamble/cjson",
+        "version": "v1.7.17",
+        "modified": "2026-08-12T03:51:42.776342053Z",
+        "max_severity": 8.2
+      }
+    },
+    {
+      "id": "CVE-2026-10637",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:H",
+      "score": 7.1,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "subsys/net/ip/ipv6_mld.c:mld_send() read the packet interface via net_pkt_iface(pkt) after net_send_data(pkt) returned successfully. Per the network stack's ownership contract (include/zephyr/net/net_",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/3159c53e8e7d233c2a85a0798cf25ac441db6dae",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-m23w-34pp-4h92"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 1.12.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "no OSV record"
+    },
+    {
+      "id": "CVE-2026-10638",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 7.5,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "subsys/net/ip/icmpv6.c reads the network interface from a net_pkt after that packet has been handed to net_try_send_data(). In icmpv6_handle_echo_request() and net_icmpv6_send_error(), the post-send s",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/09c8578c66b517c5165cde53332ed5d8d8ef2cfc",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-m92g-94xv-wvw2"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 4.2.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10640",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:H",
+      "score": 7.1,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "Zephyr's IPv6 Neighbor Discovery send paths (net_ipv6_send_na, net_ipv6_send_ns, net_ipv6_send_rs in subsys/net/ip/ipv6_nbr.c) updated the per-interface ICMP-sent statistics by calling net_pkt_iface(p",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/aaed8332a62b0490a2f3c2cbabe272f575068eaa",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-r74c-mr4m-7g9g"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 3.3.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10669",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+      "score": 7.8,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "On Xtensa SoCs built with CONFIG_XTENSA_MPU and CONFIG_USERSPACE, arch_buffer_validate() in arch/xtensa/core/mpu.c \u2014 the architecture hook that verifies a user-mode-supplied buffer is accessible to th",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/3b1bdaf5482188ca110ef9a411aaa8c7d3db3b16",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-4r4p-gh69-v6w4"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 3.7.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10671",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:H",
+      "score": 7.1,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "In Zephyr's kernel pipe implementation, the userspace syscall verifier z_vrfy_k_pipe_init() in kernel/pipe.c used K_SYSCALL_OBJ() (which requires the kernel object to already be initialized) instead o",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/4424aa681e0b80e9cbd0ae27a987d582be88cb74",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-p8w8-3x99-mg8f"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 4.1.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10673",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "score": 8.8,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The Zephyr ADIN2111/ADIN1110 10BASE-T1S/T1L Ethernet driver (drivers/ethernet/eth_adin2111.c) reassembles received Ethernet frames in OPEN Alliance (OA) SPI mode by copying device-supplied 64-byte dat",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/158df8d088316cdae20816fc07703892280b2acb",
+        "https://github.com/zephyrproject-rtos/zephyr/commit/c98321cbfef23c0e3bdf043ccf6b421067c8d508",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-hm6v-4jh4-3qc4"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 3.7.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10681",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+      "score": 7,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "In Zephyr's userspace dynamic-objects subsystem, thread_idx_alloc() in kernel/userspace/userspace.c allocated a new thread permission index from the global _thread_idx_map[] bitmap without holding lis",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/862ea2fbbeb2ccdf8ff994b03e2e3b4405f2c37d",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-j693-5rh5-8g8h"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 2.0.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10682",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+      "score": 7.8,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The userspace verifier z_vrfy_log_filter_set() for the log_filter_set syscall in subsys/logging/log_mgmt.c performed a signed comparison against the int16_t src_id parameter: src_id < (int16_t)log_src",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/56a15114c6acbab2067fe406dc3adda8608f3def",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-6vqh-mg7h-58qh"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 3.0.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10685",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:H",
+      "score": 7.6,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The Zephyr Bluetooth GATT client CCC-write response handler gatt_write_ccc_rsp() in subsys/bluetooth/host/gatt.c invoked the application's params->subscribe() callback after it had already called para",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/c7292f20223637232b6f962141725611a38f6a52",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-29xh-jm2m-4qvx"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 2.4.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10686",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 7.5,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "Zephyr's IPv6 forwarding path re-sent routed unicast packets without ever decrementing the IPv6 hop limit. Both routing branches of ipv6_route_packet() (subsys/net/ip) were affected: the explicit-rout",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/7d8f1afa7345975b58405d6fba18bb8c3f7cb12a",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-4cg6-6jc4-2r6h"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 1.8.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10848",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:H",
+      "score": 8.6,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The OCPP 1.6 client in subsys/net/lib/ocpp parsed inbound WAMP RPC frames in parse_rpc_msg() (subsys/net/lib/ocpp/ocpp_j.c) using a hand-rolled helper, extract_string_field(), that copied the message'",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/e500f7b81b5b8a867e28b2f4e59512cbfdd5ae75",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-jgqq-7mjj-w642"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 4.3.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10849",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "High",
+      "cvss": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 7.5,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The hawkBit device management client in subsys/mgmt/hawkbit accumulates the body of an HTTP response from the update server into a heap buffer in response_json_cb() (subsys/mgmt/hawkbit/hawkbit.c). Th",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/59d7ab58d853489e6134081cadb11733730264ac",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-39h3-7phx-pwhv"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 2.4.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2023-53154",
+      "aliases": [],
+      "component": "cjson",
+      "component_version": "1.7.17",
+      "component_purl": "pkg:github/davegamble/cjson@v1.7.17",
+      "component_spdx_id": "SPDXRef-cjson",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+      "score": 5.5,
+      "found_by": [
+        "grype",
+        "osv-scanner"
+      ],
+      "summary": "parse_string in cJSON before 1.7.18 has a heap-based buffer over-read via {\"1\":1, with no trailing newline if cJSON_ParseWithLength is called.",
+      "urls": [
+        "https://github.com/DaveGamble/cJSON/compare/v1.7.17...v1.7.18",
+        "https://github.com/DaveGamble/cJSON/issues/800",
+        "https://lists.debian.org/debian-lts-announce/2025/06/msg00014.html"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:*"
+        ],
+        "version_constraint": "< 1.7.18 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "1.7.18"
+        ]
+      },
+      "osv": {
+        "repo": "https://github.com/davegamble/cjson",
+        "version": "v1.7.17",
+        "modified": "2026-08-12T03:51:35.811525545Z",
+        "max_severity": 2.9
+      }
+    },
+    {
+      "id": "CVE-2026-67217",
+      "aliases": [],
+      "component": "cjson",
+      "component_version": "1.7.17",
+      "component_purl": "pkg:github/davegamble/cjson@v1.7.17",
+      "component_spdx_id": "SPDXRef-cjson",
+      "severity": "Medium",
+      "cvss": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N/E:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X/S:X/AU:X/R:X/V:X/RE:X/U:X",
+      "score": 6.9,
+      "found_by": [
+        "grype",
+        "osv-scanner"
+      ],
+      "summary": "cJSON through 1.7.19 applies RFC 6902 JSON Patch operations non-atomically in apply_patch() in cJSON_Utils.c. For a replace operation that is missing its value member, or a move operation whose destin",
+      "urls": [
+        "https://github.com/DaveGamble/cJSON/blob/v1.7.19/cJSON_Utils.c#L887-L948",
+        "https://joshua.hu/cjson-json-parser-cve-vulnerabilities",
+        "https://www.vulncheck.com/advisories/cjson-json-patch-non-atomic-application-destroys-data-before-validation"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:*"
+        ],
+        "version_constraint": "<= 1.7.19 (unknown)",
+        "fix_state": "",
+        "fix_versions": []
+      },
+      "osv": {
+        "repo": "https://github.com/davegamble/cjson",
+        "version": "v1.7.17",
+        "modified": "2026-08-12T03:51:18.748400830Z",
+        "max_severity": 6.9
+      }
+    },
+    {
+      "id": "CVE-2026-87933",
+      "aliases": [],
+      "component": "cjson",
+      "component_version": "1.7.17",
+      "component_purl": "pkg:github/davegamble/cjson@v1.7.17",
+      "component_spdx_id": "SPDXRef-cjson",
+      "severity": "Medium",
+      "cvss": null,
+      "score": 5.5,
+      "found_by": [
+        "osv-scanner"
+      ],
+      "summary": "DaveGamble cJSON cJSON_Utils.c cJSONUtils_MergePatch use after free",
+      "urls": [
+        "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/87xxx/CVE-2026-87933.json",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-87933",
+        "https://vuldb.com/cve/CVE-2026-87933"
+      ],
+      "osv": {
+        "repo": "https://github.com/davegamble/cjson",
+        "version": "v1.7.17",
+        "modified": "2026-09-12T03:30:58.542724972Z",
+        "max_severity": 5.5
+      }
+    },
+    {
+      "id": "CVE-2023-4039",
+      "aliases": [],
+      "component": "gcc",
+      "component_version": "14.3.0",
+      "component_purl": null,
+      "component_spdx_id": "SPDXRef-gcc",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+      "score": 4.8,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "**DISPUTED**A failure in the -fstack-protector feature in GCC-based toolchains ",
+      "urls": [
+        "https://developer.arm.com/Arm%20Security%20Center/GCC%20Stack%20Protector%20Vulnerability%20AArch64",
+        "https://github.com/metaredteam/external-disclosures/security/advisories/GHSA-x7ch-h5rf-w2mf",
+        "https://cert-portal.siemens.com/productcert/html/ssa-355557.html"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:a:gnu:gcc:14.3.0:*:*:*:*:*:*:*"
+        ],
+        "version_constraint": "< 2023-09-12 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "2023-09-12"
+        ]
+      }
+    },
+    {
+      "id": "CVE-2026-10634",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 5.3,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "Zephyr's native TCP stack iterates the global connection list in net_tcp_foreach() (subsys/net/ip/tcp.c) using the SYS_SLIST_FOR_EACH_CONTAINER_SAFE macro, which caches a pointer to the next list node",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/cd85e0e890ab89815c4cbc0a8fbc03a3efa84dc2",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-6c57-xfhw-j26x"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 2.5.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "no OSV record"
+    },
+    {
+      "id": "CVE-2026-10639",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:L",
+      "score": 4.8,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "In Zephyr's native IPv4 stack, icmpv4_handle_echo_request() in subsys/net/ip/icmpv4.c builds an echo-reply packet (reply), hands it to net_try_send_data(), and then, on success, calls net_stats_update",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/86e21665d4641f304dc3895bfb03b8f89db83291",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-qhrf-w466-qmpw"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 1.14.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10642",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:P/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 4.6,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The Zephyr PL011 UART driver (drivers/serial/uart_pl011.c) contains an unbounded software loop in pl011_irq_tx_enable() that repeatedly invokes the interrupt-driven application callback while the TX i",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/68e702294b711eadfe7b4fadedd46d7c87fe8f3d",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-3fgh-73jh-2q5j"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 4.1.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10647",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 5.3,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The USB CDC-NCM device class (subsys/usb/device_next/class/usbd_cdc_ncm.c) ignores the return value of usbd_ep_enqueue() in its ethernet transmit callback cdc_ncm_send(). When the enqueue fails, the f",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/255bccc1badd1aa06c6e5ddf5b40de8463b33f02",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-xcf7-r86m-5q9f"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 4.1.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10663",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:P/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H",
+      "score": 6.1,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "In Zephyr's experimental USB host stack (CONFIG_USB_HOST_STACK), usbh_device_disconnect() (subsys/usb/host/usbh_device.c) freed the root usb_device slab object without clearing the cached pointer ctx-",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/4b87a8f161a44cb19505fa97db7cf72f64d49165",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-26q8-xjq3-f5p6"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 4.4.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10664",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+      "score": 5,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The nRF70 Wi-Fi driver's power-save event handler nrf_wifi_event_proc_get_power_save_info() in drivers/wifi/nrf_wifi/src/wifi_mgmt.c copied TWT (Target Wake Time) flow entries from an nrf_wifi_umac_ev",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/a2c4324acd50a5f92e492e6e460e6297af826148",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-3r6j-pm38-r43m"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 4.0.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10670",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+      "score": 5.5,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The CONFIG_USERSPACE verification handler for the k_thread_name_copy() system call (z_vrfy_k_thread_name_copy() in kernel/thread.c) calls k_object_find() on the caller-supplied thread pointer and then",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/491583951036bc5794a3843a4baa246453bb1ee2",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-82h2-v4vm-q2g9"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 2.0.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10683",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:P/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 4.6,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "In the Synopsys DesignWare I2C driver (drivers/i2c/i2c_dw.c) operating in target/slave mode, the rx_full interrupt handler gates the write_requested() callback on dw->state != CMD_SEND, and dw->state ",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/06e2053efe0e324d71cc29cdd95160fff643730a",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fj9c-r5qw-3639"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 4.0.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10773",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:L",
+      "score": 5.4,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The DHCPv4 client helper net_dhcpv4_msg_type_name() in subsys/net/lib/dhcpv4/dhcpv4.c indexes a static 8-element const char * name table after a faulty bounds check. The guard used msg_type <= sizeof(",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/73c8a7df4f00088fc04ee5ab71bcabf47fcd3db7",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-r5hq-xq42-wcfq"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 3.6.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-10774",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 6.5,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "Zephyr's Bluetooth Mesh subnet key management leaks one PSA Crypto key slot on every subnet-key teardown. In subsys/bluetooth/mesh/subnet.c, net_keys_create() imports the Private Beacon Key into a PSA",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/f573da9f53630082ae95fcfd39fb021fe15f7abd",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-6q7g-798f-76p2"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 3.6.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-11368",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 6.5,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The Bluetooth host ATT layer (subsys/bluetooth/host/att.c) associates each in-flight ATT TX buffer with its owning channel via the static tx_meta_data_storage[] array (data->att_chan = chan). When a b",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/dfdea9bad8d9b5b31c125e97fcffb549f2217caa",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-85vg-gwc4-77g7"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 4.4.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-2411",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+      "score": 6.5,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "Zephyr's Bluetooth host declares a GATT characteristic as two consecutive attributes: a Characteristic Declaration whose permission is hard-coded to BT_GATT_PERM_READ, and a Characteristic Value attri",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/c3386f92fe81bd10dc23e6a115e6a80a7d863546",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-4w3r-v9q9-4462"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 2.6.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-7007",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:P/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "score": 4.6,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "The Zephyr ext2 file system validates the on-disk superblock in ext2_verify_disk_superblock() (subsys/fs/ext2/ext2_impl.c) before completing a mount. The validator checked the magic number, block size",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/babc0900ed40e6c023ccc26aa1a321f9388b66af",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-wrf2-79mm-cvw5"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 3.5.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    },
+    {
+      "id": "CVE-2026-75084",
+      "aliases": [
+        "GHSA-pgg5-wwxw-vmj8"
+      ],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+      "score": 6.8,
+      "found_by": [
+        "osv-scanner"
+      ],
+      "summary": "Out-of-bounds write in the TI CC1200 IEEE 802.15.4 driver from an unvalidated radio-supplied packet length",
+      "urls": [
+        "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/75xxx/CVE-2026-75084.json",
+        "https://github.com/zephyrproject-rtos/zephyr/commit/26a8b8294bf28523c7aa2f15cf728517980ee593",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-pgg5-wwxw-vmj8"
+      ],
+      "osv": {
+        "repo": "https://github.com/zephyrproject-rtos/zephyr",
+        "version": "v4.4.2",
+        "modified": "2026-10-15T02:47:41.545722895Z",
+        "max_severity": 6.8
+      }
+    },
+    {
+      "id": "CVE-2026-75085",
+      "aliases": [
+        "GHSA-w7pm-4r95-c9vr"
+      ],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Medium",
+      "cvss": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:L",
+      "score": 4.2,
+      "found_by": [
+        "osv-scanner"
+      ],
+      "summary": "Out-of-bounds read from received-frame length underflow in the STM32WBA IEEE 802.15.4 driver",
+      "urls": [
+        "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/75xxx/CVE-2026-75085.json",
+        "https://github.com/zephyrproject-rtos/zephyr/commit/46f8af4f5ee472abc13b0291c44fdfe4ed879aaa",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-w7pm-4r95-c9vr"
+      ],
+      "osv": {
+        "repo": "https://github.com/zephyrproject-rtos/zephyr",
+        "version": "v4.4.2",
+        "modified": "2026-10-15T02:47:33.182135332Z",
+        "max_severity": 4.2
+      }
+    },
+    {
+      "id": "CVE-2026-10636",
+      "aliases": [],
+      "component": "zephyr",
+      "component_version": "4.4.2",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "component_spdx_id": "SPDXRef-zephyr",
+      "severity": "Low",
+      "cvss": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+      "score": 3.7,
+      "found_by": [
+        "grype"
+      ],
+      "summary": "In Zephyr's IPv4 IGMP implementation, igmp_send() in subsys/net/ip/igmp.c read the network interface back out of the packet via net_pkt_iface(pkt) after the packet had been handed to net_send_data(). ",
+      "urls": [
+        "https://github.com/zephyrproject-rtos/zephyr/commit/0223e5e3ec5ebc51e8d0328fc3e604fa43552f54",
+        "https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fj6q-975v-65c9"
+      ],
+      "grype": {
+        "namespace": "nvd:cpe",
+        "matched_cpes": [
+          "cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*"
+        ],
+        "version_constraint": ">= 2.6.0, < 4.5.0 (unknown)",
+        "fix_state": "fixed",
+        "fix_versions": [
+          "4.5.0"
+        ]
+      },
+      "osv_view": "OSV record does not list v4.4.2"
+    }
+  ]
+}

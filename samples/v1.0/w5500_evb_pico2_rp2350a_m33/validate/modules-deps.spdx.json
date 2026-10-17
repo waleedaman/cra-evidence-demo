@@ -1,0 +1,128 @@
+{
+  "document": "modules-deps.spdx",
+  "spdx_validation_errors": [],
+  "ntia": {
+    "isConformant": true,
+    "isNtiaConformant": true,
+    "complianceStandard": "ntia",
+    "sbomSpec": "spdx2",
+    "validationMessages": [],
+    "conformanceMessages": [],
+    "parsingError": [],
+    "sbomName": "modules-deps",
+    "specVersionProvided": true,
+    "authorNameProvided": true,
+    "timestampProvided": true,
+    "dependencyRelationshipsProvided": true,
+    "totalNumberComponents": 5,
+    "componentsEvaluated": true,
+    "graphValidation": {
+      "unknownPointers": {
+        "hasUnknownPointers": false,
+        "unknownPointerEdges": {}
+      },
+      "floatingComponents": {
+        "floatingComponentCount": 4,
+        "floatingComponentIds": [
+          "SPDXRef-hal-rpi-pico-deps",
+          "SPDXRef-mbedtls-deps",
+          "SPDXRef-cmsis-6-deps",
+          "SPDXRef-tf-psa-crypto-deps"
+        ]
+      }
+    },
+    "componentNames": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentVersions": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentIdentifiers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentSuppliers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentConcludedLicenses": {
+      "nonconformantComponents": [
+        "zephyr"
+      ],
+      "allProvided": false
+    },
+    "componentCopyrightTexts": {
+      "nonconformantComponents": [
+        "zephyr"
+      ],
+      "allProvided": false
+    }
+  },
+  "fsct3-min": {
+    "isConformant": false,
+    "isNtiaConformant": false,
+    "complianceStandard": "fsct3-min",
+    "sbomSpec": "spdx2",
+    "validationMessages": [],
+    "conformanceMessages": [],
+    "parsingError": [],
+    "sbomName": "modules-deps",
+    "specVersionProvided": true,
+    "authorNameProvided": true,
+    "timestampProvided": true,
+    "dependencyRelationshipsProvided": true,
+    "totalNumberComponents": 5,
+    "componentsEvaluated": true,
+    "graphValidation": {
+      "unknownPointers": {
+        "hasUnknownPointers": false,
+        "unknownPointerEdges": {}
+      },
+      "floatingComponents": {
+        "floatingComponentCount": 4,
+        "floatingComponentIds": [
+          "SPDXRef-hal-rpi-pico-deps",
+          "SPDXRef-mbedtls-deps",
+          "SPDXRef-cmsis-6-deps",
+          "SPDXRef-tf-psa-crypto-deps"
+        ]
+      }
+    },
+    "componentNames": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentVersions": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentIdentifiers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentSuppliers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentConcludedLicenses": {
+      "nonconformantComponents": [
+        "zephyr"
+      ],
+      "allProvided": false
+    },
+    "componentCopyrightTexts": {
+      "nonconformantComponents": [
+        "zephyr"
+      ],
+      "allProvided": false
+    }
+  },
+  "floating_packages": [
+    "SPDXRef-cmsis-6-deps",
+    "SPDXRef-hal-rpi-pico-deps",
+    "SPDXRef-mbedtls-deps",
+    "SPDXRef-tf-psa-crypto-deps"
+  ]
+}

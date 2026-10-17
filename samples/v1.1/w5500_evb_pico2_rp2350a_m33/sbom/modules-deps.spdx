@@ -1,0 +1,81 @@
+SPDXVersion: SPDX-2.3
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: modules-deps
+DocumentNamespace: https://spdx.org/spdxdocs/cra-evidence-demo/v1.1/w5500_evb_pico2_rp2350a_m33/faf7d694942423a8/modules-deps
+Creator: Tool: Zephyr SPDX builder
+Created: 2026-10-17T16:12:32Z
+
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-zephyr-deps
+Relationship: SPDXRef-cmsis-6-deps DEPENDENCY_OF SPDXRef-zephyr-deps
+Relationship: SPDXRef-hal-rpi-pico-deps DEPENDENCY_OF SPDXRef-zephyr-deps
+Relationship: SPDXRef-mbedtls-deps DEPENDENCY_OF SPDXRef-zephyr-deps
+Relationship: SPDXRef-tf-psa-crypto-deps DEPENDENCY_OF SPDXRef-zephyr-deps
+
+##### Package: zephyr
+
+PackageName: zephyr
+SPDXID: SPDXRef-zephyr-deps
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageDownloadLocation: git+https://github.com/zephyrproject-rtos/zephyr@dccb09599635bdff17633fa7e9dab014b91dce90
+PackageVersion: 4.4.2
+PackageSupplier: Organization: zephyrproject
+ExternalRef: PACKAGE-MANAGER purl pkg:github/zephyrproject-rtos/zephyr@v4.4.2
+ExternalRef: SECURITY cpe23Type cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:*
+FilesAnalyzed: false
+PackageComment: Utility target; no files
+
+##### Package: cmsis-6-deps
+
+PackageName: cmsis_6-deps
+SPDXID: SPDXRef-cmsis-6-deps
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageComment: Utility target; no files
+
+##### Package: hal-rpi-pico-deps
+
+PackageName: hal_rpi_pico-deps
+SPDXID: SPDXRef-hal-rpi-pico-deps
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+FilesAnalyzed: false
+PackageComment: Utility target; no files
+
+##### Package: mbed-tls
+
+PackageName: mbed_tls
+SPDXID: SPDXRef-mbedtls-deps
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+PackageVersion: 4.1.0
+PackageSupplier: Organization: arm
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:arm:mbed_tls:4.1.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:github/Mbed-TLS/mbedtls@v4.1.0
+FilesAnalyzed: false
+PackageComment: Utility target; no files
+
+##### Package: tf-psa-crypto
+
+PackageName: tf-psa-crypto
+SPDXID: SPDXRef-tf-psa-crypto-deps
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+PackageVersion: 1.1.0
+PackageSupplier: Organization: arm
+ExternalRef: SECURITY cpe23Type cpe:2.3:a:arm:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*
+ExternalRef: PACKAGE-MANAGER purl pkg:github/Mbed-TLS/TF-PSA-Crypto@v1.1.0
+FilesAnalyzed: false
+PackageComment: Utility target; no files
+

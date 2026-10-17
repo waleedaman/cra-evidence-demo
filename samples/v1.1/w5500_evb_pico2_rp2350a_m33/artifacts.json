@@ -1,0 +1,22 @@
+{
+  "version": "v1.1",
+  "board": "w5500_evb_pico2/rp2350a/m33",
+  "artifacts": {
+    "zephyr.elf": {
+      "sha256": "faf7d694942423a8ac0b9a07b5aec7e7d92a0ab80f50975a2d11d06a8c2bcf79",
+      "size": 6140148
+    },
+    "zephyr.uf2": {
+      "sha256": "c333217dc035420a644bf09cdf0e9aa2963e09bfc7f70d9c783a6ba3d4104389",
+      "size": 379904
+    },
+    "zephyr.hex": {
+      "sha256": "8087f88e8bd10b8fe1d549fb8d4fe7de8e57755eb13a894dad53d2294cf66891",
+      "size": 533862
+    },
+    "zephyr.bin": {
+      "sha256": "e35acb9b5ad4c169afd6031b85ed308dcafc436be0f0aef2cf6acb185d7ffa98",
+      "size": 189744
+    }
+  }
+}

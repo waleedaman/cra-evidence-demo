@@ -1,0 +1,133 @@
+{
+  "document": "normalized/firmware.spdx.json",
+  "spdx_validation_errors": [],
+  "ntia": {
+    "isConformant": true,
+    "isNtiaConformant": true,
+    "complianceStandard": "ntia",
+    "sbomSpec": "spdx2",
+    "validationMessages": [],
+    "conformanceMessages": [],
+    "parsingError": [],
+    "sbomName": "cra-evidence-demo-firmware-v1.0-w5500_evb_pico2_rp2350a_m33",
+    "specVersionProvided": true,
+    "authorNameProvided": true,
+    "timestampProvided": true,
+    "dependencyRelationshipsProvided": true,
+    "totalNumberComponents": 9,
+    "componentsEvaluated": true,
+    "graphValidation": {
+      "unknownPointers": {
+        "hasUnknownPointers": false,
+        "unknownPointerEdges": {}
+      },
+      "floatingComponents": {
+        "floatingComponentCount": 0,
+        "floatingComponentIds": []
+      }
+    },
+    "componentNames": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentVersions": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentIdentifiers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentSuppliers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentConcludedLicenses": {
+      "nonconformantComponents": [
+        "picolibc",
+        "gcc",
+        "cjson"
+      ],
+      "allProvided": false
+    },
+    "componentCopyrightTexts": {
+      "nonconformantComponents": [
+        "cra-evidence-demo-firmware",
+        "zephyr",
+        "cmsis_6",
+        "hal_rpi_pico",
+        "mbedtls",
+        "tf-psa-crypto",
+        "picolibc",
+        "gcc",
+        "cjson"
+      ],
+      "allProvided": false
+    }
+  },
+  "fsct3-min": {
+    "isConformant": false,
+    "isNtiaConformant": false,
+    "complianceStandard": "fsct3-min",
+    "sbomSpec": "spdx2",
+    "validationMessages": [],
+    "conformanceMessages": [],
+    "parsingError": [],
+    "sbomName": "cra-evidence-demo-firmware-v1.0-w5500_evb_pico2_rp2350a_m33",
+    "specVersionProvided": true,
+    "authorNameProvided": true,
+    "timestampProvided": true,
+    "dependencyRelationshipsProvided": true,
+    "totalNumberComponents": 9,
+    "componentsEvaluated": true,
+    "graphValidation": {
+      "unknownPointers": {
+        "hasUnknownPointers": false,
+        "unknownPointerEdges": {}
+      },
+      "floatingComponents": {
+        "floatingComponentCount": 0,
+        "floatingComponentIds": []
+      }
+    },
+    "componentNames": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentVersions": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentIdentifiers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentSuppliers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentConcludedLicenses": {
+      "nonconformantComponents": [
+        "picolibc",
+        "gcc",
+        "cjson"
+      ],
+      "allProvided": false
+    },
+    "componentCopyrightTexts": {
+      "nonconformantComponents": [
+        "cra-evidence-demo-firmware",
+        "zephyr",
+        "cmsis_6",
+        "hal_rpi_pico",
+        "mbedtls",
+        "tf-psa-crypto",
+        "picolibc",
+        "gcc",
+        "cjson"
+      ],
+      "allProvided": false
+    }
+  },
+  "floating_packages": []
+}

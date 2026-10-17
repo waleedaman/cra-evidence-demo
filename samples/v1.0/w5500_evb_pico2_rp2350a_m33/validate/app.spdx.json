@@ -1,0 +1,117 @@
+{
+  "document": "app.spdx",
+  "spdx_validation_errors": [],
+  "ntia": {
+    "isConformant": false,
+    "isNtiaConformant": false,
+    "complianceStandard": "ntia",
+    "sbomSpec": "spdx2",
+    "validationMessages": [],
+    "conformanceMessages": [],
+    "parsingError": [],
+    "sbomName": "app-sources",
+    "specVersionProvided": true,
+    "authorNameProvided": true,
+    "timestampProvided": true,
+    "dependencyRelationshipsProvided": true,
+    "totalNumberComponents": 1,
+    "componentsEvaluated": true,
+    "graphValidation": {
+      "unknownPointers": {
+        "hasUnknownPointers": false,
+        "unknownPointerEdges": {}
+      },
+      "floatingComponents": {
+        "floatingComponentCount": 0,
+        "floatingComponentIds": []
+      }
+    },
+    "componentNames": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentVersions": {
+      "nonconformantComponents": [
+        "app-sources"
+      ],
+      "allProvided": false
+    },
+    "componentIdentifiers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentSuppliers": {
+      "nonconformantComponents": [
+        "app-sources"
+      ],
+      "allProvided": false
+    },
+    "componentConcludedLicenses": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentCopyrightTexts": {
+      "nonconformantComponents": [
+        "app-sources"
+      ],
+      "allProvided": false
+    }
+  },
+  "fsct3-min": {
+    "isConformant": false,
+    "isNtiaConformant": false,
+    "complianceStandard": "fsct3-min",
+    "sbomSpec": "spdx2",
+    "validationMessages": [],
+    "conformanceMessages": [],
+    "parsingError": [],
+    "sbomName": "app-sources",
+    "specVersionProvided": true,
+    "authorNameProvided": true,
+    "timestampProvided": true,
+    "dependencyRelationshipsProvided": true,
+    "totalNumberComponents": 1,
+    "componentsEvaluated": true,
+    "graphValidation": {
+      "unknownPointers": {
+        "hasUnknownPointers": false,
+        "unknownPointerEdges": {}
+      },
+      "floatingComponents": {
+        "floatingComponentCount": 0,
+        "floatingComponentIds": []
+      }
+    },
+    "componentNames": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentVersions": {
+      "nonconformantComponents": [
+        "app-sources"
+      ],
+      "allProvided": false
+    },
+    "componentIdentifiers": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentSuppliers": {
+      "nonconformantComponents": [
+        "app-sources"
+      ],
+      "allProvided": false
+    },
+    "componentConcludedLicenses": {
+      "nonconformantComponents": [],
+      "allProvided": true
+    },
+    "componentCopyrightTexts": {
+      "nonconformantComponents": [
+        "app-sources"
+      ],
+      "allProvided": false
+    }
+  },
+  "floating_packages": []
+}

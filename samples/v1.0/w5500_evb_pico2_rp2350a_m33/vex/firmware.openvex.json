@@ -1,0 +1,748 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://cra-evidence-demo.invalid/vex/v1.0/w5500_evb_pico2_rp2350a_m33/0ef23d019b60828e",
+  "author": "CRA evidence demo project",
+  "version": 37,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2023-4039"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "cpe:2.3:a:gnu:gcc:14.3.0:*:*:*:*:*:*:*"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:a:gnu:gcc:14.3.0:*:*:*:*:*:*:* against \"\u003c 2023-09-12 (unknown)\"); advisory: https://developer.arm.com/Arm%20Security%20Center/GCC%20Stack%20Protector%20Vulnerability%20AArch64 (Reference listed with the finding); advisory: https://github.com/metaredteam/external-disclosures/security/advisories/GHSA-x7ch-h5rf-w2mf (Reference listed with the finding); advisory: https://cert-portal.siemens.com/productcert/html/ssa-355557.html (Reference listed with the finding); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_ARM: y; CONFIG_ARM64: not present; CONFIG_STACK_CANARIES: not present); advisory: https://developer.arm.com/Arm%20Security%20Center/GCC%20Stack%20Protector%20Vulnerability%20AArch64 (Arm advisory: affects AArch64 targets). Reassess if: CONFIG_STACK_CANARIES=y or a build for an AArch64 (CONFIG_ARM64=y) target.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The flaw is in GCC's AArch64 -fstack-protector code generation (dynamically sized locals). This firmware is built for Arm Cortex-M33 (AArch32/Thumb-2) and without stack protector (CONFIG_STACK_CANARIES not enabled). The NVD range '\u003c 2023-09-12' is a date, not a GCC version.",
+      "timestamp": "2026-10-17T16:04:15Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2023-53154"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/davegamble/cjson@v1.7.17"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:* against \"\u003c 1.7.18 (unknown)\"; OSV-Scanner: OSV record lists v1.7.17 of https://github.com/davegamble/cjson as affected); advisory: https://github.com/DaveGamble/cJSON/compare/v1.7.17...v1.7.18 (Reference listed with the finding); advisory: https://github.com/DaveGamble/cJSON/issues/800 (Reference listed with the finding); advisory: https://lists.debian.org/debian-lts-announce/2025/06/msg00014.html (Reference listed with the finding); symbols: out/v1.0/w5500_evb_pico2_rp2350a_m33/evidence/lib_cjson_cJSON.c.json (lib/cjson/cJSON.c is compiled (6762 bytes .text in zephyr.map), but cJSON_Parse, cJSON_ParseWithLength, cJSON_ParseWithOpts, cJSON_ParseWithLengthOpts is not in zephyr.elf (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=lib/cjson/cJSON.c SYMBOL=cJSON_Parse,cJSON_ParseWithLength,cJSON_ParseWithOpts,cJSON_ParseWithLengthOpts)). Reassess if: application code parses JSON with cJSON (cJSON_Parse* symbols appear in zephyr.elf).",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "parse_string() is reached only through the cJSON_Parse* functions. The firmware only builds JSON (create/print); no parse function is in zephyr.elf.",
+      "timestamp": "2026-10-17T16:04:15Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-31755"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/davegamble/cjson@v1.7.17"
+            }
+          ]
+        }
+      ],
+      "status": "fixed",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:a:cjson_project:cjson:1.7.17:*:*:*:*:*:*:* against \"= 1.7.17 (unknown)\"; OSV-Scanner: OSV record lists v1.7.17 of https://github.com/davegamble/cjson as affected); advisory: https://github.com/DaveGamble/cJSON/issues/839 (Reference listed with the finding); source: app/lib/cjson/patches/0001-Add-NULL-check-to-cJSON_SetValuestring.patch (Upstream fix backported into the vendored cJSON.c; version string stays 1.7.17); commit: https://github.com/DaveGamble/cJSON/commit/7e4d5dabe7a9b754c601f214e65b544e67ba9f59 (Upstream commit of the fix); test: out/evidence/cjson-CVE-2024-31755-test.txt (make cjson-test: upstream 1.7.17 crashes on cJSON_SetValuestring(obj, NULL), the firmware copy returns NULL); symbols: out/v1.0/w5500_evb_pico2_rp2350a_m33/evidence/lib_cjson_cJSON.c.json (lib/cjson/cJSON.c is compiled (6762 bytes .text in zephyr.map), but cJSON_SetValuestring is not in zephyr.elf (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=lib/cjson/cJSON.c SYMBOL=cJSON_SetValuestring)). Reassess if: app/lib/cjson/cJSON.c replaced without the patch (sha256 differs from identifiers/component-map.yaml).",
+      "timestamp": "2026-10-17T16:04:16Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-57052"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/davegamble/cjson@v1.7.17"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:* against \"\u003e= 1.5.0, \u003c= 1.7.18 (unknown)\"; OSV-Scanner: OSV record lists v1.7.17 of https://github.com/davegamble/cjson as affected); advisory: https://x-0r.com/posts/cJSON-Array-Index-Parsing-Vulnerability (Reference listed with the finding); advisory: https://lists.debian.org/debian-lts-announce/2025/09/msg00019.html (Reference listed with the finding); source: app/lib/cjson/ (Vendored files: cJSON.c, cJSON.h, LICENSE (app/lib/cjson/README.md)); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/app.spdx (lib/cjson/cJSON_Utils.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=lib/cjson/cJSON_Utils.c)). Reassess if: cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code (decode_array_index_from_pointer()) is in cJSON_Utils.c. cJSON_Utils.c (JSON Pointer/Patch helpers) is not vendored: app/lib/cjson contains only cJSON.c and cJSON.h, and the build SBOM lists no cJSON_Utils.c.",
+      "timestamp": "2026-10-17T16:04:17Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10634"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "fixed",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 2.5.0, \u003c 4.5.0 (unknown)\"; no OSV record); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/cd85e0e890ab89815c4cbc0a8fbc03a3efa84dc2 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-6c57-xfhw-j26x (Reference listed with the finding); linker-map: out/v1.0/w5500_evb_pico2_rp2350a_m33/evidence/subsys_net_ip_tcp.c.json (subsys/net/ip/tcp.c is compiled into zephyr.elf (11190 bytes .text) (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/ip/tcp.c SYMBOL=net_tcp_foreach KCONFIG=CONFIG_NET_TCP)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_NET_TCP: y); commit: https://github.com/zephyrproject-rtos/zephyr/commit/cd85e0e890ab89815c4cbc0a8fbc03a3efa84dc2 (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/net/ip/tcp.c 10/10). Reassess if: Zephyr version change (the fix must stay in the source); the NVD range '\u003c 4.5.0' will keep matching v4.4.x.",
+      "timestamp": "2026-10-17T16:04:17Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10636"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 2.6.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/0223e5e3ec5ebc51e8d0328fc3e604fa43552f54 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fj6q-975v-65c9 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/net/ip/igmp.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/ip/igmp.c KCONFIG=CONFIG_NET_IPV4_IGMP)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_NET_IPV4_IGMP: not set); commit: https://github.com/zephyrproject-rtos/zephyr/commit/0223e5e3ec5ebc51e8d0328fc3e604fa43552f54 (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/net/ip/igmp.c 3/3). Reassess if: CONFIG_NET_IPV4_IGMP=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in IPv4 IGMP (igmp.c); not enabled. subsys/net/ip/igmp.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:18Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10637"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 1.12.0, \u003c 4.5.0 (unknown)\"; no OSV record); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/3159c53e8e7d233c2a85a0798cf25ac441db6dae (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-m23w-34pp-4h92 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/net/ip/ipv6_mld.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/ip/ipv6_mld.c KCONFIG=CONFIG_NET_IPV6,CONFIG_NET_IPV6_MLD)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_NET_IPV6: not set; CONFIG_NET_IPV6_MLD: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/3159c53e8e7d233c2a85a0798cf25ac441db6dae (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/net/ip/ipv6_mld.c 5/5). Reassess if: CONFIG_NET_IPV6=y or CONFIG_NET_IPV6_MLD=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in IPv6 MLD (ipv6_mld.c); IPv6 is disabled. subsys/net/ip/ipv6_mld.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:18Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10638"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 4.2.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/09c8578c66b517c5165cde53332ed5d8d8ef2cfc (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-m92g-94xv-wvw2 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/net/ip/icmpv6.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/ip/icmpv6.c KCONFIG=CONFIG_NET_IPV6)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_NET_IPV6: not set); commit: https://github.com/zephyrproject-rtos/zephyr/commit/09c8578c66b517c5165cde53332ed5d8d8ef2cfc (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/net/ip/icmpv6.c 10/10). Reassess if: CONFIG_NET_IPV6=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in ICMPv6 (icmpv6.c); IPv6 is disabled. subsys/net/ip/icmpv6.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:19Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10639"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "fixed",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 1.14.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/86e21665d4641f304dc3895bfb03b8f89db83291 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-qhrf-w466-qmpw (Reference listed with the finding); linker-map: out/v1.0/w5500_evb_pico2_rp2350a_m33/evidence/subsys_net_ip_icmpv4.c.json (subsys/net/ip/icmpv4.c is compiled into zephyr.elf (836 bytes .text) (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/ip/icmpv4.c KCONFIG=CONFIG_NET_IPV4)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_NET_IPV4: y); commit: https://github.com/zephyrproject-rtos/zephyr/commit/86e21665d4641f304dc3895bfb03b8f89db83291 (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/net/ip/icmpv4.c 11/11). Reassess if: Zephyr version change (the fix must stay in the source); the NVD range '\u003c 4.5.0' will keep matching v4.4.x.",
+      "timestamp": "2026-10-17T16:04:20Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10640"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 3.3.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/aaed8332a62b0490a2f3c2cbabe272f575068eaa (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-r74c-mr4m-7g9g (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/net/ip/ipv6_nbr.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/ip/ipv6_nbr.c KCONFIG=CONFIG_NET_IPV6,CONFIG_NET_IPV6_NBR_CACHE)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_NET_IPV6: not set; CONFIG_NET_IPV6_NBR_CACHE: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/aaed8332a62b0490a2f3c2cbabe272f575068eaa (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/net/ip/ipv6_nbr.c 3/3). Reassess if: CONFIG_NET_IPV6=y or CONFIG_NET_IPV6_NBR_CACHE=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in IPv6 Neighbor Discovery (ipv6_nbr.c); IPv6 is disabled. subsys/net/ip/ipv6_nbr.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:20Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10642"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "fixed",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 4.1.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/68e702294b711eadfe7b4fadedd46d7c87fe8f3d (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-3fgh-73jh-2q5j (Reference listed with the finding); linker-map: out/v1.0/w5500_evb_pico2_rp2350a_m33/evidence/drivers_serial_uart_pl011.c.json (drivers/serial/uart_pl011.c is compiled into zephyr.elf (1196 bytes .text) (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=drivers/serial/uart_pl011.c KCONFIG=CONFIG_UART_PL011,CONFIG_UART_INTERRUPT_DRIVEN)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_UART_PL011: y; CONFIG_UART_INTERRUPT_DRIVEN: y); commit: https://github.com/zephyrproject-rtos/zephyr/commit/68e702294b711eadfe7b4fadedd46d7c87fe8f3d (Upstream fix. Lines it adds that are already in the v4.4.2 source: drivers/serial/uart_pl011.c 16/16). Reassess if: Zephyr version change (the fix must stay in the source); the NVD range '\u003c 4.5.0' will keep matching v4.4.x.",
+      "timestamp": "2026-10-17T16:04:21Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10647"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 4.1.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/255bccc1badd1aa06c6e5ddf5b40de8463b33f02 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-xcf7-r86m-5q9f (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/usb/device_next/class/usbd_cdc_ncm.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/usb/device_next/class/usbd_cdc_ncm.c KCONFIG=CONFIG_USBD_CDC_NCM_CLASS)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_USBD_CDC_NCM_CLASS: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/255bccc1badd1aa06c6e5ddf5b40de8463b33f02 (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/usb/device_next/class/usbd_cdc_ncm.c 7/7). Reassess if: CONFIG_USBD_CDC_NCM_CLASS=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the USB CDC-NCM device class; USB is not used. subsys/usb/device_next/class/usbd_cdc_ncm.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:21Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10663"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 4.4.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/4b87a8f161a44cb19505fa97db7cf72f64d49165 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-26q8-xjq3-f5p6 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/usb/host/usbh_device.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/usb/host/usbh_device.c KCONFIG=CONFIG_USB_HOST_STACK)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_USB_HOST_STACK: not set). Reassess if: CONFIG_USB_HOST_STACK=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the experimental USB host stack; not enabled. subsys/usb/host/usbh_device.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:22Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10664"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 4.0.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/a2c4324acd50a5f92e492e6e460e6297af826148 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-3r6j-pm38-r43m (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (drivers/wifi/nrf_wifi/src/wifi_mgmt.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=drivers/wifi/nrf_wifi/src/wifi_mgmt.c KCONFIG=CONFIG_WIFI_NRF70)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_WIFI_NRF70: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/a2c4324acd50a5f92e492e6e460e6297af826148 (Upstream fix. Lines it adds that are already in the v4.4.2 source: drivers/wifi/nrf_wifi/src/wifi_mgmt.c 18/18). Reassess if: CONFIG_WIFI_NRF70=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the nRF70 Wi-Fi driver; no Wi-Fi. drivers/wifi/nrf_wifi/src/wifi_mgmt.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:23Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10669"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 3.7.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/3b1bdaf5482188ca110ef9a411aaa8c7d3db3b16 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-4r4p-gh69-v6w4 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (arch/xtensa/core/mpu.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=arch/xtensa/core/mpu.c KCONFIG=CONFIG_XTENSA,CONFIG_XTENSA_MPU)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_XTENSA: not present; CONFIG_XTENSA_MPU: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/3b1bdaf5482188ca110ef9a411aaa8c7d3db3b16 (Upstream fix. Lines it adds that are already in the v4.4.2 source: arch/xtensa/core/mpu.c 5/5). Reassess if: CONFIG_XTENSA=y or CONFIG_XTENSA_MPU=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the Xtensa MPU code (arch/xtensa); this is an Arm target. arch/xtensa/core/mpu.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:23Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10670"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 2.0.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/491583951036bc5794a3843a4baa246453bb1ee2 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-82h2-v4vm-q2g9 (Reference listed with the finding); symbols: out/v1.0/w5500_evb_pico2_rp2350a_m33/evidence/kernel_thread.c.json (kernel/thread.c is compiled (654 bytes .text in zephyr.map), but z_vrfy_k_thread_name_copy is not in zephyr.elf (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=kernel/thread.c SYMBOL=z_vrfy_k_thread_name_copy KCONFIG=CONFIG_USERSPACE)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_USERSPACE: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/491583951036bc5794a3843a4baa246453bb1ee2 (Upstream fix. Lines it adds that are already in the v4.4.2 source: kernel/thread.c 1/1). Reassess if: CONFIG_USERSPACE=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is the system call verifier z_vrfy_k_thread_name_copy(), which exists only with CONFIG_USERSPACE. This firmware is built without user mode; the verifier is not in zephyr.elf.",
+      "timestamp": "2026-10-17T16:04:24Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10671"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 4.1.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/4424aa681e0b80e9cbd0ae27a987d582be88cb74 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-p8w8-3x99-mg8f (Reference listed with the finding); symbols: out/v1.0/w5500_evb_pico2_rp2350a_m33/evidence/kernel_pipe.c.json (kernel/pipe.c is compiled (0 bytes .text in zephyr.map), but z_vrfy_k_pipe_init is not in zephyr.elf (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=kernel/pipe.c SYMBOL=z_vrfy_k_pipe_init KCONFIG=CONFIG_USERSPACE)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_USERSPACE: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/4424aa681e0b80e9cbd0ae27a987d582be88cb74 (Upstream fix. Lines it adds that are already in the v4.4.2 source: kernel/pipe.c 1/1). Reassess if: CONFIG_USERSPACE=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is the system call verifier z_vrfy_k_pipe_init(), which exists only with CONFIG_USERSPACE. This firmware is built without user mode; the verifier is not in zephyr.elf.",
+      "timestamp": "2026-10-17T16:04:24Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10673"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 3.7.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/158df8d088316cdae20816fc07703892280b2acb (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/c98321cbfef23c0e3bdf043ccf6b421067c8d508 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-hm6v-4jh4-3qc4 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (drivers/ethernet/eth_adin2111.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=drivers/ethernet/eth_adin2111.c KCONFIG=CONFIG_ETH_ADIN2111)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_ETH_ADIN2111: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/158df8d088316cdae20816fc07703892280b2acb (Upstream fix. Lines it adds that are already in the v4.4.2 source: drivers/ethernet/eth_adin2111.c 4/4, drivers/ethernet/eth_adin2111_priv.h 2/2); commit: https://github.com/zephyrproject-rtos/zephyr/commit/c98321cbfef23c0e3bdf043ccf6b421067c8d508 (Upstream fix. Lines it adds that are already in the v4.4.2 source: drivers/ethernet/eth_adin2111.c 4/4, drivers/ethernet/eth_adin2111_priv.h 2/2). Reassess if: CONFIG_ETH_ADIN2111=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the ADIN2111/ADIN1110 Ethernet driver; the board uses a W5500. drivers/ethernet/eth_adin2111.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:25Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10681"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 2.0.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/862ea2fbbeb2ccdf8ff994b03e2e3b4405f2c37d (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-j693-5rh5-8g8h (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (kernel/userspace/userspace.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=kernel/userspace/userspace.c KCONFIG=CONFIG_USERSPACE,CONFIG_DYNAMIC_OBJECTS)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_USERSPACE: not present; CONFIG_DYNAMIC_OBJECTS: not present). Reassess if: CONFIG_USERSPACE=y or CONFIG_DYNAMIC_OBJECTS=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in userspace dynamic objects (kernel/userspace); built without CONFIG_USERSPACE. kernel/userspace/userspace.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:25Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10682"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 3.0.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/56a15114c6acbab2067fe406dc3adda8608f3def (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-6vqh-mg7h-58qh (Reference listed with the finding); symbols: out/v1.0/w5500_evb_pico2_rp2350a_m33/evidence/subsys_logging_log_mgmt.c.json (subsys/logging/log_mgmt.c is compiled (656 bytes .text in zephyr.map), but z_vrfy_log_filter_set is not in zephyr.elf (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/logging/log_mgmt.c SYMBOL=z_vrfy_log_filter_set KCONFIG=CONFIG_USERSPACE)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_USERSPACE: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/56a15114c6acbab2067fe406dc3adda8608f3def (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/logging/log_mgmt.c 1/1). Reassess if: CONFIG_USERSPACE=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is the system call verifier z_vrfy_log_filter_set(), which exists only with CONFIG_USERSPACE. This firmware is built without user mode; the verifier is not in zephyr.elf.",
+      "timestamp": "2026-10-17T16:04:25Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10683"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 4.0.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/06e2053efe0e324d71cc29cdd95160fff643730a (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-fj9c-r5qw-3639 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (drivers/i2c/i2c_dw.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=drivers/i2c/i2c_dw.c KCONFIG=CONFIG_I2C_DW)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_I2C_DW: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/06e2053efe0e324d71cc29cdd95160fff643730a (Upstream fix. Lines it adds that are already in the v4.4.2 source: drivers/i2c/i2c_dw.c 3/3). Reassess if: CONFIG_I2C_DW=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the DesignWare I2C driver; not on this SoC. drivers/i2c/i2c_dw.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:26Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10685"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 2.4.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/c7292f20223637232b6f962141725611a38f6a52 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-29xh-jm2m-4qvx (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/bluetooth/host/gatt.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/bluetooth/host/gatt.c KCONFIG=CONFIG_BT)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_BT: not set); commit: https://github.com/zephyrproject-rtos/zephyr/commit/c7292f20223637232b6f962141725611a38f6a52 (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/bluetooth/host/gatt.c 9/9). Reassess if: CONFIG_BT=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the Bluetooth GATT client; Bluetooth is disabled. subsys/bluetooth/host/gatt.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:27Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10686"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 1.8.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/7d8f1afa7345975b58405d6fba18bb8c3f7cb12a (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-4cg6-6jc4-2r6h (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/net/ip/ipv6.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/ip/ipv6.c KCONFIG=CONFIG_NET_IPV6,CONFIG_NET_ROUTE,CONFIG_NET_ROUTING)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_NET_IPV6: not set; CONFIG_NET_ROUTE: not present; CONFIG_NET_ROUTING: not present); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/net/ip/route.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/ip/route.c KCONFIG=CONFIG_NET_IPV6,CONFIG_NET_ROUTE,CONFIG_NET_ROUTING)). Reassess if: CONFIG_NET_IPV6=y or CONFIG_NET_ROUTE=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in IPv6 packet forwarding (ipv6.c, route.c); IPv6 and routing are disabled. subsys/net/ip/ipv6.c, subsys/net/ip/route.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:27Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10773"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 3.6.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/73c8a7df4f00088fc04ee5ab71bcabf47fcd3db7 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-r5hq-xq42-wcfq (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/net/lib/dhcpv4/dhcpv4.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/lib/dhcpv4/dhcpv4.c KCONFIG=CONFIG_NET_DHCPV4)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_NET_DHCPV4: not set); commit: https://github.com/zephyrproject-rtos/zephyr/commit/73c8a7df4f00088fc04ee5ab71bcabf47fcd3db7 (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/net/lib/dhcpv4/dhcpv4.c 2/2, subsys/net/lib/dhcpv6/dhcpv6.c 1/1). Reassess if: CONFIG_NET_DHCPV4=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the DHCPv4 client; the device uses a static IPv4 address. subsys/net/lib/dhcpv4/dhcpv4.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:31Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10774"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 3.6.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/f573da9f53630082ae95fcfd39fb021fe15f7abd (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-6q7g-798f-76p2 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/bluetooth/mesh/subnet.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/bluetooth/mesh/subnet.c KCONFIG=CONFIG_BT_MESH)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_BT_MESH: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/f573da9f53630082ae95fcfd39fb021fe15f7abd (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/bluetooth/mesh/subnet.c 1/1). Reassess if: CONFIG_BT_MESH=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in Bluetooth Mesh; Bluetooth is disabled. subsys/bluetooth/mesh/subnet.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:32Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10848"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 4.3.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/e500f7b81b5b8a867e28b2f4e59512cbfdd5ae75 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-jgqq-7mjj-w642 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/net/lib/ocpp/ocpp_j.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/net/lib/ocpp/ocpp_j.c KCONFIG=CONFIG_OCPP)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_OCPP: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/e500f7b81b5b8a867e28b2f4e59512cbfdd5ae75 (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/net/lib/ocpp/ocpp_j.c 46/46, subsys/net/lib/ocpp/ocpp_j.h 11/11). Reassess if: CONFIG_OCPP=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the OCPP client library; not enabled. subsys/net/lib/ocpp/ocpp_j.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:32Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-10849"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 2.4.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/59d7ab58d853489e6134081cadb11733730264ac (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-39h3-7phx-pwhv (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/mgmt/hawkbit/hawkbit.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/mgmt/hawkbit/hawkbit.c KCONFIG=CONFIG_HAWKBIT)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_HAWKBIT: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/59d7ab58d853489e6134081cadb11733730264ac (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/mgmt/hawkbit/hawkbit.c 6/6). Reassess if: CONFIG_HAWKBIT=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the hawkBit update client; not enabled. subsys/mgmt/hawkbit/hawkbit.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:33Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-11368"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 4.4.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/dfdea9bad8d9b5b31c125e97fcffb549f2217caa (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-85vg-gwc4-77g7 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/bluetooth/host/att.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/bluetooth/host/att.c KCONFIG=CONFIG_BT)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_BT: not set); commit: https://github.com/zephyrproject-rtos/zephyr/commit/dfdea9bad8d9b5b31c125e97fcffb549f2217caa (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/bluetooth/host/att.c 8/8). Reassess if: CONFIG_BT=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the Bluetooth host ATT layer; Bluetooth is disabled. subsys/bluetooth/host/att.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:33Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-2411"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 2.6.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/c3386f92fe81bd10dc23e6a115e6a80a7d863546 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-4w3r-v9q9-4462 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/bluetooth/host/gatt.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/bluetooth/host/gatt.c KCONFIG=CONFIG_BT)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_BT: not set); commit: https://github.com/zephyrproject-rtos/zephyr/commit/c3386f92fe81bd10dc23e6a115e6a80a7d863546 (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/bluetooth/host/gatt.c 29/29). Reassess if: CONFIG_BT=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the Bluetooth host GATT code; Bluetooth is disabled. subsys/bluetooth/host/gatt.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:34Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-29036"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/davegamble/cjson@v1.7.17"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (OSV-Scanner: OSV record lists v1.7.17 of https://github.com/davegamble/cjson as affected); advisory: https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/29xxx/CVE-2026-29036.json (Reference listed with the finding); advisory: https://nvd.nist.gov/vuln/detail/CVE-2026-29036 (Reference listed with the finding); advisory: https://www.vulncheck.com/advisories/cjson-wrong-key-modification-via-json-pointer-escape-decoding (Reference listed with the finding); source: app/lib/cjson/ (Vendored files: cJSON.c, cJSON.h, LICENSE (app/lib/cjson/README.md)); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/app.spdx (lib/cjson/cJSON_Utils.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=lib/cjson/cJSON_Utils.c)). Reassess if: cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code (the JSON Pointer escape decoding) is in cJSON_Utils.c. cJSON_Utils.c (JSON Pointer/Patch helpers) is not vendored: app/lib/cjson contains only cJSON.c and cJSON.h, and the build SBOM lists no cJSON_Utils.c.",
+      "timestamp": "2026-10-17T16:04:35Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-67215"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/davegamble/cjson@v1.7.17"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:* against \"\u003c= 1.7.19 (unknown)\"; OSV-Scanner: OSV record lists v1.7.17 of https://github.com/davegamble/cjson as affected); advisory: https://github.com/DaveGamble/cJSON/blob/v1.7.19/cJSON.c#L253-L261 (Reference listed with the finding); advisory: https://github.com/DaveGamble/cJSON/blob/v1.7.19/cJSON_Utils.c#L906-L940 (Reference listed with the finding); advisory: https://joshua.hu/cjson-json-parser-cve-vulnerabilities (Reference listed with the finding); source: app/lib/cjson/ (Vendored files: cJSON.c, cJSON.h, LICENSE (app/lib/cjson/README.md)); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/app.spdx (lib/cjson/cJSON_Utils.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=lib/cjson/cJSON_Utils.c)). Reassess if: cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code (cJSONUtils_ApplyPatches()) is in cJSON_Utils.c. cJSON_Utils.c (JSON Pointer/Patch helpers) is not vendored: app/lib/cjson contains only cJSON.c and cJSON.h, and the build SBOM lists no cJSON_Utils.c.",
+      "timestamp": "2026-10-17T16:04:35Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-67216"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/davegamble/cjson@v1.7.17"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:* against \"\u003c= 1.7.19 (unknown)\"; OSV-Scanner: OSV record lists v1.7.17 of https://github.com/davegamble/cjson as affected); advisory: https://github.com/DaveGamble/cJSON/blob/v1.7.19/cJSON.c#L3057-L3180 (Reference listed with the finding); advisory: https://joshua.hu/cjson-json-parser-cve-vulnerabilities (Reference listed with the finding); advisory: https://www.vulncheck.com/advisories/cjson-cjson-compare-exponential-complexity-denial-of-service (Reference listed with the finding); symbols: out/v1.0/w5500_evb_pico2_rp2350a_m33/evidence/lib_cjson_cJSON.c.json (lib/cjson/cJSON.c is compiled (6762 bytes .text in zephyr.map), but cJSON_Compare is not in zephyr.elf (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=lib/cjson/cJSON.c SYMBOL=cJSON_Compare)). Reassess if: application code calls cJSON_Compare() (symbol appears in zephyr.elf).",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "cJSON_Compare() is in cJSON.c, but the firmware never calls it and the linker removed it (--gc-sections): the function is not in zephyr.elf.",
+      "timestamp": "2026-10-17T16:04:36Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-67217"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/davegamble/cjson@v1.7.17"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:a:davegamble:cjson:1.7.17:*:*:*:*:*:*:* against \"\u003c= 1.7.19 (unknown)\"; OSV-Scanner: OSV record lists v1.7.17 of https://github.com/davegamble/cjson as affected); advisory: https://github.com/DaveGamble/cJSON/blob/v1.7.19/cJSON_Utils.c#L887-L948 (Reference listed with the finding); advisory: https://joshua.hu/cjson-json-parser-cve-vulnerabilities (Reference listed with the finding); advisory: https://www.vulncheck.com/advisories/cjson-json-patch-non-atomic-application-destroys-data-before-validation (Reference listed with the finding); source: app/lib/cjson/ (Vendored files: cJSON.c, cJSON.h, LICENSE (app/lib/cjson/README.md)); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/app.spdx (lib/cjson/cJSON_Utils.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=lib/cjson/cJSON_Utils.c)). Reassess if: cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code (apply_patch()) is in cJSON_Utils.c. cJSON_Utils.c (JSON Pointer/Patch helpers) is not vendored: app/lib/cjson contains only cJSON.c and cJSON.h, and the build SBOM lists no cJSON_Utils.c.",
+      "timestamp": "2026-10-17T16:04:36Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-7007"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (Grype (nvd:cpe) matched cpe:2.3:o:zephyrproject:zephyr:4.4.2:-:*:*:*:*:*:* against \"\u003e= 3.5.0, \u003c 4.5.0 (unknown)\"; OSV record does not list v4.4.2); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/babc0900ed40e6c023ccc26aa1a321f9388b66af (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-wrf2-79mm-cvw5 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (subsys/fs/ext2/ext2_impl.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=subsys/fs/ext2/ext2_impl.c KCONFIG=CONFIG_FILE_SYSTEM_EXT2)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_FILE_SYSTEM_EXT2: not present); commit: https://github.com/zephyrproject-rtos/zephyr/commit/babc0900ed40e6c023ccc26aa1a321f9388b66af (Upstream fix. Lines it adds that are already in the v4.4.2 source: subsys/fs/ext2/ext2_impl.c 5/5). Reassess if: CONFIG_FILE_SYSTEM_EXT2=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the ext2 file system; no file system is enabled. subsys/fs/ext2/ext2_impl.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:37Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-75084",
+        "aliases": [
+          "GHSA-pgg5-wwxw-vmj8"
+        ]
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (OSV-Scanner: OSV record lists v4.4.2 of https://github.com/zephyrproject-rtos/zephyr as affected); advisory: https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/75xxx/CVE-2026-75084.json (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/26a8b8294bf28523c7aa2f15cf728517980ee593 (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-pgg5-wwxw-vmj8 (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (drivers/ieee802154/ieee802154_cc1200.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=drivers/ieee802154/ieee802154_cc1200.c KCONFIG=CONFIG_IEEE802154_CC1200)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_IEEE802154_CC1200: not present). Reassess if: CONFIG_IEEE802154_CC1200=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the TI CC1200 IEEE 802.15.4 driver; no 802.15.4 radio. drivers/ieee802154/ieee802154_cc1200.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:37Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-75085",
+        "aliases": [
+          "GHSA-w7pm-4r95-c9vr"
+        ]
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (OSV-Scanner: OSV record lists v4.4.2 of https://github.com/zephyrproject-rtos/zephyr as affected); advisory: https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/75xxx/CVE-2026-75085.json (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/commit/46f8af4f5ee472abc13b0291c44fdfe4ed879aaa (Reference listed with the finding); advisory: https://github.com/zephyrproject-rtos/zephyr/security/advisories/GHSA-w7pm-4r95-c9vr (Reference listed with the finding); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/zephyr.spdx (drivers/ieee802154/ieee802154_stm32wba.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=drivers/ieee802154/ieee802154_stm32wba.c KCONFIG=CONFIG_IEEE802154_STM32WBA)); config: out/v1.0/w5500_evb_pico2_rp2350a_m33/config (CONFIG_IEEE802154_STM32WBA: not present). Reassess if: CONFIG_IEEE802154_STM32WBA=y.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code is in the STM32WBA IEEE 802.15.4 driver; no 802.15.4 radio. drivers/ieee802154/ieee802154_stm32wba.c is not compiled into this firmware.",
+      "timestamp": "2026-10-17T16:04:38Z"
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-87933"
+      },
+      "products": [
+        {
+          "@id": "pkg:generic/cra-evidence-demo-firmware@1.0.0?checksum=sha256:0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+          "subcomponents": [
+            {
+              "@id": "pkg:github/davegamble/cjson@v1.7.17"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "status_notes": "Reviewed by m.aashir. Evidence: scanner-report: out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json (OSV-Scanner: OSV record lists v1.7.17 of https://github.com/davegamble/cjson as affected); advisory: https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/87xxx/CVE-2026-87933.json (Reference listed with the finding); advisory: https://nvd.nist.gov/vuln/detail/CVE-2026-87933 (Reference listed with the finding); advisory: https://vuldb.com/cve/CVE-2026-87933 (Reference listed with the finding); source: app/lib/cjson/ (Vendored files: cJSON.c, cJSON.h, LICENSE (app/lib/cjson/README.md)); sbom: out/v1.0/w5500_evb_pico2_rp2350a_m33/sbom/app.spdx (lib/cjson/cJSON_Utils.c is not a source file of this build (make evidence VERSION=v1.0 BOARD=w5500_evb_pico2/rp2350a/m33 FILE=lib/cjson/cJSON_Utils.c)). Reassess if: cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy.",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "The vulnerable code (cJSONUtils_MergePatch()) is in cJSON_Utils.c. cJSON_Utils.c (JSON Pointer/Patch helpers) is not vendored: app/lib/cjson contains only cJSON.c and cJSON.h, and the build SBOM lists no cJSON_Utils.c.",
+      "timestamp": "2026-10-17T16:04:39Z"
+    }
+  ],
+  "timestamp": "2026-10-17T16:04:15Z",
+  "last_updated": "2026-10-17T16:04:39Z"
+}

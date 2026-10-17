@@ -1,0 +1,187 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://cra-evidence-demo.invalid/buildtypes/zephyr-west-docker/v1",
+      "externalParameters": {
+        "application": "app",
+        "board": "w5500_evb_pico2/rp2350a/m33",
+        "manifest": "west.yml",
+        "sourceDirty": false,
+        "version": "v1.1"
+      },
+      "internalParameters": {
+        "buildDirectory": "/ws/build/v1.1/w5500_evb_pico2_rp2350a_m33",
+        "compiler": "arm-zephyr-eabi-gcc (Zephyr SDK 1.0.1) 14.3.0",
+        "kconfigSha256": "3687b8c3c974362aba1e36ca61a6f4f1d0b885b40842d75cb0e1d734ac89d2d5",
+        "zephyrToolchainVariant": "zephyr"
+      },
+      "resolvedDependencies": [
+        {
+          "digest": {
+            "gitCommit": "2b8b1e5e4871eecf3c064bd64682fff31dd45156"
+          },
+          "name": "source:cra-evidence-demo",
+          "uri": "git+file:///ws/demo"
+        },
+        {
+          "annotations": {
+            "tags": [
+              "v4.4.2"
+            ]
+          },
+          "digest": {
+            "gitCommit": "dccb09599635bdff17633fa7e9dab014b91dce90"
+          },
+          "name": "zephyr",
+          "uri": "git+https://github.com/zephyrproject-rtos/zephyr@dccb09599635bdff17633fa7e9dab014b91dce90"
+        },
+        {
+          "digest": {
+            "gitCommit": "30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74"
+          },
+          "name": "module:cmsis_6",
+          "uri": "git+https://github.com/zephyrproject-rtos/CMSIS_6@30a859f44ef8ab4dc8f84b03ed586fd16ccf9d74"
+        },
+        {
+          "digest": {
+            "gitCommit": "562b41e10a1d8b1a761b253b107c5c6a84cf4535"
+          },
+          "name": "module:hal_rpi_pico",
+          "uri": "git+https://github.com/zephyrproject-rtos/hal_rpi_pico@562b41e10a1d8b1a761b253b107c5c6a84cf4535"
+        },
+        {
+          "annotations": {
+            "external-references": [
+              "cpe:2.3:a:arm:mbed_tls:4.1.0:*:*:*:*:*:*:*",
+              "pkg:github/Mbed-TLS/mbedtls@v4.1.0"
+            ]
+          },
+          "digest": {
+            "gitCommit": "a3e190fe44c78d1ba67f55979e1257328cc7d0d8"
+          },
+          "name": "module:mbedtls",
+          "uri": "git+https://github.com/zephyrproject-rtos/mbedtls@a3e190fe44c78d1ba67f55979e1257328cc7d0d8"
+        },
+        {
+          "annotations": {
+            "external-references": [
+              "cpe:2.3:a:arm:tf-psa-crypto:1.1.0:*:*:*:*:*:*:*",
+              "pkg:github/Mbed-TLS/TF-PSA-Crypto@v1.1.0"
+            ]
+          },
+          "digest": {
+            "gitCommit": "dc575a2ddcc8cb16275d24c42a52eaf79ebe2231"
+          },
+          "name": "module:tf-psa-crypto",
+          "uri": "git+https://github.com/zephyrproject-rtos/tf-psa-crypto@dc575a2ddcc8cb16275d24c42a52eaf79ebe2231"
+        },
+        {
+          "digest": {
+            "sha256": "0a4e08683a5582748696dd28d1633566be04218174811eb532e170a13e14959b"
+          },
+          "name": "image:ci-base",
+          "uri": "pkg:docker/zephyrproject-rtos/ci-base@v0.29.4?repository_url=ghcr.io"
+        },
+        {
+          "digest": {
+            "sha256": "ca9bc0ff66fafca1dac9d592a36d953cf16d096a9d09b1c0357f021cf9f6a7eb"
+          },
+          "name": "zephyr-sdk-minimal",
+          "uri": "https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v1.0.1/zephyr-sdk-1.0.1_linux-x86_64_minimal.tar.xz"
+        },
+        {
+          "digest": {
+            "sha256": "21b85981cb5a1818d9bc53d82af80f208946ec038b982ff1907287572ed3a634"
+          },
+          "name": "zephyr-sdk-arm-zephyr-eabi",
+          "uri": "https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v1.0.1/toolchain_gnu_linux-x86_64_arm-zephyr-eabi.tar.xz"
+        },
+        {
+          "digest": {
+            "sha256": "7fdecf4af768a2bae9abf32ba2491cdfa1a4c1d76d2064539fadf3b9d7db2271"
+          },
+          "name": "demo-ca.der (embedded trust anchor)",
+          "uri": "file:certs/generated/demo-ca.der"
+        }
+      ]
+    },
+    "runDetails": {
+      "builder": {
+        "builderDependencies": [
+          {
+            "digest": {
+              "sha256": "dc3c64c496e67a8247398ba58c741b163cdf47188e2eca0708dd5d51d74a55a5"
+            },
+            "name": "image:cra-evidence-demo (local build, not pushed)"
+          }
+        ],
+        "id": "https://cra-evidence-demo.invalid/builders/local-docker/v1",
+        "version": {
+          "cra-evidence-demo-image": "sha256:dc3c64c496e67a8247398ba58c741b163cdf47188e2eca0708dd5d51d74a55a5"
+        }
+      },
+      "metadata": {
+        "finishedOn": "2026-10-17T16:12:13Z",
+        "invocationId": "v1.1/w5500_evb_pico2_rp2350a_m33/faf7d694942423a8"
+      }
+    }
+  },
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "subject": [
+    {
+      "digest": {
+        "sha256": "faf7d694942423a8ac0b9a07b5aec7e7d92a0ab80f50975a2d11d06a8c2bcf79"
+      },
+      "name": "zephyr.elf"
+    },
+    {
+      "digest": {
+        "sha256": "c333217dc035420a644bf09cdf0e9aa2963e09bfc7f70d9c783a6ba3d4104389"
+      },
+      "name": "zephyr.uf2"
+    },
+    {
+      "digest": {
+        "sha256": "8087f88e8bd10b8fe1d549fb8d4fe7de8e57755eb13a894dad53d2294cf66891"
+      },
+      "name": "zephyr.hex"
+    },
+    {
+      "digest": {
+        "sha256": "e35acb9b5ad4c169afd6031b85ed308dcafc436be0f0aef2cf6acb185d7ffa98"
+      },
+      "name": "zephyr.bin"
+    },
+    {
+      "digest": {
+        "sha256": "a3ccb62ac34c84261bc3280fd78e8bcbccee226809b65dceed76ac3d7004a5cb"
+      },
+      "name": "sbom/app.spdx"
+    },
+    {
+      "digest": {
+        "sha256": "068748cc6c4f1d9f8d53a707fdc5e26a5b1f983dd4068d798c57208a50f4ec51"
+      },
+      "name": "sbom/build.spdx"
+    },
+    {
+      "digest": {
+        "sha256": "7cbe710bf4d9562a54183a562111dd012fb65af0d370b641d9ff4914baeb0cb9"
+      },
+      "name": "sbom/modules-deps.spdx"
+    },
+    {
+      "digest": {
+        "sha256": "31dfc9286a4ec159f595049d21fd8ff027bbc89809bfe9c926647f2d52241a87"
+      },
+      "name": "sbom/sdk.spdx"
+    },
+    {
+      "digest": {
+        "sha256": "4636534dfbc473ca2460ac6946f75acd33117d59072177a80d53a36401882e02"
+      },
+      "name": "sbom/zephyr.spdx"
+    }
+  ]
+}

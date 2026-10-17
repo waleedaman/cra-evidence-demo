@@ -1,0 +1,499 @@
+{
+  "a": "v1.0",
+  "b": "v1.1",
+  "board": "w5500_evb_pico2/rp2350a/m33",
+  "firmware_file": "zephyr.uf2",
+  "firmware_sha256": [
+    "0ef23d019b60828eeb0317ef199448ace37a15e4f902475619986a5ecc7901b5",
+    "c333217dc035420a644bf09cdf0e9aa2963e09bfc7f70d9c783a6ba3d4104389"
+  ],
+  "kconfig_changed": {
+    "CONFIG_NET_CONFIG_MY_IPV6_ADDR": [
+      "n",
+      ""
+    ],
+    "CONFIG_NET_CONFIG_PEER_IPV6_ADDR": [
+      "n",
+      ""
+    ],
+    "CONFIG_NET_ICMPV6_LOG_LEVEL": [
+      "n",
+      "0"
+    ],
+    "CONFIG_NET_IF_IPV6_PREFIX_COUNT": [
+      "n",
+      "2"
+    ],
+    "CONFIG_NET_IF_MAX_IPV6_COUNT": [
+      "n",
+      "1"
+    ],
+    "CONFIG_NET_IF_MCAST_IPV6_ADDR_COUNT": [
+      "n",
+      "3"
+    ],
+    "CONFIG_NET_IF_UNICAST_IPV6_ADDR_COUNT": [
+      "n",
+      "2"
+    ],
+    "CONFIG_NET_INITIAL_HOP_LIMIT": [
+      "n",
+      "64"
+    ],
+    "CONFIG_NET_INITIAL_IPV6_MCAST_LOOP": [
+      "n",
+      "y"
+    ],
+    "CONFIG_NET_INITIAL_MCAST_HOP_LIMIT": [
+      "n",
+      "1"
+    ],
+    "CONFIG_NET_IPV6": [
+      "n",
+      "y"
+    ],
+    "CONFIG_NET_IPV6_DAD": [
+      "n",
+      "y"
+    ],
+    "CONFIG_NET_IPV6_IID_EUI_64": [
+      "n",
+      "y"
+    ],
+    "CONFIG_NET_IPV6_LOG_LEVEL": [
+      "n",
+      "0"
+    ],
+    "CONFIG_NET_IPV6_MAX_NEIGHBORS": [
+      "n",
+      "8"
+    ],
+    "CONFIG_NET_IPV6_MLD": [
+      "n",
+      "y"
+    ],
+    "CONFIG_NET_IPV6_MTU": [
+      "n",
+      "1280"
+    ],
+    "CONFIG_NET_IPV6_NBR_CACHE": [
+      "n",
+      "y"
+    ],
+    "CONFIG_NET_IPV6_NBR_CACHE_LOG_LEVEL": [
+      "n",
+      "0"
+    ],
+    "CONFIG_NET_IPV6_ND": [
+      "n",
+      "y"
+    ],
+    "CONFIG_NET_IPV6_ND_LOG_LEVEL": [
+      "n",
+      "0"
+    ],
+    "CONFIG_NET_IPV6_NS_TIMEOUT": [
+      "n",
+      "1000"
+    ],
+    "CONFIG_NET_IPV6_PE_LOG_LEVEL": [
+      "n",
+      "0"
+    ],
+    "CONFIG_NET_IPV6_RS_TIMEOUT": [
+      "n",
+      "1"
+    ],
+    "CONFIG_NET_MAX_CONN": [
+      "4",
+      "8"
+    ],
+    "CONFIG_NET_MAX_NEXTHOPS": [
+      "n",
+      "8"
+    ],
+    "CONFIG_NET_MAX_ROUTERS": [
+      "1",
+      "2"
+    ],
+    "CONFIG_NET_MAX_ROUTES": [
+      "n",
+      "8"
+    ],
+    "CONFIG_NET_NATIVE_IPV6": [
+      "n",
+      "y"
+    ],
+    "CONFIG_NET_ROUTE": [
+      "n",
+      "y"
+    ]
+  },
+  "sources_added": [
+    "zephyr:zephyr/subsys/net/ip/icmpv6.c",
+    "zephyr:zephyr/subsys/net/ip/ipv6.c",
+    "zephyr:zephyr/subsys/net/ip/ipv6_mld.c",
+    "zephyr:zephyr/subsys/net/ip/ipv6_nbr.c",
+    "zephyr:zephyr/subsys/net/ip/nbr.c",
+    "zephyr:zephyr/subsys/net/ip/route.c"
+  ],
+  "sources_removed": [],
+  "components_changed": {
+    "cra-evidence-demo-firmware": [
+      "1.0.0",
+      "1.1.0"
+    ]
+  },
+  "findings": {
+    "a": 37,
+    "b": 37,
+    "added": [],
+    "removed": []
+  },
+  "decisions_of_a": [
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2023-4039--gcc.yaml",
+      "vuln_id": "CVE-2023-4039",
+      "component": "gcc",
+      "status": "not_affected",
+      "trigger": "CONFIG_STACK_CANARIES=y or a build for an AArch64 (CONFIG_ARM64=y) target",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2023-53154--cjson.yaml",
+      "vuln_id": "CVE-2023-53154",
+      "component": "cjson",
+      "status": "not_affected",
+      "trigger": "application code parses JSON with cJSON (cJSON_Parse* symbols appear in zephyr.elf)",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2024-31755--cjson.yaml",
+      "vuln_id": "CVE-2024-31755",
+      "component": "cjson",
+      "status": "fixed",
+      "trigger": "app/lib/cjson/cJSON.c replaced without the patch (sha256 differs from identifiers/component-map.yaml)",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2025-57052--cjson.yaml",
+      "vuln_id": "CVE-2025-57052",
+      "component": "cjson",
+      "status": "not_affected",
+      "trigger": "cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10634--zephyr.yaml",
+      "vuln_id": "CVE-2026-10634",
+      "component": "zephyr",
+      "status": "fixed",
+      "trigger": "Zephyr version change (the fix must stay in the source); the NVD range '< 4.5.0' will keep matching v4.4.x",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10636--zephyr.yaml",
+      "vuln_id": "CVE-2026-10636",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_NET_IPV4_IGMP=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10637--zephyr.yaml",
+      "vuln_id": "CVE-2026-10637",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_NET_IPV6=y or CONFIG_NET_IPV6_MLD=y",
+      "trigger_holds_in_b": [
+        "CONFIG_NET_IPV6=y",
+        "CONFIG_NET_IPV6_MLD=y"
+      ],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10638--zephyr.yaml",
+      "vuln_id": "CVE-2026-10638",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_NET_IPV6=y",
+      "trigger_holds_in_b": [
+        "CONFIG_NET_IPV6=y"
+      ],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10639--zephyr.yaml",
+      "vuln_id": "CVE-2026-10639",
+      "component": "zephyr",
+      "status": "fixed",
+      "trigger": "Zephyr version change (the fix must stay in the source); the NVD range '< 4.5.0' will keep matching v4.4.x",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10640--zephyr.yaml",
+      "vuln_id": "CVE-2026-10640",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_NET_IPV6=y or CONFIG_NET_IPV6_NBR_CACHE=y",
+      "trigger_holds_in_b": [
+        "CONFIG_NET_IPV6=y",
+        "CONFIG_NET_IPV6_NBR_CACHE=y"
+      ],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10642--zephyr.yaml",
+      "vuln_id": "CVE-2026-10642",
+      "component": "zephyr",
+      "status": "fixed",
+      "trigger": "Zephyr version change (the fix must stay in the source); the NVD range '< 4.5.0' will keep matching v4.4.x",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10647--zephyr.yaml",
+      "vuln_id": "CVE-2026-10647",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_USBD_CDC_NCM_CLASS=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10663--zephyr.yaml",
+      "vuln_id": "CVE-2026-10663",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_USB_HOST_STACK=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10664--zephyr.yaml",
+      "vuln_id": "CVE-2026-10664",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_WIFI_NRF70=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10669--zephyr.yaml",
+      "vuln_id": "CVE-2026-10669",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_XTENSA=y or CONFIG_XTENSA_MPU=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10670--zephyr.yaml",
+      "vuln_id": "CVE-2026-10670",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_USERSPACE=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10671--zephyr.yaml",
+      "vuln_id": "CVE-2026-10671",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_USERSPACE=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10673--zephyr.yaml",
+      "vuln_id": "CVE-2026-10673",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_ETH_ADIN2111=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10681--zephyr.yaml",
+      "vuln_id": "CVE-2026-10681",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_USERSPACE=y or CONFIG_DYNAMIC_OBJECTS=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10682--zephyr.yaml",
+      "vuln_id": "CVE-2026-10682",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_USERSPACE=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10683--zephyr.yaml",
+      "vuln_id": "CVE-2026-10683",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_I2C_DW=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10685--zephyr.yaml",
+      "vuln_id": "CVE-2026-10685",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_BT=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10686--zephyr.yaml",
+      "vuln_id": "CVE-2026-10686",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_NET_IPV6=y or CONFIG_NET_ROUTE=y",
+      "trigger_holds_in_b": [
+        "CONFIG_NET_IPV6=y",
+        "CONFIG_NET_ROUTE=y"
+      ],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10773--zephyr.yaml",
+      "vuln_id": "CVE-2026-10773",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_NET_DHCPV4=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10774--zephyr.yaml",
+      "vuln_id": "CVE-2026-10774",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_BT_MESH=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10848--zephyr.yaml",
+      "vuln_id": "CVE-2026-10848",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_OCPP=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-10849--zephyr.yaml",
+      "vuln_id": "CVE-2026-10849",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_HAWKBIT=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-11368--zephyr.yaml",
+      "vuln_id": "CVE-2026-11368",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_BT=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-2411--zephyr.yaml",
+      "vuln_id": "CVE-2026-2411",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_BT=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-29036--cjson.yaml",
+      "vuln_id": "CVE-2026-29036",
+      "component": "cjson",
+      "status": "not_affected",
+      "trigger": "cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-67215--cjson.yaml",
+      "vuln_id": "CVE-2026-67215",
+      "component": "cjson",
+      "status": "not_affected",
+      "trigger": "cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-67216--cjson.yaml",
+      "vuln_id": "CVE-2026-67216",
+      "component": "cjson",
+      "status": "not_affected",
+      "trigger": "application code calls cJSON_Compare() (symbol appears in zephyr.elf)",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-67217--cjson.yaml",
+      "vuln_id": "CVE-2026-67217",
+      "component": "cjson",
+      "status": "not_affected",
+      "trigger": "cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-7007--zephyr.yaml",
+      "vuln_id": "CVE-2026-7007",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_FILE_SYSTEM_EXT2=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-75084--zephyr.yaml",
+      "vuln_id": "CVE-2026-75084",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_IEEE802154_CC1200=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-75085--zephyr.yaml",
+      "vuln_id": "CVE-2026-75085",
+      "component": "zephyr",
+      "status": "not_affected",
+      "trigger": "CONFIG_IEEE802154_STM32WBA=y",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    },
+    {
+      "file": "decisions/v1.0/w5500_evb_pico2_rp2350a_m33/CVE-2026-87933--cjson.yaml",
+      "vuln_id": "CVE-2026-87933",
+      "component": "cjson",
+      "status": "not_affected",
+      "trigger": "cJSON_Utils.c added to app/lib/cjson, or cJSON replaced by a full upstream copy",
+      "trigger_holds_in_b": [],
+      "bound_to_b": false
+    }
+  ]
+}

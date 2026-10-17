@@ -1,0 +1,367 @@
+{
+  "product": {
+    "name": "cra-evidence-demo-firmware",
+    "version": "1.0.0",
+    "release": "v1.0",
+    "board": "w5500_evb_pico2/rp2350a/m33",
+    "firmware_file": "zephyr.uf2",
+    "firmware_sha256": "3e9941d6ce7a9e3f4153c4397d48ed2eb1bc9fc470f1582a224b3242fc3c0c9a",
+    "purl": "pkg:generic/cra-evidence-demo-firmware@1.0.0"
+  },
+  "snapshot": "baseline",
+  "findings": {
+    "path": "out/v1.0/w5500_evb_pico2_rp2350a_m33/findings.json",
+    "sha256": "2df9cd842afc54c87ccbc53c72c93e7b3bc37b7eec90408796c2193f4ad84b6c"
+  },
+  "decided": 0,
+  "open": [
+    {
+      "id": "CVE-2026-10637",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: no record",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10638",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10640",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10669",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10671",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10673",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10681",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10682",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10685",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10686",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10848",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10849",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "High",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2023-4039",
+      "component": "gcc",
+      "component_purl": null,
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: cannot check",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10634",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: no record",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10639",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10642",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10647",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10663",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10664",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10670",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10683",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10773",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10774",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-11368",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-2411",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-7007",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-75084",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "osv-scanner"
+      ],
+      "cross_check": "Grype: no match",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-75085",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Medium",
+      "found_by": [
+        "osv-scanner"
+      ],
+      "cross_check": "Grype: no match",
+      "state": "new",
+      "stale_decisions": []
+    },
+    {
+      "id": "CVE-2026-10636",
+      "component": "zephyr",
+      "component_purl": "pkg:github/zephyrproject-rtos/zephyr@v4.4.2",
+      "severity": "Low",
+      "found_by": [
+        "grype"
+      ],
+      "cross_check": "OSV: not this version",
+      "state": "new",
+      "stale_decisions": []
+    }
+  ]
+}
