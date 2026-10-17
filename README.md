@@ -140,7 +140,7 @@ the built firmware file.
 Run these once, after cloning. Only these steps use the network.
 
 ```bash
-git clone https://github.com/<owner>/cra-evidence-demo.git
+git clone https://github.com/waleedaman/cra-evidence-demo.git
 cd cra-evidence-demo
 make env                         # build the pinned tooling image
 make snapshot NAME=mine          # record today's vulnerability databases (about 400 MB)
